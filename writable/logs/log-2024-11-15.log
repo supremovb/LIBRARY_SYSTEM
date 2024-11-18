@@ -1,0 +1,578 @@
+CRITICAL - 2024-11-15 14:03:59 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "login.php"
+[Method: GET, Route: /]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('login', [], true)
+ 3 APPPATH\Controllers\UserController.php(15): view('login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->login()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 14:04:38 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "login.php"
+[Method: GET, Route: /]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('login', [], true)
+ 3 APPPATH\Controllers\UserController.php(15): view('login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->login()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-15 14:19:42 --> mysqli_sql_exception: Unknown column 'created_at' in 'field list' in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\library_system\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\library_system\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\laragon\www\library_system\system\BaseModel.php(751): CodeIgniter\Model->insert(Array, false)
+#8 C:\laragon\www\library_system\app\Controllers\UserController.php(135): CodeIgniter\BaseModel->save(Array)
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+#10 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2024-11-15 14:19:42 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'created_at' in 'field list'
+[Method: POST, Route: user/register]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (:username:, :password:, :role:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\UserController.php(135): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 14:19:42 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'created_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$zSFFUergSO00QeImVeqju.nz292cZRYGs2jJjbklUEAEhZnmL93EW\', \'student\', \'2024-11-15 14:19:42\', \'2024-11-15 14:19:42\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$zSFFUergSO00QeImVeqju.nz292cZRYGs2jJjbklUEAEhZnmL93EW\', \'student\', \'2024-11-15 14:19:42\', \'2024-11-15 14:19:42\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (:username:, :password:, :role:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\UserController.php(135): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 14:19:42 --> [Caused by] mysqli_sql_exception: Unknown column 'created_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$zSFFUergSO00QeImVeqju.nz292cZRYGs2jJjbklUEAEhZnmL93EW\', \'student\', \'2024-11-15 14:19:42\', \'2024-11-15 14:19:42\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$zSFFUergSO00QeImVeqju.nz292cZRYGs2jJjbklUEAEhZnmL93EW\', \'student\', \'2024-11-15 14:19:42\', \'2024-11-15 14:19:42\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$zSFFUergSO00QeImVeqju.nz292cZRYGs2jJjbklUEAEhZnmL93EW\', \'student\', \'2024-11-15 14:19:42\', \'2024-11-15 14:19:42\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (:username:, :password:, :role:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\UserController.php(135): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-15 14:22:27 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\library_system\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\library_system\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\laragon\www\library_system\system\BaseModel.php(751): CodeIgniter\Model->insert(Array, false)
+#8 C:\laragon\www\library_system\app\Controllers\UserController.php(135): CodeIgniter\BaseModel->save(Array)
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+#10 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2024-11-15 14:22:27 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'updated_at' in 'field list'
+[Method: POST, Route: user/register]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (:username:, :password:, :role:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\UserController.php(135): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 14:22:27 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'updated_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$8pss1fawdxELRq3fQsneEuRujvXfoWJBHi6lNg4suQACPOpCcz63C\', \'student\', \'2024-11-15 14:22:27\', \'2024-11-15 14:22:27\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$8pss1fawdxELRq3fQsneEuRujvXfoWJBHi6lNg4suQACPOpCcz63C\', \'student\', \'2024-11-15 14:22:27\', \'2024-11-15 14:22:27\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (:username:, :password:, :role:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\UserController.php(135): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 14:22:27 --> [Caused by] mysqli_sql_exception: Unknown column 'updated_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$8pss1fawdxELRq3fQsneEuRujvXfoWJBHi6lNg4suQACPOpCcz63C\', \'student\', \'2024-11-15 14:22:27\', \'2024-11-15 14:22:27\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$8pss1fawdxELRq3fQsneEuRujvXfoWJBHi6lNg4suQACPOpCcz63C\', \'student\', \'2024-11-15 14:22:27\', \'2024-11-15 14:22:27\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (\'student1\', \'$2y$10$8pss1fawdxELRq3fQsneEuRujvXfoWJBHi6lNg4suQACPOpCcz63C\', \'student\', \'2024-11-15 14:22:27\', \'2024-11-15 14:22:27\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`username`, `password`, `role`, `created_at`, `updated_at`) VALUES (:username:, :password:, :role:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\UserController.php(135): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-15 14:40:01 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 14:40:19 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 14:40:38 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 14:54:18 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 15:01:40 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 15:28:31 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+    [year] => Year must be a number.
+)
+
+ERROR - 2024-11-15 15:33:56 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+CRITICAL - 2024-11-15 15:36:14 --> Error: Call to a member function getErrors() on null
+[Method: POST, Route: user/createStudent]
+in APPPATH\Controllers\UserController.php on line 118.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-15 15:39:08 --> Validation errors: Array
+(
+    [password] => The password field must be at least 6 characters in length.
+)
+
+ERROR - 2024-11-15 15:39:32 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 15:40:50 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 15:58:12 --> Failed to save user data: {"firstname":"First name can only contain letters and spaces.","lastname":"Last name can only contain letters and spaces."}
+ERROR - 2024-11-15 16:01:41 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 16:29:40 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 16:31:49 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 16:32:57 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 16:33:53 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 16:37:03 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 16:42:27 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+ERROR - 2024-11-15 16:46:08 --> Failed to register user: Array
+(
+    [firstname] => First name can only contain letters and spaces.
+    [lastname] => Last name can only contain letters and spaces.
+)
+
+CRITICAL - 2024-11-15 16:54:02 --> CodeIgniter\Validation\Exceptions\ValidationException: "student_registration" is not a valid rule.
+[Method: POST, Route: user/createStudent]
+in SYSTEMPATH\Controller.php on line 169.
+ 1 SYSTEMPATH\Controller.php(169): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('student_registration')
+ 2 SYSTEMPATH\Controller.php(135): CodeIgniter\Controller->setValidator('student_registration', [])
+ 3 APPPATH\Controllers\UserController.php(105): CodeIgniter\Controller->validate('student_registration')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->createStudent()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-15 17:00:01 --> Username already exists: student1
+ERROR - 2024-11-15 17:00:32 --> Username already exists: student1
+ERROR - 2024-11-15 17:02:16 --> Username already exists: student1
+ERROR - 2024-11-15 17:02:45 --> Username already exists: student1
+ERROR - 2024-11-15 17:04:43 --> Username already exists: student1
+ERROR - 2024-11-15 17:07:31 --> Username already exists: student7
+ERROR - 2024-11-15 17:08:00 --> Username already exists: student8
+CRITICAL - 2024-11-15 17:40:27 --> ParseError: syntax error, unexpected token "public", expecting end of file
+[Method: GET, Route: register]
+in APPPATH\Controllers\UserController.php on line 134.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\library_system\\app\\Controllers\\UserController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\UserController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\UserController')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\UserController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 17:52:40 --> ErrorException: ini_set(): Session ini settings cannot be changed when a session is active
+[Method: GET, Route: /]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Session ini settings cannot be changed when a session is active', 'C:\\laragon\\www\\library_system\\system\\Session\\Handlers\\FileHandler.php', 74)
+ 2 SYSTEMPATH\Session\Handlers\FileHandler.php(74): ini_set('session.save_path', 'C:\\laragon\\www\\library_system\\writable\\session')
+ 3 SYSTEMPATH\Config\Services.php(697): CodeIgniter\Session\Handlers\FileHandler->__construct(Object(Config\Session), '::1')
+ 4 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 5 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 6 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 7 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+ 8 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+ 9 SYSTEMPATH\Common.php(998): CodeIgniter\Config\BaseService::get('session')
+10 SYSTEMPATH\Common.php(971): service('session')
+11 SYSTEMPATH\CodeIgniter.php(1062): session()
+12 SYSTEMPATH\CodeIgniter.php(542): CodeIgniter\CodeIgniter->storePreviousURL(Object(CodeIgniter\HTTP\SiteURI))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 17:52:46 --> ErrorException: ini_set(): Session ini settings cannot be changed when a session is active
+[Method: GET, Route: /]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Session ini settings cannot be changed when a session is active', 'C:\\laragon\\www\\library_system\\system\\Session\\Handlers\\FileHandler.php', 74)
+ 2 SYSTEMPATH\Session\Handlers\FileHandler.php(74): ini_set('session.save_path', 'C:\\laragon\\www\\library_system\\writable\\session')
+ 3 SYSTEMPATH\Config\Services.php(697): CodeIgniter\Session\Handlers\FileHandler->__construct(Object(Config\Session), '::1')
+ 4 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 5 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 6 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 7 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+ 8 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+ 9 SYSTEMPATH\Common.php(998): CodeIgniter\Config\BaseService::get('session')
+10 SYSTEMPATH\Common.php(971): service('session')
+11 SYSTEMPATH\CodeIgniter.php(1062): session()
+12 SYSTEMPATH\CodeIgniter.php(542): CodeIgniter\CodeIgniter->storePreviousURL(Object(CodeIgniter\HTTP\SiteURI))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-15 18:31:05 --> Password mismatch for user: student1
+ERROR - 2024-11-15 18:32:47 --> Password mismatch for user: student1
+ERROR - 2024-11-15 18:37:02 --> Password mismatch for user: student1
+ERROR - 2024-11-15 18:39:26 --> Password mismatch for user: student1
+ERROR - 2024-11-15 18:39:33 --> Password mismatch for user: student1
+ERROR - 2024-11-15 18:42:05 --> Password mismatch for user: student1
+ERROR - 2024-11-15 18:42:19 --> Password mismatch for user: student1
+ERROR - 2024-11-15 18:48:59 --> Password mismatch for user: student2
+CRITICAL - 2024-11-15 19:06:51 --> ErrorException: Undefined variable $username
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\dashboard.php on line 9.
+ 1 APPPATH\Views\admin\dashboard.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $username', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\dashboard.php', 9)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\AdminController.php(29): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 19:27:44 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/dashbord.php"
+[Method: GET, Route: admin/dashboard]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/dashbord.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/dashbord', [], true)
+ 3 APPPATH\Controllers\AdminController.php(30): view('admin/dashbord', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 19:27:48 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/dashbord.php"
+[Method: GET, Route: admin/dashboard]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/dashbord.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/dashbord', [], true)
+ 3 APPPATH\Controllers\AdminController.php(30): view('admin/dashbord', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-15 19:33:27 --> Password mismatch for user: student1
+ERROR - 2024-11-15 20:00:13 --> Username not found: admin
+ERROR - 2024-11-15 20:00:20 --> Password mismatch for user: admin1
+ERROR - 2024-11-15 20:09:30 --> mysqli_sql_exception: Unknown column 'created_at' in 'field list' in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `bo...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `bo...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `bo...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `bo...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\library_system\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\library_system\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\library_system\app\Controllers\AdminController.php(65): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-11-15 20:09:30 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'created_at' in 'field list'
+[Method: POST, Route: admin/create-book]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (:title:, :author:, :isbn:, :published_date:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(65): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 20:09:30 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'created_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:09:30\', \'2024-11-15 20:09:30\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:09:30\', \'2024-11-15 20:09:30\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (:title:, :author:, :isbn:, :published_date:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(65): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 20:09:30 --> [Caused by] mysqli_sql_exception: Unknown column 'created_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:09:30\', \'2024-11-15 20:09:30\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:09:30\', \'2024-11-15 20:09:30\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:09:30\', \'2024-11-15 20:09:30\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (:title:, :author:, :isbn:, :published_date:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(65): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-15 20:10:25 --> mysqli_sql_exception: Unknown column 'created_at' in 'field list' in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `bo...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `bo...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `bo...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `bo...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\library_system\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\library_system\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\library_system\app\Controllers\AdminController.php(65): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-11-15 20:10:25 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'created_at' in 'field list'
+[Method: POST, Route: admin/create-book]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (:title:, :author:, :isbn:, :published_date:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(65): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 20:10:25 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'created_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:25\', \'2024-11-15 20:10:25\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:25\', \'2024-11-15 20:10:25\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (:title:, :author:, :isbn:, :published_date:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(65): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 20:10:25 --> [Caused by] mysqli_sql_exception: Unknown column 'created_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:25\', \'2024-11-15 20:10:25\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:25\', \'2024-11-15 20:10:25\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:25\', \'2024-11-15 20:10:25\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (:title:, :author:, :isbn:, :published_date:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(65): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-15 20:10:44 --> mysqli_sql_exception: Unknown column 'created_at' in 'field list' in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `bo...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `bo...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `bo...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `bo...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\library_system\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\library_system\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\library_system\app\Controllers\AdminController.php(65): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-11-15 20:10:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'created_at' in 'field list'
+[Method: POST, Route: admin/create-book]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (:title:, :author:, :isbn:, :published_date:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(65): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 20:10:44 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'created_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:44\', \'2024-11-15 20:10:44\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:44\', \'2024-11-15 20:10:44\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (:title:, :author:, :isbn:, :published_date:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(65): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-15 20:10:44 --> [Caused by] mysqli_sql_exception: Unknown column 'created_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:44\', \'2024-11-15 20:10:44\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:44\', \'2024-11-15 20:10:44\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (\'TEST\', \'TEST\', \'3245678909876\', \'2024-11-16\', \'available\', \'2024-11-15 20:10:44\', \'2024-11-15 20:10:44\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `books` (`title`, `author`, `isbn`, `published_date`, `status`, `created_at`, `updated_at`) VALUES (:title:, :author:, :isbn:, :published_date:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(65): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
