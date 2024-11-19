@@ -66,6 +66,18 @@
             </div>
 
             <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" class="form-control" required>
+                        <option value="" disabled selected>Select category</option>
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category['category_id']; ?>"><?= $category['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small id="categoryHelp" class="form-text text-muted">Please select the category of the book.</small>
+                </div>
+
+
+            <div class="form-group">
                 <label for="photo">Book Photo</label>
                 <input type="file" name="photo" class="form-control" accept="image/*" required aria-describedby="photoHelp" id="photoInput">
                 <small id="photoHelp" class="form-text text-muted">Upload a cover photo for the book (required).</small>

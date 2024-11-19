@@ -8,11 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
     <style>
         .container {
-            margin-top: 50px;
+            margin-top: 100px; /* Increased margin-top for more space at the top */
         }
         .form-container {
             max-width: 500px;
-            margin: 0 auto;
+            margin: 0 auto; /* Center the form container */
             padding: 20px;
             background-color: #f8f9fa;
             border-radius: 8px;
@@ -26,22 +26,44 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Library System</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('admin/dashboard') ?>">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('admin/categories') ?>">Categories</a>
-                </li>
-            </ul>
+    <?php if (session()->get('role') === 'admin'): ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="<?= base_url('dashboard') ?>">Library System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="<?= base_url('admin/dashboard') ?>" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="booksDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Books
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="booksDropdown">
+                            <li><a class="dropdown-item" href="<?= base_url('admin/categories') ?>">Categories</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('admin/add-category') ?>">Add Category</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('admin/create-book') ?>">Add Book</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('admin/view-books') ?>">View Books</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>">View Borrowed Books</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?= session()->get('firstname') ?>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="<?= base_url('admin/view-profile') ?>">View Profile</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('user/logout') ?>">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
+    <?php endif; ?>
 
     <!-- Add Category Form -->
     <div class="container">
@@ -49,8 +71,7 @@
             <h2>Add New Category</h2>
 
             <form method="POST" action="<?= base_url('admin/add-category') ?>">
-            <?= csrf_field() ?>  <!-- CSRF token field -->
-
+                <?= csrf_field() ?>  <!-- CSRF token field -->
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Category Name</label>
@@ -71,24 +92,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    
+
     <script>
-        // Show SweetAlert on form submission success or error
-        <?php if(session()->get('success')): ?>
-            Swal.fire({
-                title: 'Success!',
-                text: 'Category added successfully.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        <?php elseif(session()->get('error')): ?>
-            Swal.fire({
-                title: 'Error!',
-                text: 'Failed to add category. Please try again.',
-                icon: 'error',
-                confirmButtonText: 'Try Again'
-            });
-        <?php endif; ?>
-    </script>
+    // Show SweetAlert on form submission success or error
+    <?php if(session()->get('success')): ?>
+        Swal.fire({
+            title: 'Success!',
+            text: '<?= session()->get('success'); ?>',  // Dynamically use session success message
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    <?php elseif(session()->get('error')): ?>
+        Swal.fire({
+            title: 'Error!',
+            text: '<?= session()->get('error'); ?>',  // Dynamically use session error message
+            icon: 'error',
+            confirmButtonText: 'Try Again'
+        });
+    <?php endif; ?>
+</script>
+
 </body>
 </html>

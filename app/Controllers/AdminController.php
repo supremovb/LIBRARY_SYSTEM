@@ -14,6 +14,14 @@ use App\Models\CategoryModel;
 class AdminController extends BaseController
 {
 
+    protected $categoryModel;
+
+    public function __construct()
+    {
+        // Initialize the CategoryModel
+        $this->categoryModel = new CategoryModel();
+    }
+
 
     // Method to display the form
     public function add_Category()
@@ -21,47 +29,77 @@ class AdminController extends BaseController
         return view('admin/add_category');
     }
 
-    // Method to process the form submission
     public function addCategory()
 {
-    if ($this->request->getMethod() === 'post') {
-        // Get form inputs
-        $categoryName = $this->request->getPost('name');
-        $categoryDescription = $this->request->getPost('description');
+    $categoryModel = new CategoryModel();
 
-        // Create an instance of the model
-        $categoryModel = new CategoryModel();
+    // Validate input
+    $validation = \Config\Services::validation();
+    $validation->setRules([
+        'name' => 'required|min_length[3]|max_length[255]',
+        'description' => 'required|min_length[5]'
+    ]);
 
-        // Validation
-        if (empty($categoryName)) {
-            return redirect()->back()->with('error', 'Category name is required');
-        }
-
-        // Save the category to the database
-        $categoryData = [
-            'name' => $categoryName,
-            'description' => $categoryDescription
-        ];
-
-        // Check for validation errors before saving
-        if (!$categoryModel->validate($categoryData)) {
-            $errors = $categoryModel->errors();
-            return redirect()->back()->with('error', 'Validation failed: ' . implode(', ', $errors));
-        }
-
-        if ($categoryModel->save($categoryData)) {
-            // Successful insert, redirect with success message
-            return redirect()->to('/admin/categories')->with('success', 'Category added successfully');
-        } else {
-            log_message('error', 'Save failed: ' . json_encode($categoryModel->errors()));
-            // Failed to save, redirect with error message
-            return redirect()->back()->with('error', 'Failed to add category');
-        }
+    if (!$this->validate($validation->getRules())) {
+        // Validation failed
+        return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
     }
 
-    // If the form was not submitted properly, redirect back
-    return redirect()->back()->with('error', 'Invalid submission');
+    // Insert category into the database
+    $data = [
+        'name' => $this->request->getPost('name'),
+        'description' => $this->request->getPost('description'),
+    ];
+
+    if ($categoryModel->insert($data)) {
+        // Success: Redirect with success message
+        return redirect()->to('/admin/categories')->with('success', 'Category added successfully!');
+    } else {
+        // Failure: Redirect with error message
+        return redirect()->back()->withInput()->with('error', 'Failed to add category. Please try again.');
+    }
 }
+
+
+public function editCategory($categoryId)
+    {
+        // Fetch the category by ID from the database
+        $category = $this->categoryModel->find($categoryId);
+
+        if (!$category) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Category with ID $categoryId not found");
+        }
+
+        // Pass the category data to the view
+        return view('admin/edit_category', ['category' => $category]);
+    }
+
+
+public function updateCategory()
+{
+    $categoryId = $this->request->getPost('category_id');
+    $name = $this->request->getPost('name');
+    $description = $this->request->getPost('description');
+
+    $categoryModel = new CategoryModel();
+
+    $categoryData = [
+        'name' => $name,
+        'description' => $description
+    ];
+
+    if ($categoryModel->update($categoryId, $categoryData)) {
+        session()->setFlashdata('success', 'Category updated successfully!');
+    } else {
+        session()->setFlashdata('error', 'An error occurred while updating the category.');
+    }
+
+    return redirect()->to(base_url('admin/edit-category/' . $categoryId));
+}
+
+
+
+
 
 public function categories()
 {
@@ -71,6 +109,26 @@ public function categories()
     return view('admin/categories', $data); // Load the categories view
 }
 
+
+public function deleteCategory($categoryId)
+    {
+        // Load the Category model
+        $categoryModel = new CategoryModel();
+
+        // Check if the category exists
+        $category = $categoryModel->find($categoryId);
+
+        if ($category) {
+            // Delete the category
+            $categoryModel->delete($categoryId);
+
+            // Set success message and redirect back to categories page
+            return redirect()->to(base_url('admin/categories'))->with('message', 'Category deleted successfully.');
+        } else {
+            // Set error message and redirect back to categories page if category is not found
+            return redirect()->to(base_url('admin/categories'))->with('error', 'Category not found.');
+        }
+    }
 
 
 
@@ -300,16 +358,22 @@ public function verifyEmail()
     }
 
     // Show form to add a new book
-public function addBook()
-{
-    // Check if the user is logged in and has the required role/permissions
-    if (!session()->has('logged_in') || session()->get('role') !== 'admin') {
-        // Redirect to an unauthorized page or show a warning
-        return view('errors/unauthorized'); // Create this view to show an unauthorized message
+    public function addBook()
+    {
+        // Check if the user is logged in and has the required role/permissions
+        if (!session()->has('logged_in') || session()->get('role') !== 'admin') {
+            // Redirect to an unauthorized page or show a warning
+            return view('errors/unauthorized'); // Create this view to show an unauthorized message
+        }
+    
+        // Fetch categories from the database
+        $categoryModel = new CategoryModel();
+        $categories = $categoryModel->findAll();
+    
+        // Pass categories to the view
+        return view('admin/book_form', ['categories' => $categories]);
     }
-
-    return view('admin/book_form');  // Loads the add book form
-}
+    
 
 
     // Store new book
@@ -351,6 +415,7 @@ public function addBook()
             'published_date' => $this->request->getPost('published_date'),
             'description' => $this->request->getPost('description'), // Add description here
             'photo' => $newFileName,
+            'category_id' => $this->request->getPost('category'), // Get category from form
         ];
 
         // Validate required fields
@@ -360,7 +425,7 @@ public function addBook()
             }
         }
 
-        // Insert data into database
+        // Insert data into the database
         $bookModel = new BookModel();
 
         // Temporarily disable validation for 'status' if not set
@@ -391,6 +456,8 @@ public function addBook()
         ]);
     }
 }
+
+
 
 public function approveTransaction($transactionId)
 {
@@ -486,109 +553,121 @@ public function approve_reject_transactions()
     
 
     // Show the form to edit a book
-    public function editBook($book_id)
-    {
-        $bookModel = new BookModel();
-        $data['book'] = $bookModel->find($book_id);  // Fetch the book to edit
+public function editBook($book_id)
+{
+    $bookModel = new BookModel();
+    $categoryModel = new CategoryModel();
 
-        return view('admin/book_edit', $data);  // Load book_edit.php
-    }
+    // Fetch the book to edit
+    $data['book'] = $bookModel->find($book_id);
+
+    // Fetch all categories to show in the form
+    $data['categories'] = $categoryModel->findAll();
+
+    
+
+    // Load the book edit form with the current book data and categories
+    return view('admin/book_edit', $data);  // Load the book_edit.php view
+}
+
 
     // Update book details
     public function updateBookDetails()
-{
-    $bookModel = new BookModel();
+    {
+        $bookModel = new BookModel();
+        
+        // Collect updated data
+        $book_id = $this->request->getPost('book_id');
+        $title = $this->request->getPost('title');
+        $isbn = $this->request->getPost('isbn');  // Still get the ISBN but won't validate if unchanged
     
-    // Collect updated data
-    $book_id = $this->request->getPost('book_id');
-    $title = $this->request->getPost('title');
-    $isbn = $this->request->getPost('isbn');  // Still get the ISBN but won't validate if unchanged
+        // If the title is updated, proceed to validate it
+        $validationRules = [
+            'title' => 'required|min_length[3]|max_length[255]',
+        ];
     
-    // If the title is updated, proceed to validate it
-    $validationRules = [
-        'title' => 'required|min_length[3]|max_length[255]',
-    ];
-
-    // Get existing book data to compare ISBN
-    $existingBookData = $bookModel->find($book_id);
-    $existingIsbn = $existingBookData ? $existingBookData['isbn'] : '';
-
-    // Only validate ISBN if it's updated (i.e., if a new ISBN is provided or if it differs from the current one)
-    if ($isbn && $isbn !== $existingIsbn) {
-        $validationRules['isbn'] = 'required|is_unique[books.isbn,book_id,' . $book_id . ']|min_length[10]|max_length[13]';
-    }
-
-    // Validate other fields conditionally
-    if (!$this->validate($validationRules)) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Validation failed. Please check the inputs.',
-            'errors' => \Config\Services::validation()->getErrors(),
-        ]);
-    }
-
-    // Prepare the data to update
-    $data = [
-        'title' => $title,
-        'isbn' => $isbn,
-        'author' => $this->request->getPost('author'),
-        'published_date' => $this->request->getPost('published_date'),
-        'status' => $this->request->getPost('status'),
-        'description' => $this->request->getPost('description'), // Optional field
-    ];
+        // Get existing book data to compare ISBN
+        $existingBookData = $bookModel->find($book_id);
+        $existingIsbn = $existingBookData ? $existingBookData['isbn'] : '';
     
-    // Handle photo upload if provided
-    $file = $this->request->getFile('photo');
-    if ($file && $file->isValid()) {
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-        $fileExtension = strtolower($file->getExtension());
-
-        if (!in_array($fileExtension, $allowedExtensions)) {
+        // Only validate ISBN if it's updated (i.e., if a new ISBN is provided or if it differs from the current one)
+        if ($isbn && $isbn !== $existingIsbn) {
+            $validationRules['isbn'] = 'required|is_unique[books.isbn,book_id,' . $book_id . ']|min_length[10]|max_length[13]';
+        }
+    
+        // Validate other fields conditionally
+        if (!$this->validate($validationRules)) {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'Invalid file type for the photo.',
+                'message' => 'Validation failed. Please check the inputs.',
+                'errors' => \Config\Services::validation()->getErrors(),
             ]);
         }
-
-        // Ensure upload directory exists
-        $uploadPath = FCPATH . 'uploads/books/';
-        if (!is_dir($uploadPath)) {
-            mkdir($uploadPath, 0755, true);
+    
+        // Prepare the data to update
+        $data = [
+            'title' => $title,
+            'isbn' => $isbn,
+            'author' => $this->request->getPost('author'),
+            'published_date' => $this->request->getPost('published_date'),
+            'status' => $this->request->getPost('status'),
+            'description' => $this->request->getPost('description'), // Optional field
+            'category_id' => $this->request->getPost('category'), // Update the category_id if provided
+        ];
+        
+        // Handle photo upload if provided
+        $file = $this->request->getFile('photo');
+        if ($file && $file->isValid()) {
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $fileExtension = strtolower($file->getExtension());
+    
+            if (!in_array($fileExtension, $allowedExtensions)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Invalid file type for the photo.',
+                ]);
+            }
+    
+            // Ensure upload directory exists
+            $uploadPath = FCPATH . 'uploads/books/';
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0755, true);
+            }
+    
+            // Move the file to the upload directory
+            $newFileName = $file->getRandomName();
+            if (!$file->move($uploadPath, $newFileName)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Failed to upload the photo.',
+                ]);
+            }
+    
+            // Add photo to the update data
+            $data['photo'] = $newFileName;
+    
+            // Optionally delete the old photo
+            if ($existingBookData && !empty($existingBookData['photo'])) {
+                @unlink($uploadPath . $existingBookData['photo']);
+            }
         }
-
-        // Move the file to the upload directory
-        $newFileName = $file->getRandomName();
-        if (!$file->move($uploadPath, $newFileName)) {
+    
+        // Update the book record
+        if ($bookModel->update($book_id, $data)) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Book updated successfully.',
+            ]);
+        } else {
+            // Log model errors
+            log_message('error', 'Failed to update book. Model error: ' . print_r($bookModel->errors(), true));
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'Failed to upload the photo.',
+                'message' => 'Failed to update book.',
             ]);
         }
-
-        // Add photo to the update data
-        $data['photo'] = $newFileName;
-
-        // Optionally delete the old photo
-        if ($existingBookData && !empty($existingBookData['photo'])) {
-            @unlink($uploadPath . $existingBookData['photo']);
-        }
     }
-
-    // Update the book record
-    if ($bookModel->update($book_id, $data)) {
-        return $this->response->setJSON([
-            'status' => 'success',
-            'message' => 'Book updated successfully.',
-        ]);
-    } else {
-        // Log model errors
-        log_message('error', 'Failed to update book. Model error: ' . print_r($bookModel->errors(), true));
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Failed to update book.',
-        ]);
-    }
-}
+    
 
 
 public function viewBooks()

@@ -12,6 +12,7 @@
             Books
         </a>
         <div class="dropdown-menu" aria-labelledby="booksDropdown">
+            <a class="dropdown-item" href="<?= base_url('admin/categories') ?>">Categories</a>
             <a class="dropdown-item" href="<?= base_url('admin/add-category') ?>">Add Category</a>
             <a class="dropdown-item" href="<?= base_url('admin/create-book') ?>">Add Book</a>
             <a class="dropdown-item" href="<?= base_url('admin/view-books') ?>">View Books</a>

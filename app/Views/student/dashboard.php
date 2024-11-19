@@ -103,21 +103,21 @@
 
     <!-- Search Bar Section -->
     <div class="form-group">
-        <input type="text" id="bookSearch" class="form-control" placeholder="Search for books..." onkeyup="searchBooks()">
+        <input type="text" id="searchInput" class="form-control search-bar" placeholder="Search by name or ISBN" aria-label="Search Categories">
     </div>
 
     <!-- Available Books Section -->
     <h4>Available Books</h4>
     <div class="card-deck" id="booksList">
         <?php foreach($books as $book): ?>
-            <div class="card" data-title="<?= esc(strtolower($book['title'])) ?>" data-author="<?= esc(strtolower($book['author'])) ?>" data-isbn="<?= esc(strtolower($book['isbn'])) ?>">
+            <div class="card category-row" data-title="<?= esc(strtolower($book['title'])) ?>" data-author="<?= esc(strtolower($book['author'])) ?>" data-isbn="<?= esc(strtolower($book['isbn'])) ?>">
                 <img src="<?= base_url('uploads/books/' . esc($book['photo'])) ?>" 
                      class="card-img-top book-image" 
                      alt="<?= esc($book['title']) ?>" 
                      data-id="<?= esc($book['book_id']) ?>">
                 <div class="card-body">
-                    <h5 class="card-title"><?= esc($book['title']) ?></h5>
-                    <p class="card-text">
+                    <h5 class="card-title category-name"><?= esc($book['title']) ?></h5>
+                    <p class="card-text category-description">
                         <strong>Author:</strong> <?= esc($book['author']) ?><br>
                         <strong>ISBN:</strong> <?= esc($book['isbn']) ?><br>
                         <strong>Published:</strong> <?= esc($book['published_date']) ?>
@@ -127,7 +127,6 @@
         <?php endforeach; ?>
     </div>
 </div>
-
 
     <!-- Book Details Modal -->
     <div class="modal fade" id="bookDetailsModal" tabindex="-1" aria-hidden="true">
@@ -158,6 +157,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
+        // Search functionality for the books
+        $('#searchInput').on('input', function () {
+            var query = $(this).val().toLowerCase();
+            $('.category-row').each(function () {
+                var name = $(this).find('.category-name').text().toLowerCase();
+                var description = $(this).find('.category-description').text().toLowerCase();
+
+                if (name.includes(query) || description.includes(query)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
         $(document).on('click', '.book-image', function() {
             const bookId = $(this).data('id');
             // Fetch book details and history
@@ -210,26 +224,24 @@
                 text: "Do you want to borrow this book?",
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, borrow it!',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
+                confirmButtonText: 'Yes, Borrow',
+                cancelButtonText: 'No, Cancel'
+            }).then(result => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '<?= base_url("transaction/borrow") ?>',
+                        url: '<?= base_url("student/borrow_book") ?>',
                         type: 'POST',
-                        data: { book_id: bookId, status: 'pending' },
-                        beforeSend: function() {
-                            Swal.fire({ title: 'Processing...', text: 'Please wait.', showConfirmButton: false, allowOutsideClick: false });
-                        },
+                        data: { book_id: bookId },
                         success: function(response) {
-                            if (response.status === 'success') {
-                                Swal.fire('Success!', response.message, 'success').then(() => location.reload());
+                            if (response.success) {
+                                Swal.fire('Success', 'You have successfully borrowed the book!', 'success');
+                                $('#bookDetailsModal').modal('hide');
                             } else {
-                                Swal.fire('Error!', response.message, 'error');
+                                Swal.fire('Error', 'Failed to borrow the book.', 'error');
                             }
                         },
                         error: function() {
-                            Swal.fire('Error!', 'An error occurred while processing the request.', 'error');
+                            Swal.fire('Error', 'An error occurred while borrowing the book.', 'error');
                         }
                     });
                 }

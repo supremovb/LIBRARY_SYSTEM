@@ -131,6 +131,12 @@ $routes->post('admin/add-category', 'AdminController::addCategory');
 
 $routes->get('admin/categories', 'AdminController::categories');
 
+$routes->get('admin/delete-category/(:num)', 'AdminController::deleteCategory/$1');
+
+$routes->get('admin/edit-category/(:num)', 'AdminController::editCategory/$1');
+
+$routes->post('admin/update-category', 'AdminController::updateCategory');
+
 
 $routes->get('/admin/user/logout', 'AdminController::logout');
 

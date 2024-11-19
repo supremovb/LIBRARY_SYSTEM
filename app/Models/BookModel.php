@@ -16,7 +16,8 @@ class BookModel extends Model
         'isbn', 
         'published_date', 
         'status', 
-        'photo' // Photo field for the book cover
+        'photo',
+        'category_id' // Photo field for the book cover
     ]; // Fields allowed for mass assignment
 
     // Enable automatic timestamps if needed (e.g., for created_at/updated_at fields)
@@ -33,7 +34,8 @@ class BookModel extends Model
         'isbn'           => 'required|min_length[10]|max_length[13]',
         'published_date' => 'required|valid_date',
         'status'         => 'in_list[available,borrowed,pending]',
-        'photo'          => 'permit_empty|mime_in[photo,image/jpg,image/jpeg,image/png]|max_size[photo,2048]'
+        'photo'          => 'permit_empty|mime_in[photo,image/jpg,image/jpeg,image/png]|max_size[photo,2048]',
+        'category_id' => 'required|is_not_unique[categories.category_id]',
     ];
 
     // Validation messages for errors
