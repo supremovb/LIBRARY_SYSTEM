@@ -99,29 +99,35 @@
     </nav>
 
     <div class="container">
-        <h2>Student Dashboard</h2>
+    <h2>Student Dashboard</h2>
 
-        <!-- Available Books Section -->
-        <h4>Available Books</h4>
-        <div class="card-deck">
-            <?php foreach($books as $book): ?>
-                <div class="card">
-                    <img src="<?= base_url('uploads/books/' . esc($book['photo'])) ?>" 
-                         class="card-img-top book-image" 
-                         alt="<?= esc($book['title']) ?>" 
-                         data-id="<?= esc($book['book_id']) ?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= esc($book['title']) ?></h5>
-                        <p class="card-text">
-                            <strong>Author:</strong> <?= esc($book['author']) ?><br>
-                            <strong>ISBN:</strong> <?= esc($book['isbn']) ?><br>
-                            <strong>Published:</strong> <?= esc($book['published_date']) ?>
-                        </p>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
+    <!-- Search Bar Section -->
+    <div class="form-group">
+        <input type="text" id="bookSearch" class="form-control" placeholder="Search for books..." onkeyup="searchBooks()">
     </div>
+
+    <!-- Available Books Section -->
+    <h4>Available Books</h4>
+    <div class="card-deck" id="booksList">
+        <?php foreach($books as $book): ?>
+            <div class="card" data-title="<?= esc(strtolower($book['title'])) ?>" data-author="<?= esc(strtolower($book['author'])) ?>" data-isbn="<?= esc(strtolower($book['isbn'])) ?>">
+                <img src="<?= base_url('uploads/books/' . esc($book['photo'])) ?>" 
+                     class="card-img-top book-image" 
+                     alt="<?= esc($book['title']) ?>" 
+                     data-id="<?= esc($book['book_id']) ?>">
+                <div class="card-body">
+                    <h5 class="card-title"><?= esc($book['title']) ?></h5>
+                    <p class="card-text">
+                        <strong>Author:</strong> <?= esc($book['author']) ?><br>
+                        <strong>ISBN:</strong> <?= esc($book['isbn']) ?><br>
+                        <strong>Published:</strong> <?= esc($book['published_date']) ?>
+                    </p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
 
     <!-- Book Details Modal -->
     <div class="modal fade" id="bookDetailsModal" tabindex="-1" aria-hidden="true">

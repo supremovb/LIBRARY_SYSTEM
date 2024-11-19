@@ -8,6 +8,6 @@ class PasswordResetModel extends Model
 {
     protected $table = 'password_resets';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id', 'token', 'expires_at'];
+    protected $allowedFields = ['user_id', 'token', 'expires_at', 'email'];
     protected $useTimestamps = false;
 }

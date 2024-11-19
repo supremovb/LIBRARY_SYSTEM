@@ -204,15 +204,39 @@
             }
         });
 
-        <?php if(session()->getFlashdata('success')): ?>
+                <?php if(session()->getFlashdata('registration_success')): ?>
             Swal.fire({
                 icon: 'success',
                 title: 'Registration Successful',
-                text: '<?= session()->getFlashdata('success') ?>',
+                text: '<?= session()->getFlashdata('registration_success') ?>',
                 timer: 3000,
                 timerProgressBar: true,
             });
         <?php endif; ?>
+
+        <?php if(session()->getFlashdata('password_reset_success')): ?>
+    Swal.fire({
+        icon: 'success',
+        title: 'Password Reset Successful',
+        text: '<?= session()->getFlashdata('password_reset_success') ?>',
+        timer: 3000,
+        timerProgressBar: true,
+    });
+<?php endif; ?>
+
+            <?php if(session()->getFlashdata('email_verification_success')): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Email Verified',
+                    text: '<?= session()->getFlashdata('email_verification_success') ?>',
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
+            <?php endif; ?>
+
+
+            // Fade in the flash message
+            $('#flashError').fadeIn('slow').delay(3000).fadeOut('slow');
 
         <?php if(session()->getFlashdata('msg')): ?>
             Swal.fire({

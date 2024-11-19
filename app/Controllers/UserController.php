@@ -6,6 +6,7 @@ use App\Models\UserModel;
 use App\Models\BookModel;
 use App\Models\PasswordResetModel;
 use App\Models\TransactionModel;
+use App\Models\OtpModel;
 use CodeIgniter\Controller;
 
 class UserController extends BaseController
@@ -19,11 +20,138 @@ class UserController extends BaseController
 
     public function __construct()
     {
+        
+
         $this->transactionModel = new TransactionModel(); // Initialize the model
         $this->userModel = new UserModel();
         $this->passwordResetModel = new PasswordResetModel();
         $this->email = \Config\Services::email();
     }
+
+    private function sendVerificationEmail($email, $otp, $token)
+{
+    $emailService = \Config\Services::email();
+
+    $verificationLink = base_url('/verify-email?token=' . $token);
+
+    $message = "
+        <p>Your OTP is: <strong>{$otp}</strong>. It is valid for 10 minutes.</p>
+        <p>Alternatively, you can click the link below to verify your account:</p>
+        <p><a href='{$verificationLink}'>Verify My Account</a></p>
+        <p>If you did not register for this account, please ignore this email.</p>
+    ";
+
+    $emailService->setFrom('no-reply@yourdomain.com', 'Library System');
+    $emailService->setTo($email);
+    $emailService->setSubject('Your Verification Code');
+    $emailService->setMessage($message);
+
+    return $emailService->send();
+}
+
+
+public function verifyEmail()
+{
+    $token = $this->request->getGet('token'); // Get token from URL
+    $otpModel = new \App\Models\OtpModel();
+
+    // Check if token exists and is valid
+    $currentDateTime = date('Y-m-d H:i:s');
+    $otpRecord = $otpModel
+        ->where('token', $token)
+        ->where('token_expiration >', $currentDateTime) // Token not expired
+        ->first();
+
+    if (!$otpRecord) {
+        // Token is invalid or expired
+        return redirect()->to('/register')->with('msg', 'Invalid or expired token.');
+    }
+
+    // Mark OTP as verified
+    $otpModel->update($otpRecord['id'], ['is_verified' => 1]);
+
+    // Redirect user to login with success message
+    return redirect()->to('/login')->with('email_verification_success', 'Your email has been successfully verified!');
+}
+
+
+
+public function verifyOtp()
+{
+    $session = session();
+    log_message('debug', 'Session user_id at verifyOtp: ' . $session->get('user_id'));
+    return view('verify_otp'); // Display the OTP verification form
+}
+
+
+
+public function processOtp()
+{
+    $session = session();
+    $otpModel = new \App\Models\OtpModel();
+    $userModel = new \App\Models\UserModel();  // User model to delete the user if OTP fails
+
+    // Get current time including date and time (no timezone handling)
+    $currentDateTime = date('Y-m-d H:i:s'); // Current date and time in 'Y-m-d H:i:s' format
+
+    $userId = $session->get('user_id'); // Retrieve user ID from session
+    log_message('debug', 'Session User ID: ' . $userId);
+
+    if (!$userId) {
+        log_message('debug', 'No User ID found in session.');
+        $session->setFlashdata('msg', 'Session expired or invalid. Please log in again.');
+        return redirect()->to('/login');
+    }
+
+    // Retrieve only non-expired OTP record for the user by comparing full date and time
+    $otpRecord = $otpModel
+        ->where('user_id', $userId)
+        ->where('otp_expiration >', $currentDateTime) // Compare the full datetime (date and time)
+        ->first();
+
+    // Check if the OTP is expired or invalid
+    if (!$otpRecord) {
+        log_message('debug', 'OTP expired or invalid for user ID: ' . $userId);
+
+        // If OTP is expired or invalid, delete the user from the users table
+        $userModel->delete($userId); // Deletes the user
+
+        // Also delete the OTP record
+        $otpModel->where('user_id', $userId)->delete();
+
+        $session->setFlashdata('msg', 'OTP expired or invalid. The user has been deleted.');
+        return redirect()->to('/register');  // Redirect to registration or login page
+    }
+
+    // Log the stored OTP for debugging
+    $storedOtp = trim((string) $otpRecord['otp']);
+    log_message('debug', 'Stored OTP: ' . $storedOtp);
+
+    // Compare the OTPs
+    $otp = trim((string) $this->request->getPost('otp'));
+    if ($otp !== $storedOtp) {
+        log_message('debug', 'OTP mismatch. Input: "' . $otp . '", Stored: "' . $storedOtp . '"');
+        $session->setFlashdata('msg', 'Invalid OTP. Please try again.');
+        return redirect()->to('/verify-otp');
+    }
+
+    // Check if OTP is already verified
+    if ((int)$otpRecord['is_verified'] === 1) {
+        log_message('debug', 'OTP already verified for user ID: ' . $userId);
+        $session->setFlashdata('msg', 'This OTP has already been verified.');
+        return redirect()->to('/verify-otp');
+    }
+
+    // Mark OTP as verified
+    $otpModel->update($otpRecord['id'], ['is_verified' => 1]);
+    log_message('debug', 'OTP verified successfully for user ID: ' . $userId);
+
+    $session->setFlashdata('registration_success', 'You have successfully registered! Please login.');
+    return redirect()->to('/login');
+}
+
+
+
 
     /**
      * Show the Forgot Password form
@@ -67,6 +195,7 @@ class UserController extends BaseController
         // Insert token into password_resets table
         $this->passwordResetModel->insert([
             'user_id' => $user['user_id'],
+            'email' => $email,
             'token' => $token,
             'expires_at' => $expires_at
         ]);
@@ -175,7 +304,7 @@ class UserController extends BaseController
         // Delete the reset request
         $this->passwordResetModel->delete($resetRequest['id']);
 
-        return redirect()->to('/login')->with('success', 'Your password has been reset successfully. You can now log in.');
+        return redirect()->to('/login')->with('password_reset_success', 'Your password has been reset successfully. Please log in.');
     }
 
     
@@ -213,29 +342,48 @@ class UserController extends BaseController
 
 
 
-    public function viewProfile()
-    {
-        $session = session();
+public function viewProfile()
+{
+    $session = session();
 
-        // Check if user is logged in and has the correct role
-        if (!$session->get('logged_in') || $session->get('role') != 'student') {
-            return redirect()->to('/');
-        }
-
-        $user_id = $session->get('user_id');
-        $userModel = new UserModel();
-
-        // Fetch the user data from the database
-        $data['user'] = $userModel->find($user_id);
-
-        // Return the view with the user's data
-        return view('student/view_profile', $data);
+    // Check if user is logged in and has the correct role
+    if (!$session->get('logged_in') || $session->get('role') != 'student') {
+        return redirect()->to('/');
     }
+
+    $user_id = $session->get('user_id');
+    $userModel = new UserModel();
+    $otpModel = new OtpModel();  // Ensure you have an OTP model for interacting with the user_otps table
+
+    // Fetch the user data from the database
+    $data['user'] = $userModel->find($user_id);
+
+    if (!$data['user']) {
+        return redirect()->to('/')->with('error', 'User not found.');
+    }
+
+    // Check if the user has an OTP record for email verification
+    $emailVerification = $otpModel->where('user_id', $user_id)
+                                   ->where('email', $data['user']['email'])
+                                   ->first();
+
+    // Set email verification status
+    if ($emailVerification && $emailVerification['is_verified'] == 1) {
+        $data['emailVerified'] = true;  // Email is verified
+    } else {
+        $data['emailVerified'] = false; // Email is not verified
+    }
+
+    // Pass data to the view
+    return view('student/view_profile', $data);
+}
+
 
     public function updateProfile()
 {
     $session = session();
     $userModel = new UserModel();
+    $otpModel = new OtpModel(); // Make sure you have an OTP model for interacting with the user_otps table
 
     if (!$session->get('logged_in') || $session->get('role') != 'student') {
         return redirect()->to('/');
@@ -251,20 +399,35 @@ class UserController extends BaseController
         return redirect()->to('student/view-profile')->with('error', 'User not found.');
     }
 
-    // Check if username is present and changed. If not, don't validate it.
+    // Check if the email has been changed
+    $emailChanged = isset($data['email']) && $currentUser['email'] !== $data['email'];
+
+    // Handle Password Update
+        if (!empty($data['new_password']) && $data['new_password'] !== $data['confirm_password']) {
+            // If passwords don't match, show SweetAlert error
+            return redirect()->to('student/view-profile')->with('error', 'Passwords do not match!');
+        }
+
+
+    // If email hasn't changed, remove it from the data array (do not update email)
+    if (!$emailChanged) {
+        unset($data['email']); // Don't update the email if it's not changed
+    }
+
+    // Check if username is unchanged
     if (isset($data['username']) && $currentUser['username'] === $data['username']) {
         unset($data['username']); // Don't update username if it's not changed
     }
 
-    // Log the data being passed for debugging
-    log_message('debug', 'User data for update: ' . print_r($data, true));
-
     // Validation
     $validation = \Config\Services::validation();
+
+    // Define validation rules
     $validationRules = [
         'firstname' => 'required|min_length[3]|max_length[100]',
         'lastname'  => 'required|min_length[3]|max_length[100]',
-        'username'  => 'required|min_length[3]|max_length[50]',  // Only validate if username is provided (and changed)
+        'username'  => 'required|min_length[3]|max_length[50]',
+        'email'     => 'permit_empty|valid_email|max_length[100]',  // Set as permit_empty so we can skip it when not changed
         'new_password' => 'permit_empty|min_length[6]|max_length[255]',
         'confirm_password' => 'permit_empty|matches[new_password]',
         'course' => 'required|min_length[3]|max_length[100]',
@@ -272,10 +435,18 @@ class UserController extends BaseController
     ];
 
     if (!isset($data['username']) || $currentUser['username'] === $data['username']) {
-        $validationRules['username'] = 'permit_empty'; // Allow empty value for username
+        $validationRules['username'] = 'permit_empty'; // Allow empty value for username if unchanged
     }
 
     $validation->setRules($validationRules);
+
+    // If the email was changed, validate its uniqueness
+    if ($emailChanged) {
+        $existingUser = $userModel->where('email', $data['email'])->where('user_id !=', $user_id)->first();
+        if ($existingUser) {
+            return redirect()->to('student/view-profile')->with('error', 'This email address is already in use.');
+        }
+    }
 
     if (!$validation->run($data)) {
         log_message('error', 'Validation Errors: ' . print_r($validation->getErrors(), true));
@@ -284,20 +455,19 @@ class UserController extends BaseController
 
     // Handle Photo Upload
     $photo = $this->request->getFile('photo');
-if ($photo && $photo->isValid()) {
-    $photoName = $photo->getRandomName();
-    $uploadPath = ROOTPATH . 'uploads/user_photos';
-    if (!is_dir($uploadPath)) {
-        mkdir($uploadPath, 0755, true);
+    if ($photo && $photo->isValid()) {
+        $photoName = $photo->getRandomName();
+        $uploadPath = ROOTPATH . 'uploads/user_photos';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0755, true);
+        }
+        $photo->move($uploadPath, $photoName);
+
+        // Generate a URL for the photo
+        $data['photo'] = base_url('uploads/user_photos/' . $photoName);
+    } else {
+        unset($data['photo']);
     }
-    $photo->move($uploadPath, $photoName);
-
-    // Generate a URL for the photo
-    $data['photo'] = base_url('uploads/user_photos/' . $photoName);
-} else {
-    unset($data['photo']);
-}
-
 
     // Handle Password Update
     if (!empty($data['new_password']) && $data['new_password'] === $data['confirm_password']) {
@@ -312,17 +482,50 @@ if ($photo && $photo->isValid()) {
     // Try updating the user profile
     try {
         if (!$userModel->update($user_id, $data)) {
-            // Get the errors as a string (imploded)
             $errors = implode(', ', $userModel->errors());
-            // Log database error if update fails
             throw new \Exception($errors);
         }
-        return redirect()->to('student/view-profile')->with('success', 'Profile updated successfully.');
+
+        // Send email verification link if email was changed
+        if ($emailChanged) {
+            // Generate a unique token for email verification
+            $verificationToken = bin2hex(random_bytes(32)); // Generate a random token
+            $tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token valid for 1 hour
+
+            // Save the token and its expiration to the user_otps table
+            $otpData = [
+                'user_id' => $user_id,
+                'email' => $data['email'],
+                'token' => $verificationToken,
+                'token_expiration' => $tokenExpiration,
+                'type' => 'email_verification' // Optionally add a type field to distinguish OTP types
+            ];
+
+            if (!$otpModel->save($otpData)) {
+                throw new \Exception('Failed to save OTP in the database.');
+            }
+
+            // Send the verification email
+            $verificationLink = base_url("verify-email?token=$verificationToken");
+
+            $email = \Config\Services::email();
+            $email->setTo($data['email']);
+            $email->setSubject('Verify Your Email');
+            $email->setMessage("Click the link below to verify your email:\n\n" . $verificationLink);
+
+            if (!$email->send()) {
+                log_message('error', 'Email sending failed: ' . $email->printDebugger());
+                return redirect()->to('student/view-profile')->with('error', 'Failed to send verification email.');
+            }
+        }
+
+        return redirect()->to('student/view-profile')->with('success', 'Profile updated successfully. A verification link has been sent to your email.');
     } catch (\Exception $e) {
         log_message('error', 'Update Error: ' . $e->getMessage());
         return redirect()->to('student/view-profile')->with('error', 'An error occurred while updating your profile.');
     }
 }
+
     
 
     public function authenticate()
@@ -421,15 +624,16 @@ if ($photo && $photo->isValid()) {
 {
     $session = session();
     $model = new UserModel();
-    
+    $otpModel = new \App\Models\OtpModel();
+
     // Validate the form inputs
     $validation = \Config\Services::validation();
-
-    // Add validation rules for email
+    
     $validation->setRules([
         'email' => 'required|valid_email|is_unique[users.email]',
         'username' => 'required|alpha_numeric|min_length[3]|max_length[50]|is_unique[users.username]',
         'password' => 'required|min_length[6]',
+        'confirm_password' => 'required|matches[password]', // Ensure confirm password matches password
         'firstname' => 'required|alpha_space|min_length[2]|max_length[50]',
         'lastname' => 'required|alpha_space|min_length[2]|max_length[50]',
         'course' => 'required|alpha_space|min_length[2]|max_length[50]',
@@ -437,19 +641,22 @@ if ($photo && $photo->isValid()) {
     ]);
 
     if ($this->validate('student_registration')) {
-        // Check if the username already exists
+                        // Check if the username already exists
+                // Check if the username already exists
         $existingUser = $model->where('username', $this->request->getPost('username'))->first();
         if ($existingUser) {
             $session->setFlashdata('msg', 'The username already exists. Please choose another one.');
-            return redirect()->to('/register');
+            return redirect()->to('/register')->withInput();  // Preserve the input values
         }
 
         // Check if the email already exists
         $existingEmail = $model->where('email', $this->request->getPost('email'))->first();
         if ($existingEmail) {
             $session->setFlashdata('msg', 'The email is already registered. Please use a different email address.');
-            return redirect()->to('/register');
+            return redirect()->to('/register')->withInput();  // Preserve the input values
         }
+
+
 
         // Attempt to create the student
         $data = [
@@ -466,19 +673,56 @@ if ($photo && $photo->isValid()) {
         $create = $model->createUser($data);
 
         if ($create) {
-            // Success: Registering a student
-            $session->setFlashdata('success', 'Registration Successful! You can now log in.');
-            return redirect()->to('/login');
+            // Store user_id in the session immediately after registration
+            $session->set('user_id', $model->insertID());  // Store the user ID in the session
+
+            // Generate the OTP (6-digit number)
+            $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+            $otpExpiration = date('Y-m-d H:i:s', strtotime('+10 minutes'));
+
+            $token = bin2hex(random_bytes(16)); // Generate a secure random token
+            $tokenExpiration = date('Y-m-d H:i:s', strtotime('+10 minutes'));
+
+            // Save OTP to the database
+            $otpData = [
+                'user_id' => $session->get('user_id'),
+                'otp' => $otp, // Store OTP as a string
+                'otp_expiration' => $otpExpiration,
+                'token' => $token,
+                'token_expiration' => $tokenExpiration,
+                'is_verified' => 0,
+                'created_at' => date('Y-m-d H:i:s'),
+                'email' => $data['email'],
+            ];
+
+            $otpModel->save($otpData);
+
+            // Send the OTP to the user's email
+            $this->sendVerificationEmail($data['email'], $otp, $token);
+
+            // Success: Redirect to OTP verification page
+            $session->setFlashdata('success', 'Registration Successful! You can now check your email for the verification code.');
+            return redirect()->to('/verify-otp');
         } else {
             // Error: Failed to register
             $session->setFlashdata('msg', 'Failed to register the student. Please try again later.');
             return redirect()->to('/register');
         }
     } else {
-        // Validation failed, return to the registration form with validation errors
+        // Check for specific validation failure (password mismatch)
+        if ($validation->hasError('confirm_password')) {
+            $session->setFlashdata('msg', 'Passwords do not match. Please try again.');
+            return redirect()->to('/register')->withInput();
+        }
+    
+        // General validation failure
+        $session->setFlashdata('msg', 'There are errors in the form. Please correct them and try again.');
         return redirect()->to('/register')->withInput()->with('validation', $validation);
     }
+    
 }
+
+
 
 
     public function getBookDetails()

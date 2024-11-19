@@ -14,6 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- FontAwesome for check and X icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -77,12 +80,7 @@
 
             <!-- User Information -->
             <div class="profile-details">
-                <div class="row">
-                    <div class="col-md-4"><strong>Username:</strong></div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="username" value="<?= esc($user['username']) ?>" required>
-                    </div>
-                </div>
+                
                 <div class="row">
                     <div class="col-md-4"><strong>First Name:</strong></div>
                     <div class="col-md-8">
@@ -102,6 +100,30 @@
                     <div class="col-md-4"><strong>Role:</strong></div>
                     <div class="col-md-8">
                         <input type="text" class="form-control" name="role" value="<?= esc($user['role']) ?>" readonly>
+                    </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-md-4"><strong>Email:</strong></div>
+                        <div class="col-md-8">
+                            <div class="d-flex align-items-center">
+                                <input type="email" class="form-control" name="email" value="<?= esc($user['email']) ?>" required>
+                                <span class="ml-2">
+                                    <?php if ($emailVerified): ?>
+                                        <i class="fas fa-check-circle text-success" title="Email Verified"></i>
+                                    <?php else: ?>
+                                        <i class="fas fa-times-circle text-danger" title="Email Not Verified"></i>
+                                    <?php endif; ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div class="row">
+                    <div class="col-md-4"><strong>Username:</strong></div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="username" value="<?= esc($user['username']) ?>" required>
                     </div>
                 </div>
 
@@ -191,6 +213,8 @@
         confirmButtonText: 'OK',
     });
 <?php endif; ?>
+
+        
 
 setTimeout(() => {
         const validationAlert = document.querySelector('.validation-alert');

@@ -114,6 +114,22 @@ $routes->post('/update-password', 'UserController::updatePassword');
 
 $routes->get('/about-us', 'AboutController::aboutUs');
 
+$routes->get('/verify-otp', 'UserController::verifyOtp'); // View OTP input form
+$routes->post('/verify-otp', 'UserController::processOtp'); // Handle OTP submission
+
+$routes->get('verify-email', 'UserController::verifyEmail');
+
+// Route for displaying the add category form (GET request)
+$routes->get('admin/add-category', 'AdminController::add_Category');
+
+// Route for handling the form submission (POST request)
+$routes->post('admin/add-category', 'AdminController::addCategory');
+
+
+$routes->get('admin/add-category', 'AdminController::add_Category');
+$routes->post('admin/add-category', 'AdminController::addCategory');
+
+$routes->get('admin/categories', 'AdminController::categories');
 
 
 $routes->get('/admin/user/logout', 'AdminController::logout');

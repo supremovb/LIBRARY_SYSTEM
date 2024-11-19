@@ -25,6 +25,9 @@
         .btn-block {
             padding: 12px;
         }
+        .flash-message {
+            transition: opacity 0.5s ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -32,23 +35,23 @@
         <h2 class="text-center mb-4">Student Registration</h2>
 
         <!-- Flash message for form validation or errors -->
-        <?php if(session()->getFlashdata('msg')):?>
-            <div class="alert alert-danger">
+        <?php if(session()->getFlashdata('msg')): ?>
+            <div class="alert alert-danger flash-message">
                 <?= session()->getFlashdata('msg') ?>
             </div>
-        <?php endif;?>
+        <?php endif; ?>
 
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
-            <form action="<?= site_url('user/createStudent') ?>" method="POST">
+                <form action="<?= site_url('user/createStudent') ?>" method="POST">
                     <?= csrf_field(); ?>
 
-                    <!-- Flash message for form validation or errors -->
-    <?php if (isset($validation)): ?>
-        <div class="alert alert-danger">
-            <?= $validation->listErrors() ?>
-        </div>
-    <?php endif; ?>
+                    <!-- Flash message for validation errors -->
+                    <?php if (isset($validation) && $validation->getErrors()): ?>
+                        <div class="alert alert-danger flash-message">
+                            <?= $validation->listErrors() ?>
+                        </div>
+                    <?php endif; ?>
 
                     <div class="form-group">
                         <label for="username">Username</label>
@@ -61,14 +64,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-
-
-                    <div class="form-group">
                         <label for="confirm_password">Confirm Password</label>
                         <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
 
                     <div class="form-group">
@@ -106,24 +108,36 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.4/dist/sweetalert2.all.min.js"></script>
 
-    <!-- Custom Script for SweetAlert -->
+    <!-- Custom Script for SweetAlert and Auto-Close Flash Messages -->
     <script>
-    <?php if(session()->getFlashdata('msg')): ?>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '<?= session()->getFlashdata('msg') ?>',
-        });
-    <?php endif; ?>
+        // SweetAlert for session messages
+        <?php if (session()->getFlashdata('msg')): ?>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops!',
+                text: '<?= session()->getFlashdata('msg'); ?>',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#d33'
+            });
+        <?php endif; ?>
 
-    <?php if(session()->getFlashdata('success')): ?>
-        Swal.fire({
-            icon: 'success',
-            title: 'Registration Successful',
-            text: '<?= session()->getFlashdata('success') ?>',
+        <?php if (session()->getFlashdata('success')): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Registration Successful',
+                text: '<?= session()->getFlashdata('success') ?>',
+            });
+        <?php endif; ?>
+
+        // Auto-close flash messages
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".flash-message").fadeOut("slow", function () {
+                    $(this).remove();
+                });
+            }, 3000); // 5 seconds
         });
-    <?php endif; ?>
-</script>
+    </script>
 
 </body>
 </html>

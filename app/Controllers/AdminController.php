@@ -6,40 +6,119 @@ use App\Models\BookModel;
 use CodeIgniter\Controller;
 use App\Models\TransactionModel;
 use App\Models\UserModel;
+use App\Models\OtpModel;
+use App\Models\CategoryModel;
 
 
 
 class AdminController extends BaseController
 {
 
-    public function viewProfile()
-    {
-        $session = session();
 
-        // Check if the user is logged in and has the required role/permissions
+    // Method to display the form
+    public function add_Category()
+    {
+        return view('admin/add_category');
+    }
+
+    // Method to process the form submission
+    public function addCategory()
+{
+    if ($this->request->getMethod() === 'post') {
+        // Get form inputs
+        $categoryName = $this->request->getPost('name');
+        $categoryDescription = $this->request->getPost('description');
+
+        // Create an instance of the model
+        $categoryModel = new CategoryModel();
+
+        // Validation
+        if (empty($categoryName)) {
+            return redirect()->back()->with('error', 'Category name is required');
+        }
+
+        // Save the category to the database
+        $categoryData = [
+            'name' => $categoryName,
+            'description' => $categoryDescription
+        ];
+
+        // Check for validation errors before saving
+        if (!$categoryModel->validate($categoryData)) {
+            $errors = $categoryModel->errors();
+            return redirect()->back()->with('error', 'Validation failed: ' . implode(', ', $errors));
+        }
+
+        if ($categoryModel->save($categoryData)) {
+            // Successful insert, redirect with success message
+            return redirect()->to('/admin/categories')->with('success', 'Category added successfully');
+        } else {
+            log_message('error', 'Save failed: ' . json_encode($categoryModel->errors()));
+            // Failed to save, redirect with error message
+            return redirect()->back()->with('error', 'Failed to add category');
+        }
+    }
+
+    // If the form was not submitted properly, redirect back
+    return redirect()->back()->with('error', 'Invalid submission');
+}
+
+public function categories()
+{
+    $categoryModel = new \App\Models\CategoryModel();
+    $data['categories'] = $categoryModel->findAll(); // Fetch all categories from the database
+
+    return view('admin/categories', $data); // Load the categories view
+}
+
+
+
+
+    public function viewProfile()
+{
+    $session = session();
+
+    // Check if the user is logged in and has the required role/permissions
     if (!session()->has('logged_in') || session()->get('role') !== 'admin') {
         // Redirect to an unauthorized page or show a warning
         return view('errors/unauthorized'); // Create this view to show an unauthorized message
     }
 
-        $user_id = $session->get('user_id');
-        $userModel = new UserModel();
+    $user_id = $session->get('user_id');
+    $userModel = new UserModel();
+    $otpModel = new OtpModel();
+    
+    // Fetch the user data from the database
+    $data['user'] = $userModel->find($user_id);
 
-        // Fetch the admin data from the database
-        $data['user'] = $userModel->find($user_id);
-
-        if (!$data['user']) {
-            return redirect()->to('/')->with('error', 'Admin user not found.');
-        }
-
-        // Use the admin view for the profile
-        return view('admin/view_profile', $data);
+    if (!$data['user']) {
+        return redirect()->to('/')->with('error', 'User not found.');
     }
+
+    // Check if the user has an OTP record for email verification
+    $emailVerification = $otpModel->where('user_id', $user_id)
+                                   ->where('email', $data['user']['email'])
+                                   ->first();
+
+    // Set email verification status
+    if ($emailVerification && $emailVerification['is_verified'] == 1) {
+        $data['emailVerified'] = true;  // Email is verified
+    } else {
+        $data['emailVerified'] = false; // Email is not verified
+    }
+
+    // Pass data to the view
+    return view('admin/view_profile', $data);
+}
+
+
+
 
     public function updateProfile()
 {
     $session = session();
     $userModel = new UserModel();
+    $otpModel = new OtpModel();
 
     // Check if user is logged in and has the admin role
     if (!$session->get('logged_in') || $session->get('role') !== 'admin') {
@@ -55,17 +134,35 @@ class AdminController extends BaseController
         return redirect()->to('admin/view-profile')->with('error', 'User not found.');
     }
 
+    // Check if the email has been changed
+    $emailChanged = isset($data['email']) && $currentUser['email'] !== $data['email'];
+
+    // Handle Password Update
+    if (!empty($data['new_password']) && $data['new_password'] !== $data['confirm_password']) {
+        return redirect()->to('student/view-profile')->with('error', 'Passwords do not match!');
+    }
+
+    // If email hasn't changed, remove it from the data array (do not update email)
+    if (!$emailChanged) {
+        unset($data['email']); // Don't update the email if it's not changed
+    }
+
+    // Check if username is unchanged
+    if (isset($data['username']) && $currentUser['username'] === $data['username']) {
+        unset($data['username']); // Don't update username if it's not changed
+    }
+
     // Validation
     $validation = \Config\Services::validation();
     $validationRules = [
         'firstname' => 'required|min_length[3]|max_length[100]',
         'lastname'  => 'required|min_length[3]|max_length[100]',
         'username'  => 'required|min_length[3]|max_length[50]',
+        'email'     => 'permit_empty|valid_email|max_length[100]',
         'new_password' => 'permit_empty|min_length[6]|max_length[255]',
         'confirm_password' => 'permit_empty|matches[new_password]',
     ];
 
-    // Adjust validation for username only if it has changed
     if (!isset($data['username']) || $currentUser['username'] === $data['username']) {
         $validationRules['username'] = 'permit_empty'; // Allow empty value for username
     }
@@ -98,7 +195,7 @@ class AdminController extends BaseController
         unset($data['photo']);
     }
 
-    /// Handle Password Update
+    // Handle Password Update
     if (!empty($data['new_password']) && $data['new_password'] === $data['confirm_password']) {
         $data['password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
     } else {
@@ -108,16 +205,75 @@ class AdminController extends BaseController
     unset($data['new_password'], $data['confirm_password'], $data['role']);
     $data['updated_at'] = date('Y-m-d H:i:s');
 
-    $data['updated_at'] = date('Y-m-d H:i:s');
+    // Handle email change and OTP generation
+    if ($emailChanged) {
+        // Generate a unique token for email verification
+        $verificationToken = bin2hex(random_bytes(32)); // Generate a random token
+        $tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token valid for 1 hour
 
-    // Update the admin profile
+        // Save the token and its expiration to the user_otps table
+        $otpData = [
+            'user_id' => $user_id,
+            'email' => $data['email'],
+            'token' => $verificationToken,
+            'token_expiration' => $tokenExpiration,
+            'type' => 'email_verification' // Distinguish OTP types
+        ];
+
+        if (!$otpModel->save($otpData)) {
+            log_message('error', 'Failed to save OTP in the database.');
+            return redirect()->to('admin/view-profile')->with('error', 'Failed to generate OTP for email verification.');
+        }
+
+        // Send the verification email with the OTP
+        $verificationLink = base_url("verify-email?token=$verificationToken");
+
+        $email = \Config\Services::email();
+        $email->setTo($data['email']);
+        $email->setSubject('Verify Your Email');
+        $email->setMessage("Click the link below to verify your email:\n\n" . $verificationLink);
+
+        if (!$email->send()) {
+            log_message('error', 'Email sending failed: ' . $email->printDebugger());
+            return redirect()->to('admin/view-profile')->with('error', 'Failed to send verification email.');
+        }
+    }
+
+    // Update the user profile
     if ($userModel->update($user_id, $data)) {
-        return redirect()->to('admin/view-profile')->with('success', 'Profile updated successfully.');
+        // Redirect with a success message and prompt for email verification
+        return redirect()->to('admin/view-profile')->with('success', 'Profile updated successfully. Please verify your new email address.');
     } else {
         log_message('error', 'Database Update Failed: ' . print_r($userModel->errors(), true));
         return redirect()->to('admin/view-profile')->with('error', 'Failed to update profile.');
     }
 }
+
+public function verifyEmail()
+{
+    $token = $this->request->getGet('token');
+    $otpModel = new OtpModel();
+    $userModel = new UserModel();
+
+    // Check if the token is valid
+    $otp = $otpModel->where('token', $token)->first();
+    if (!$otp || strtotime($otp['token_expiration']) < time()) {
+        return redirect()->to('/')->with('error', 'Invalid or expired verification token.');
+    }
+
+    // Update user email and mark OTP as verified
+    $user_id = $otp['user_id'];
+    $user = $userModel->find($user_id);
+    $userModel->update($user_id, ['email' => $otp['new_email']]);
+
+    // Remove the OTP record
+    $otpModel->delete($otp['id']);
+
+    // Success message
+    return redirect()->to('/')->with('success', 'Your email has been successfully verified!');
+}
+
+
 
 
     // Dashboard showing all books

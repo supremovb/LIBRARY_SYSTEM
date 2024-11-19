@@ -50,7 +50,7 @@
     <div class="container">
         <div class="card">
             <h2>Reset Password</h2>
-            <form action="<?= base_url('/update-password') ?>" method="POST">
+            <form action="<?= base_url('/update-password') ?>" method="POST" id="resetPasswordForm">
                 <?= csrf_field() ?>
                 <input type="hidden" name="token" value="<?= esc($token) ?>">
 
@@ -102,7 +102,7 @@
                 <!-- New Password Field -->
                 <div class="form-group">
                     <label for="password">New Password</label>
-                    <input type="password" name="password" class="form-control" required placeholder="Enter new password">
+                    <input type="password" name="password" id="password" class="form-control" required placeholder="Enter new password">
                     <?php if(isset(session()->getFlashdata('errors')['password'])): ?>
                         <small class="text-danger"><?= session()->getFlashdata('errors')['password']; ?></small>
                     <?php endif; ?>
@@ -111,7 +111,7 @@
                 <!-- Confirm Password Field -->
                 <div class="form-group">
                     <label for="pass_confirm">Confirm New Password</label>
-                    <input type="password" name="pass_confirm" class="form-control" required placeholder="Confirm new password">
+                    <input type="password" name="pass_confirm" id="pass_confirm" class="form-control" required placeholder="Confirm new password">
                     <?php if(isset(session()->getFlashdata('errors')['pass_confirm'])): ?>
                         <small class="text-danger"><?= session()->getFlashdata('errors')['pass_confirm']; ?></small>
                     <?php endif; ?>
@@ -125,5 +125,24 @@
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.getElementById('resetPasswordForm').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('pass_confirm').value;
+
+            if (password !== confirmPassword) {
+                event.preventDefault(); // Prevent the form submission
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Passwords do not match',
+                    text: 'The new password and confirm password fields must match.',
+                    confirmButtonText: 'Try Again'
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>
