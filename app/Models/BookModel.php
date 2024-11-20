@@ -73,4 +73,13 @@ class BookModel extends Model
     ];
 
     protected $skipValidation = false; // Validation will always run before saving/updating data
+
+        // In BookModel.php
+public function get_books_by_category($category_id)
+{
+    return $this->where('category_id', $category_id)->findAll();
 }
+
+}
+
+

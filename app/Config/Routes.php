@@ -137,6 +137,9 @@ $routes->get('admin/edit-category/(:num)', 'AdminController::editCategory/$1');
 
 $routes->post('admin/update-category', 'AdminController::updateCategory');
 
+$routes->post('student/borrow_book', 'TransactionController::borrow');
+
+
 
 $routes->get('/admin/user/logout', 'AdminController::logout');
 

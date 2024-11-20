@@ -28,6 +28,26 @@ class UserController extends BaseController
         $this->email = \Config\Services::email();
     }
 
+    // In UserController.php or a relevant controller
+public function get_recommendations($book_id)
+{
+    // Get the category_id of the current book
+    $bookModel = new \App\Models\BookModel();
+    $book = $bookModel->find($book_id);
+    
+    if (!$book) {
+        return json_encode(['status' => 'error', 'message' => 'Book not found']);
+    }
+
+    // Fetch other books from the same category
+    $category_id = $book['category_id'];
+    $recommendedBooks = $bookModel->where('category_id', $category_id)->findAll();
+
+    return json_encode(['status' => 'success', 'books' => $recommendedBooks]);
+}
+
+    
+
     private function sendVerificationEmail($email, $otp, $token)
 {
     $emailService = \Config\Services::email();
@@ -486,6 +506,11 @@ public function viewProfile()
             throw new \Exception($errors);
         }
 
+        // Update session data if firstname is changed
+        if (isset($data['firstname'])) {
+            $session->set('firstname', $data['firstname']);
+        }
+
         // Send email verification link if email was changed
         if ($emailChanged) {
             // Generate a unique token for email verification
@@ -528,47 +553,63 @@ public function viewProfile()
 
     
 
-    public function authenticate()
-    {
-        $session = session();
-        $model = new UserModel();
-        $username = trim($this->request->getVar('username')); // Trim input
-        $password = trim($this->request->getVar('password')); // Trim input
-    
-        $data = $model->where('username', $username)->first();
-    
-        if ($data) {
-            $hashedPassword = $data['password'];
-            log_message('info', 'Password hash from DB: ' . $hashedPassword); // Log the hash from DB
-    
-            if (password_verify($password, $hashedPassword)) {
-                // Set session data with user's firstname
-                $ses_data = [
-                    'user_id' => $data['user_id'],
-                    'username' => $data['username'],
-                    'role' => $data['role'],
-                    'firstname' => $data['firstname'], // Store first name in session
-                    'logged_in' => TRUE
-                ];
-                $session->set($ses_data);
-    
-                if ($data['role'] === 'admin') {
-                    return redirect()->to('/admin/dashboard');
-                } else {
-                    return redirect()->to('/user/dashboard');
-                }
-            } else {
-                log_message('error', 'Password mismatch for user: ' . $username);
-                $session->setFlashdata('msg', 'Incorrect password.');
+public function authenticate()
+{
+    $session = session();
+    $model = new UserModel();
+
+    // Trim input and validate both username and password are provided
+    $username = trim($this->request->getVar('username'));
+    $password = trim($this->request->getVar('password'));
+
+    if (empty($username) || empty($password)) {
+        $session->setFlashdata('msg', 'Username and Password are required.');
+        return redirect()->to('/login');
+    }
+
+    // Fetch user data using case-sensitive comparison
+    $data = $model->where('username', $username)->first();
+
+    if ($data) {
+        $hashedPassword = $data['password'];
+
+        // Log debug information for development (remove in production)
+        log_message('debug', 'Password hash from DB for user ' . $username . ': ' . $hashedPassword);
+
+        // Verify case-sensitive password
+        if (password_verify($password, $hashedPassword)) {
+            // Ensure case-sensitive username check
+            if ($username !== $data['username']) {
+                log_message('error', 'Case mismatch in username for user: ' . $username);
+                $session->setFlashdata('msg', 'Username is incorrect (case-sensitive).');
                 return redirect()->to('/login');
             }
+
+            // Store session data
+            $ses_data = [
+                'user_id' => $data['user_id'],
+                'username' => $data['username'],
+                'role' => $data['role'],
+                'firstname' => $data['firstname'],
+                'logged_in' => TRUE
+            ];
+            $session->set($ses_data);
+
+            // Redirect based on role
+            return $data['role'] === 'admin'
+                ? redirect()->to('/admin/dashboard')
+                : redirect()->to('/user/dashboard');
         } else {
-            log_message('error', 'Username not found: ' . $username);
-            $session->setFlashdata('msg', 'Username not found.');
+            log_message('error', 'Password mismatch for username: ' . $username);
+            $session->setFlashdata('msg', 'Password is incorrect.');
             return redirect()->to('/login');
         }
+    } else {
+        log_message('error', 'Username not found: ' . $username);
+        $session->setFlashdata('msg', 'Username not found.');
+        return redirect()->to('/login');
     }
-    
+}
 
     public function dashboard()
     {

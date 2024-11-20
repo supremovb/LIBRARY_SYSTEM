@@ -48,6 +48,7 @@
             padding: 12px;
             text-align: left;
             border: 1px solid #ddd;
+            word-wrap: break-word; /* Allow text to wrap */
         }
 
         .table th {
@@ -57,6 +58,10 @@
 
         .table tr:nth-child(even) {
             background-color: #f2f2f2;
+        }
+
+        .table td:nth-child(3) {
+            max-width: 200px; /* Limit the width of the Book Title column */
         }
 
         .btn {
@@ -119,44 +124,40 @@
         <?php endif; ?>
 
         <table class="table">
-            <thead>
-                <tr>
-                    <th>Transaction ID</th>
-                    <th>User ID</th>
-                    <th>Book ID</th>
-                    <th>Borrowed Date</th>
-                    <th>Due Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($pendingTransactions)): ?>
-                    <?php foreach ($pendingTransactions as $transaction): ?>
-                        <tr>
-                            <td><?= esc($transaction['transaction_id']) ?></td>
-                            <td><?= esc($transaction['user_id']) ?></td>
-                            <td><?= esc($transaction['book_id']) ?></td>
-                            <td><?= esc($transaction['borrow_date']) ?></td>
-                            <td>
-                                <input type="date" value="<?= esc($transaction['due_date']) ?>" disabled>
-                            </td>
-                            <td><?= esc($transaction['status']) ?></td>
-                            <td class="actions">
-                                <form action="<?= site_url('admin/approveTransaction/' . $transaction['transaction_id']) ?>" method="POST">
-                                    <input type="date" name="due_date" value="<?= esc($transaction['due_date']) ?>" required>
-                                    <button type="submit" class="btn btn-success">Approve</button>
-                                </form>
-                                <a href="<?= site_url('admin/rejectTransaction/' . $transaction['transaction_id']) ?>" class="btn btn-danger">Reject</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="7">No pending transactions.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
+        <thead>
+    <tr>
+        <th>Transaction ID</th>
+        <th>Borrower</th>
+        <th>Book Title</th>
+        <th>Borrowed Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+<tbody>
+    <?php if (!empty($pendingTransactions)): ?>
+        <?php foreach ($pendingTransactions as $transaction): ?>
+            <tr>
+                <td><?= esc($transaction->transaction_id) ?></td> <!-- Use -> to access object properties -->
+                <td><?= esc($transaction->firstname) . ' ' . esc($transaction->lastname) ?></td> <!-- Use -> to access object properties -->
+                <td><?= esc($transaction->title) ?></td> <!-- Use -> to access object properties -->
+                <td><?= esc($transaction->borrow_date) ?></td> <!-- Use -> to access object properties -->
+                <td><?= esc($transaction->status) ?></td> <!-- Use -> to access object properties -->
+                <td class="actions">
+                    <form action="<?= site_url('admin/approveTransaction/' . $transaction->transaction_id) ?>" method="POST">
+                        <input type="date" name="due_date" value="<?= esc($transaction->due_date) ?>" required> <!-- Use -> to access object properties -->
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+                    <a href="<?= site_url('admin/rejectTransaction/' . $transaction->transaction_id) ?>" class="btn btn-danger">Reject</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="6">No pending transactions.</td>
+        </tr>
+    <?php endif; ?>
+</tbody>
         </table>
     </div>
 

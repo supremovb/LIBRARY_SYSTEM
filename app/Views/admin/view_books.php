@@ -8,60 +8,62 @@
     <!-- Add Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Style for card container to maintain same height for all cards */
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;  /* Ensure all cards have the same height */
-            height: 400px;
-        }
+    /* Style for card container to adapt to content height */
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;  /* Removed fixed height constraint */
+    }
 
-        /* Ensure the image inside the card has the same size */
-        .card-img-top {
-            height: 250px;
-            object-fit: cover;
-            width: 100%;
-            cursor: pointer; /* Add cursor pointer on image */
-        }
+    /* Image size adjustment */
+    .card-img-top {
+        height: 200px; /* Reduce image height to free up space */
+        object-fit: cover;
+        width: 100%;
+        cursor: pointer;
+    }
 
-        /* Optional: Add some styling for the card text */
-        .card-body {
-            flex-grow: 1;
-            padding: 10px;
-        }
+    /* Styling for card body */
+    .card-body {
+        flex-grow: 1;
+        padding: 10px;
+    }
 
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-overflow: ellipsis; /* Ensures long titles don't overflow */
+        white-space: nowrap;     /* Keeps title on one line */
+        overflow: hidden;
+    }
 
-        .card-text {
-            font-size: 1rem;
-            margin: 5px 0;
-        }
+    .card-text {
+        font-size: 0.9rem;
+        margin: 5px 0;
+    }
 
-        /* Modal styling */
-        .modal-content {
-            background: rgba(255, 255, 255, 0.9); /* Add slight transparency */
-        }
+    /* Modal styling */
+    .modal-content {
+        background: rgba(255, 255, 255, 0.9);
+    }
 
-        /* Centering the image and title in the modal */
-        .modal-body {
-            text-align: center;  /* Centers the content inside the modal */
-        }
+    .modal-body {
+        text-align: center;
+    }
 
-        .modal-body img {
-            max-width: 80%;  /* Adjusts the image size inside the modal */
-            margin: 0 auto;  /* Centers the image */
-        }
+    .modal-body img {
+        max-width: 80%;
+        margin: 0 auto;
+    }
 
-        .modal-title {
-            text-align: center;  /* Center the title */
-        }
-    </style>
+    .modal-title {
+        text-align: center;
+    }
+</style>
+
 </head>
 
 <body>
@@ -84,6 +86,7 @@
                                 <p class="card-text">Author: <?= $book['author'] ?></p>
                                 <p class="card-text">ISBN: <?= $book['isbn'] ?></p>
                                 <p class="card-text">Status: <?= ucfirst($book['status']) ?></p>
+                                <p class="card-text">Category: <?= $book['category_name'] ?></p>
                             </div>
                         </div>
                     </div>
@@ -104,6 +107,7 @@
                                     <p><strong>Author:</strong> <?= $book['author'] ?></p>
                                     <p><strong>ISBN:</strong> <?= $book['isbn'] ?></p>
                                     <p><strong>Status:</strong> <?= ucfirst($book['status']) ?></p>
+                                    <p><strong>Category:</strong> <?= $book['category_name'] ?></p>
                                     <p><strong>Description:</strong> <?= nl2br($book['description']) ?></p>
                                 </div>
                             </div>

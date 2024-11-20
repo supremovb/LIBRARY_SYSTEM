@@ -25,6 +25,7 @@ class TransactionController extends BaseController
     if (!$session->get('logged_in')) {
         return $this->response->setJSON(['status' => 'error', 'message' => 'You must be logged in.']);
     }
+
     if ($session->get('role') != 'student') {
         return $this->response->setJSON(['status' => 'error', 'message' => 'Only students can borrow books.']);
     }
@@ -32,10 +33,21 @@ class TransactionController extends BaseController
     $book_id = $this->request->getVar('book_id');
     $user_id = $session->get('user_id');
 
+    // Force fresh query to check for pending transactions
+    $existingTransaction = $this->transactionModel
+        ->where('user_id', $user_id)
+        ->where('book_id', $book_id)
+        ->where('status', 'pending')
+        ->first();
+
+    if ($existingTransaction) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'You already have a pending request for this book.']);
+    }
+
     // Check book availability
     $book = $this->bookModel->find($book_id);
     if (!$book || $book['status'] != 'available') {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Book is not available']);
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Book is not available.']);
     }
 
     // Create a transaction with status 'pending'
@@ -47,10 +59,12 @@ class TransactionController extends BaseController
     ];
 
     if ($this->transactionModel->insert($data)) {
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Borrow request submitted successfully']);
+        // Ensure the new data is committed before responding
+        $this->transactionModel->db->reconnect();
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Borrow request submitted successfully.']);
     }
 
-    return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to submit borrow request']);
+    return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to submit borrow request.']);
 }
 
 

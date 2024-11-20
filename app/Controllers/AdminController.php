@@ -263,6 +263,11 @@ public function deleteCategory($categoryId)
     unset($data['new_password'], $data['confirm_password'], $data['role']);
     $data['updated_at'] = date('Y-m-d H:i:s');
 
+    // Update session data if firstname is changed
+    if (isset($data['firstname'])) {
+        $session->set('firstname', $data['firstname']);
+    }
+
     // Handle email change and OTP generation
     if ($emailChanged) {
         // Generate a unique token for email verification
@@ -532,22 +537,27 @@ public function rejectTransaction($transactionId)
 
 
 public function approve_reject_transactions()
-    {
-        // Load the Transaction model
-
-        // Check if the user is logged in and has the required role/permissions
+{
+    // Check if the user is logged in and has the required role/permissions
     if (!session()->has('logged_in') || session()->get('role') !== 'admin') {
-        // Redirect to an unauthorized page or show a warning
-        return view('errors/unauthorized'); // Create this view to show an unauthorized message
+        return view('errors/unauthorized');
     }
-        $transactionModel = new TransactionModel();
 
-        // Fetch the pending transactions from the database
-        $data['pendingTransactions'] = $transactionModel->where('status', 'pending')->findAll();
+    // Load the Transaction model
+    $transactionModel = new TransactionModel();
 
-        // Pass the data to the view
-        return view('admin/approve_reject_transactions', $data);
-    }
+    // Fetch the pending transactions, joining with the users and books table
+    $builder = $transactionModel->builder();
+    $builder->select('transactions.*, users.firstname, users.lastname, books.title');  // Ensure 'books.title' is selected
+    $builder->join('users', 'users.user_id = transactions.user_id');
+    $builder->join('books', 'books.book_id = transactions.book_id');  // Join with books table
+    $builder->where('transactions.status', 'pending');
+    $data['pendingTransactions'] = $builder->get()->getResult();
+
+    // Pass the data to the view
+    return view('admin/approve_reject_transactions', $data);
+}
+
 
 
     
@@ -670,22 +680,22 @@ public function editBook($book_id)
     
 
 
-public function viewBooks()
+    public function viewBooks()
     {
-
-        // Check if the user is logged in and has the required role/permissions
-    if (!session()->has('logged_in') || session()->get('role') !== 'admin') {
-        // Redirect to an unauthorized page or show a warning
-        return view('errors/unauthorized'); // Create this view to show an unauthorized message
-    }
+        if (!session()->has('logged_in') || session()->get('role') !== 'admin') {
+            return view('errors/unauthorized');
+        }
+    
         $bookModel = new BookModel();
-
-        // Fetch all books
-        $books = $bookModel->findAll();
-
-        // Pass books to the view
+    
+        // Use a join to fetch category name along with book details
+        $books = $bookModel->select('books.*, categories.name as category_name')
+                           ->join('categories', 'books.category_id = categories.category_id', 'left')
+                           ->findAll();
+    
         return view('admin/view_books', ['books' => $books]);
     }
+    
     
     
     // Delete a book

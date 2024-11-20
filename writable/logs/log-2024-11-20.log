@@ -1,0 +1,358 @@
+ERROR - 2024-11-20 05:33:10 --> Username not found: dasdsad
+ERROR - 2024-11-20 05:36:34 --> Update Error: Username is already taken.
+ERROR - 2024-11-20 05:55:32 --> Invalid file type: webp
+ERROR - 2024-11-20 06:13:53 --> Invalid file type: avif
+ERROR - 2024-11-20 08:01:51 --> Password mismatch for user: supremopkv
+CRITICAL - 2024-11-20 08:15:55 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 139.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 139)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:15:59 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 139.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 139)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:16:00 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 139.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 139)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:16:01 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 139.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 139)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:16:02 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 139.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 139)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:20:35 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:22:43 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:22:44 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:22:45 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:25:38 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:25:52 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:25:52 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:25:53 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:25:53 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:25:53 --> ErrorException: Undefined array key "firstname"
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 138.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 138)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(549): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:27:57 --> Error: Cannot use object of type stdClass as array
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 137.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 4 APPPATH\Controllers\AdminController.php(553): view('admin/approve_reject_transactions', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:28:53 --> ErrorException: Undefined property: stdClass::$title
+[Method: GET, Route: admin/approve_reject_transactions]
+in APPPATH\Views\admin\approve_reject_transactions.php on line 139.
+ 1 APPPATH\Views\admin\approve_reject_transactions.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$title', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php', 139)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\approve_reject_transactions.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/approve_reject_transactions', [], true)
+ 5 APPPATH\Controllers\AdminController.php(553): view('admin/approve_reject_transactions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->approve_reject_transactions()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 08:53:18 --> ParseError: syntax error, unexpected token "public", expecting end of file
+[Method: GET, Route: dashboard]
+in APPPATH\Models\BookModel.php on line 78.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\library_system\\app\\Models\\BookModel.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\BookModel')
+ 3 APPPATH\Controllers\UserController.php(584): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\BookModel')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-20 10:40:40 --> Username not found: dsadasd
+ERROR - 2024-11-20 11:40:16 --> Username not found: adadada
+ERROR - 2024-11-20 11:40:23 --> Username not found: dadad
+ERROR - 2024-11-20 11:44:58 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`username` = 'SUPREMOPKV'
+ LIMIT 1' at line 3 in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\library_system\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\laragon\www\library_system\app\Controllers\UserController.php(559): CodeIgniter\BaseModel->first()
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\UserController->authenticate()
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-11-20 11:44:58 --> Error: Call to a member function getFirstRow() on bool
+[Method: POST, Route: user/authenticate]
+in SYSTEMPATH\Model.php on line 330.
+ 1 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 2 APPPATH\Controllers\UserController.php(559): CodeIgniter\BaseModel->first()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->authenticate()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-20 11:46:24 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`username` = 'SUPREMOPKV'
+ LIMIT 1' at line 3 in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\library_system\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\laragon\www\library_system\app\Controllers\UserController.php(559): CodeIgniter\BaseModel->first()
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\UserController->authenticate()
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-11-20 11:46:24 --> Error: Call to a member function getFirstRow() on bool
+[Method: POST, Route: user/authenticate]
+in SYSTEMPATH\Model.php on line 330.
+ 1 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 2 APPPATH\Controllers\UserController.php(559): CodeIgniter\BaseModel->first()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->authenticate()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-20 11:46:28 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`username` = 'SUPREMOPKV'
+ LIMIT 1' at line 3 in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\library_system\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\laragon\www\library_system\app\Controllers\UserController.php(559): CodeIgniter\BaseModel->first()
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\UserController->authenticate()
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-11-20 11:46:28 --> Error: Call to a member function getFirstRow() on bool
+[Method: POST, Route: user/authenticate]
+in SYSTEMPATH\Model.php on line 330.
+ 1 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 2 APPPATH\Controllers\UserController.php(559): CodeIgniter\BaseModel->first()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->authenticate()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-20 11:47:10 --> Password mismatch for user: SUPREMOPKV
+ERROR - 2024-11-20 11:47:17 --> Password mismatch for user: SUPREMOPKV
+ERROR - 2024-11-20 11:53:03 --> Case mismatch in username for user: SUPREMOPKV
+ERROR - 2024-11-20 12:02:21 --> Update Error: First name can only contain letters and spaces.
+CRITICAL - 2024-11-20 12:04:34 --> ParseError: syntax error, unexpected token "/"
+[Method: GET, Route: admin/view-profile]
+in APPPATH\Controllers\AdminController.php on line 266.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\library_system\\app\\Controllers\\AdminController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\AdminController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\AdminController')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\AdminController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-20 12:11:36 --> Case mismatch in username for user: SUPREMOPKV

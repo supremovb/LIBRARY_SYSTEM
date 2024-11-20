@@ -52,8 +52,8 @@ class TransactionModel extends Model
             'COALESCE(users.lastname, "") as lastname',
             'COALESCE(books.title, "No Title") as title'
         ])
-        ->join('users', 'users.user_id = transactions.user_id', 'left')
-        ->join('books', 'books.book_id = transactions.book_id', 'left')
+        ->join('users', 'users.user_id = transactions.user_id', 'left')  // Make sure user_id is correct
+        ->join('books', 'books.book_id = transactions.book_id', 'left')  // Ensure book_id is correct
         ->where('transactions.status', 'pending');
 
     if ($user_id !== null) {
@@ -65,21 +65,22 @@ class TransactionModel extends Model
     return $builder->get()->getResultArray();
 }
 
-    public function showPendingTransactions($user_id = null)
-    {
-        // Get the pending transactions from the model
-        $pendingTransactions = $this->getPendingTransactions($user_id);
-    
-        // Debug: Log the query result for pending transactions
-        if (empty($pendingTransactions)) {
-            log_message('debug', 'No pending transactions found.');
-        } else {
-            log_message('debug', 'Pending Transactions: ' . print_r($pendingTransactions, true));
-        }
-    
-        // Pass the transactions to the view
-        return view('admin/approve_reject_transactions', ['pendingTransactions' => $pendingTransactions]);
+public function showPendingTransactions($user_id = null)
+{
+    // Get the pending transactions from the model
+    $pendingTransactions = $this->getPendingTransactions($user_id);
+
+    // Debug: Log the query result for pending transactions
+    if (empty($pendingTransactions)) {
+        log_message('debug', 'No pending transactions found.');
+    } else {
+        log_message('debug', 'Pending Transactions: ' . print_r($pendingTransactions, true));
     }
+
+    // Pass the transactions to the view
+    return view('admin/approve_reject_transactions', ['pendingTransactions' => $pendingTransactions]);
+}
+
     
 
 
