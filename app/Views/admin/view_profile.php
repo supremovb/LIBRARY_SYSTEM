@@ -1,8 +1,8 @@
 <?php 
-    // Extract photo file name from the full URL
+
     $photoFileName = !empty($user['photo']) ? basename($user['photo']) : null;
 
-    // Build the photo path
+
     $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_photos/' . $photoFileName)) 
         ? base_url('uploads/user_photos/' . esc($photoFileName)) 
         : base_url('uploads/user_photos/default_photo.png');
@@ -14,13 +14,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- FontAwesome for check and X icons -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     
-    <!-- Boxicons CDN -->
+    
     <link href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" rel="stylesheet">
 
-    <!-- SweetAlert2 CDN -->
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
@@ -50,7 +50,7 @@
     <h2><i class="bx bx-id-card"></i> User Profile</h2>
 
 
-       <!-- Display Validation Errors -->
+       
     <?php if (session()->getFlashdata('validationErrors')): ?>
         <div class="alert alert-danger alert-dismissible fade show validation-alert">
             <ul>
@@ -61,7 +61,7 @@
         </div>
     <?php endif; ?>
 
-    <!-- Display Success or General Error Messages -->
+    
     <?php if (session()->getFlashdata('success')): ?>
         <div class="alert alert-success alert-dismissible fade show general-alert">
             <?= esc(session()->getFlashdata('success')) ?>
@@ -72,16 +72,16 @@
         </div>
     <?php endif; ?>
 
-        <!-- User Photo -->
+        
         <form action="<?= base_url('admin/update-profile') ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <!-- Hidden file input -->
+                
                 <input type="file" class="d-none" name="photo" id="photo" onchange="previewPhoto()">
-                <!-- Clickable profile photo -->
+                
                 <img id="photo-preview" src="<?= $photoPath ?>" alt="User Photo" class="profile-photo" onclick="triggerFileInput()">
             </div>
 
-            <!-- User Information -->
+            
             <div class="profile-details">
                 <div class="row">
                     <div class="col-md-4"><strong>Student ID:</strong></div>
@@ -159,7 +159,7 @@
                     </div>
                 </div>
 
-                <!-- Password Change Fields -->
+                
                 <div class="row mt-3">
                     <div class="col-md-4"><strong>New Password:</strong></div>
                     <div class="col-md-8">
@@ -192,11 +192,11 @@
     
     </div>
 
-    <!-- jQuery, Bootstrap JS -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Script for Image Preview and File Input Trigger -->
+    
     <script>
         function triggerFileInput() {
             Swal.fire({
@@ -223,7 +223,7 @@
             }
         }
 
-        // SweetAlert for success and error messages
+
         <?php if (session()->getFlashdata('success')): ?>
     Swal.fire({
         icon: 'success',

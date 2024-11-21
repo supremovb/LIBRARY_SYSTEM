@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories - Library System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Include SweetAlert CSS -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <i class="bx bx-book-reader"></i> Library System
@@ -84,11 +84,11 @@
         </div>
     </nav>
 
-    <!-- Categories Content -->
+    
     <div class="container mt-5">
         <h2>Categories</h2>
     
-        <!-- Search Bar -->
+        
         <div class="input-group search-bar">
             <span class="input-group-text"><i class="bx bx-search"></i></span>
             <input type="text" id="searchInput" class="form-control" placeholder="Search by name or description" aria-label="Search Categories">
@@ -130,7 +130,7 @@
             </tbody>
         </table>
 
-        <!-- Edit Category Modal -->
+        
         <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -160,7 +160,7 @@
             </div>
         </div>
 
-        <!-- Add Category Modal -->
+        
         <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -190,7 +190,7 @@
         </div>
     </div>
 
-    <!-- Include SweetAlert2 and Bootstrap JS -->
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
@@ -198,24 +198,24 @@
     <script>
 
 $(document).ready(function() {
-    // Open modal and fill in the data
+
     $('.edit-category').on('click', function() {
         var categoryId = $(this).data('category-id');
         var categoryName = $(this).data('category-name');
         var categoryDescription = $(this).data('category-description');
 
-        // Set data in the modal fields
+
         $('#categoryName').val(categoryName);
         $('#categoryDescription').val(categoryDescription);
 
-        // Set the categoryId in the hidden field for the form submission
+
         $('input[name="category_id"]').val(categoryId);
 
-        // Show the modal
+
         $('#editCategoryModal').modal('show');
     });
 
-    // Handle form submission via AJAX
+
     $('#editCategoryForm').on('submit', function(e) {
         e.preventDefault();
 
@@ -234,7 +234,7 @@ $(document).ready(function() {
                         text: response.message,
                         confirmButtonText: 'OK'
                     }).then(() => {
-                        // Reload the page or update the row in the table without reload
+
                         location.reload(); // Reload to reflect changes
                     });
                 } else {
@@ -259,7 +259,7 @@ $(document).ready(function() {
 
     
 
-    // Handle category deletion
+
     $('.delete-category').on('click', function() {
         var categoryId = $(this).data('category-id');
         Swal.fire({
@@ -272,13 +272,13 @@ $(document).ready(function() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Redirect to the delete URL after confirmation
+
                 window.location.href = '<?= base_url('admin/delete-category/') ?>' + categoryId;
             }
         });
     });
 
-    // Check if there's a flash message for success or error after the page reloads
+
     <?php if (session()->get('message')): ?>
         Swal.fire({
             icon: 'success',
@@ -297,7 +297,7 @@ $(document).ready(function() {
         });
     <?php endif; ?>
 
-    // Search functionality
+
     $('#searchInput').on('input', function () {
         var query = $(this).val().toLowerCase();
         $('.category-row').each(function () {

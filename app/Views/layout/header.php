@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library System</title>
-    <!-- Bootstrap 4.5.0 CSS -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- Font Awesome for the eye icon -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Header styling */
@@ -34,10 +34,10 @@
 </head>
 <body>
 
-    <!-- Header Section -->
+    
     <div class="header">
         <div class="logo">
-            <!-- Library Logo from local assets wrapped in a clickable link -->
+            
             <a href="https://stdominiccollege.edu.ph" target="_blank">
                 <img src="/library_system/assets/logo.png" alt="Library Logo" class="img-fluid">
             </a>

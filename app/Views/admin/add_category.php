@@ -6,7 +6,7 @@
     <title>Add Category - Library System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
-    <!-- Boxicons CDN -->
+    
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
     <style>
         .container {
@@ -27,7 +27,7 @@
 </head>
 <body>
 
-    <!-- Navbar -->
+    
     <?php if (session()->get('role') === 'admin'): ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
         <div class="container-fluid">
@@ -68,13 +68,13 @@
     </nav>
     <?php endif; ?>
 
-    <!-- Add Category Form -->
+    
     <div class="container">
         <div class="form-container">
             <h2><i class="bx bx-plus-circle"></i> Add New Category</h2>
 
             <form method="POST" action="<?= base_url('admin/add-category') ?>">
-                <?= csrf_field() ?>  <!-- CSRF token field -->
+                <?= csrf_field() ?>  
 
                 <div class="mb-3">
                     <label for="name" class="form-label"><i class="bx bx-category"></i> Category Name</label>
@@ -94,13 +94,13 @@
         </div>
     </div>
 
-    <!-- jQuery, Bootstrap JS, SweetAlert JS -->
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-    // Show SweetAlert on form submission success or error
+
     <?php if(session()->get('success')): ?>
         Swal.fire({
             title: 'Success!',

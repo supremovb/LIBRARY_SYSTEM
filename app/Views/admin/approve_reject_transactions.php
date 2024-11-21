@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Approve or Reject Transactions</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Boxicons CDN for Icons -->
+    
     <link href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" rel="stylesheet">
     <style>
         body {
@@ -137,7 +137,7 @@
 </head>
 
 <body>
-    <!-- Include the Navbar -->
+    
     <?= $this->include('layout/navbar'); ?>
 
     <div class="container mt-5">
@@ -148,7 +148,7 @@
             <div class="alert"><?= session()->getFlashdata('message') ?></div>
         <?php endif; ?>
 
-        <!-- Search Box -->
+        
         <div id="searchInputWrapper" style="position: relative;">
             <i class="uil uil-search search-icon" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
             <input type="text" id="searchInput" class="form-control" placeholder="Search by Book Title or Borrower" style="padding-left: 30px;">
@@ -156,14 +156,14 @@
 
 
         <div class="d-flex justify-content-between mb-3">
-            <!-- Approve All Button -->
+            
             <form id="approveAllForm" action="<?= site_url('admin/approveAllTransactions') ?>" method="POST">
                 <input type="date" name="due_date" id="approveAllDate" required>
                 <button type="button" class="btn btn-success" id="approveAllBtn">
                     <i class="uil uil-check-circle"></i> Approve All
                 </button>
             </form>
-            <!-- Reject All Button -->
+            
             <form id="rejectAllForm" action="<?= site_url('admin/rejectAllTransactions') ?>" method="POST">
                 <input type="hidden" name="action" value="reject_all">
                 <button type="button" class="btn btn-danger" id="rejectAllBtn">
@@ -209,13 +209,13 @@
             </tbody>
         </table>
     </div>
-    <!-- jQuery, Bootstrap JS, SweetAlert JS -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-    // Approve All Transactions with SweetAlert
+
     document.getElementById('approveAllBtn').addEventListener('click', function () {
         const dueDate = document.getElementById('approveAllDate').value;
         if (!dueDate) {
@@ -239,7 +239,7 @@
         });
     });
 
-    // Reject All Transactions with SweetAlert
+
     document.getElementById('rejectAllBtn').addEventListener('click', function () {
     Swal.fire({
         title: 'Are you sure?',
@@ -252,13 +252,13 @@
         cancelButtonColor: '#6c757d',
     }).then((result) => {
         if (result.isConfirmed) {
-            // Submit the reject all form
+
             document.getElementById('rejectAllForm').submit();
         }
     });
 });
 
-// Search functionality for the table
+
 $('#searchInput').on('input', function () {
             var value = $(this).val().toLowerCase();
             $("#transactionTable tr").filter(function () {
@@ -269,7 +269,7 @@ $('#searchInput').on('input', function () {
 </script>
 
     <script>
-        // Add SweetAlert for better user experience on approve/reject actions
+
         $('.btn-danger').on('click', function (e) {
             e.preventDefault();
             const href = $(this).attr('href');

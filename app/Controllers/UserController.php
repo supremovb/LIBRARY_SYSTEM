@@ -28,10 +28,10 @@ class UserController extends BaseController
         $this->email = \Config\Services::email();
     }
 
-    // In UserController.php or a relevant controller
+
 public function get_recommendations($book_id)
 {
-    // Get the category_id of the current book
+
     $bookModel = new \App\Models\BookModel();
     $book = $bookModel->find($book_id);
     
@@ -39,7 +39,7 @@ public function get_recommendations($book_id)
         return json_encode(['status' => 'error', 'message' => 'Book not found']);
     }
 
-    // Fetch other books from the same category
+
     $category_id = $book['category_id'];
     $recommendedBooks = $bookModel->where('category_id', $category_id)->findAll();
 
@@ -75,7 +75,7 @@ public function verifyEmail()
     $token = $this->request->getGet('token'); // Get token from URL
     $otpModel = new \App\Models\OtpModel();
 
-    // Check if token exists and is valid
+
     $currentDateTime = date('Y-m-d H:i:s');
     $otpRecord = $otpModel
         ->where('token', $token)
@@ -83,14 +83,14 @@ public function verifyEmail()
         ->first();
 
     if (!$otpRecord) {
-        // Token is invalid or expired
+
         return redirect()->to('/register')->with('msg', 'Invalid or expired token.');
     }
 
-    // Mark OTP as verified
+
     $otpModel->update($otpRecord['id'], ['is_verified' => 1]);
 
-    // Redirect user to login with success message
+
     return redirect()->to('/login')->with('email_verification_success', 'Your email has been successfully verified!');
 }
 
@@ -111,7 +111,7 @@ public function processOtp()
     $otpModel = new \App\Models\OtpModel();
     $userModel = new \App\Models\UserModel();  // User model to delete the user if OTP fails
 
-    // Get current time including date and time (no timezone handling)
+
     $currentDateTime = date('Y-m-d H:i:s'); // Current date and time in 'Y-m-d H:i:s' format
 
     $userId = $session->get('user_id'); // Retrieve user ID from session
@@ -123,31 +123,31 @@ public function processOtp()
         return redirect()->to('/login');
     }
 
-    // Retrieve only non-expired OTP record for the user by comparing full date and time
+
     $otpRecord = $otpModel
         ->where('user_id', $userId)
         ->where('otp_expiration >', $currentDateTime) // Compare the full datetime (date and time)
         ->first();
 
-    // Check if the OTP is expired or invalid
+
     if (!$otpRecord) {
         log_message('debug', 'OTP expired or invalid for user ID: ' . $userId);
 
-        // If OTP is expired or invalid, delete the user from the users table
+
         $userModel->delete($userId); // Deletes the user
 
-        // Also delete the OTP record
+
         $otpModel->where('user_id', $userId)->delete();
 
         $session->setFlashdata('msg', 'OTP expired or invalid. The user has been deleted.');
         return redirect()->to('/register');  // Redirect to registration or login page
     }
 
-    // Log the stored OTP for debugging
+
     $storedOtp = trim((string) $otpRecord['otp']);
     log_message('debug', 'Stored OTP: ' . $storedOtp);
 
-    // Compare the OTPs
+
     $otp = trim((string) $this->request->getPost('otp'));
     if ($otp !== $storedOtp) {
         log_message('debug', 'OTP mismatch. Input: "' . $otp . '", Stored: "' . $storedOtp . '"');
@@ -155,14 +155,14 @@ public function processOtp()
         return redirect()->to('/verify-otp');
     }
 
-    // Check if OTP is already verified
+
     if ((int)$otpRecord['is_verified'] === 1) {
         log_message('debug', 'OTP already verified for user ID: ' . $userId);
         $session->setFlashdata('msg', 'This OTP has already been verified.');
         return redirect()->to('/verify-otp');
     }
 
-    // Mark OTP as verified
+
     $otpModel->update($otpRecord['id'], ['is_verified' => 1]);
     log_message('debug', 'OTP verified successfully for user ID: ' . $userId);
 
@@ -201,18 +201,18 @@ public function processOtp()
     $user = $this->userModel->where('email', $email)->first();
 
     if (!$user) {
-        // To prevent email enumeration, always show a success message
+
         return redirect()->back()->with('success', 'If that email address exists in our system, we have sent a password reset link to it.');
     }
 
     try {
-        // Generate a unique token
+
         $token = bin2hex(random_bytes(50));
 
-        // Set token expiration to 5 minutes from now
+
         $expires_at = date('Y-m-d H:i:s', strtotime('+5 minutes'));
 
-        // Insert token into password_resets table
+
         $this->passwordResetModel->insert([
             'user_id' => $user['user_id'],
             'email' => $email,
@@ -220,19 +220,19 @@ public function processOtp()
             'expires_at' => $expires_at
         ]);
 
-        // Prepare the reset link
+
         $resetLink = base_url("reset-password?token={$token}");
 
-        // Prepare data to pass to the email view
+
         $data = [
             'firstname' => $user['firstname'], // Passing only the firstname
             'resetLink' => $resetLink
         ];
 
-        // Load the email content from the view
+
         $message = view('emails/password_reset', $data);
 
-        // Send the reset email
+
         $this->email->setFrom('no-reply@yourdomain.com', 'Library System');
         $this->email->setTo($email);
         $this->email->setSubject('Password Reset Request');
@@ -269,13 +269,13 @@ public function processOtp()
         return redirect()->to('/login')->with('error', 'Invalid password reset token.');
     }
 
-    // Check if the token has expired
+
     if (strtotime($resetRequest['expires_at']) < time()) {
         $this->passwordResetModel->delete($resetRequest['id']); // Remove expired token
         return redirect()->to('/login')->with('error', 'The password reset link has expired. Please request a new one.');
     }
 
-    // Pass token to the view
+
     $data['token'] = $token;
     echo view('auth/reset_password', $data);
 }
@@ -307,12 +307,12 @@ public function processOtp()
         }
 
         if (strtotime($resetRequest['expires_at']) < time()) {
-            // Token has expired
+
             $this->passwordResetModel->delete($resetRequest['id']);
             return redirect()->to('/login')->with('error', 'Password reset token has expired.');
         }
 
-        // Update the user's password
+
         $user = $this->userModel->find($resetRequest['user_id']);
         if (!$user) {
             return redirect()->to('/login')->with('error', 'User not found.');
@@ -321,7 +321,7 @@ public function processOtp()
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $this->userModel->update($user['user_id'], ['password' => $hashedPassword]);
 
-        // Delete the reset request
+
         $this->passwordResetModel->delete($resetRequest['id']);
 
         return redirect()->to('/login')->with('password_reset_success', 'Your password has been reset successfully. Please log in.');
@@ -332,9 +332,9 @@ public function processOtp()
 {
     $session = session();
 
-    // Check if the user is logged in
+
     if ($session->get('logged_in')) {
-        // Check for session timeout (30 minutes = 1800 seconds)
+
         $currentTime = time();
         $lastActivity = $session->get('last_activity') ?? $currentTime;
 
@@ -344,10 +344,10 @@ public function processOtp()
             return redirect()->to('/login');
         }
 
-        // Update the last activity timestamp
+
         $session->set('last_activity', $currentTime);
 
-        // Redirect to the appropriate dashboard
+
         if ($session->get('role') === 'admin') {
             return redirect()->to('/admin/dashboard');
         } else {
@@ -366,7 +366,7 @@ public function viewProfile()
 {
     $session = session();
 
-    // Check if user is logged in and has the correct role
+
     if (!$session->get('logged_in') || $session->get('role') != 'student') {
         return redirect()->to('/');
     }
@@ -375,26 +375,26 @@ public function viewProfile()
     $userModel = new UserModel();
     $otpModel = new OtpModel();  // Ensure you have an OTP model for interacting with the user_otps table
 
-    // Fetch the user data from the database
+
     $data['user'] = $userModel->find($user_id);
 
     if (!$data['user']) {
         return redirect()->to('/')->with('error', 'User not found.');
     }
 
-    // Check if the user has an OTP record for email verification
+
     $emailVerification = $otpModel->where('user_id', $user_id)
                                    ->where('email', $data['user']['email'])
                                    ->first();
 
-    // Set email verification status
+
     if ($emailVerification && $emailVerification['is_verified'] == 1) {
         $data['emailVerified'] = true;  // Email is verified
     } else {
         $data['emailVerified'] = false; // Email is not verified
     }
 
-    // Pass data to the view
+
     return view('student/view_profile', $data);
 }
 
@@ -412,37 +412,37 @@ public function viewProfile()
     $user_id = $session->get('user_id');
     $data = $this->request->getPost();
 
-    // Get current user data
+
     $currentUser = $userModel->find($user_id);
     if (!$currentUser) {
         log_message('error', 'User not found: ' . $user_id);
         return redirect()->to('student/view-profile')->with('error', 'User not found.');
     }
 
-    // Check if the email has been changed
+
     $emailChanged = isset($data['email']) && $currentUser['email'] !== $data['email'];
 
-    // Handle Password Update
+
         if (!empty($data['new_password']) && $data['new_password'] !== $data['confirm_password']) {
-            // If passwords don't match, show SweetAlert error
+
             return redirect()->to('student/view-profile')->with('error', 'Passwords do not match!');
         }
 
 
-    // If email hasn't changed, remove it from the data array (do not update email)
+
     if (!$emailChanged) {
         unset($data['email']); // Don't update the email if it's not changed
     }
 
-    // Check if username is unchanged
+
     if (isset($data['username']) && $currentUser['username'] === $data['username']) {
         unset($data['username']); // Don't update username if it's not changed
     }
 
-    // Validation
+
     $validation = \Config\Services::validation();
 
-    // Define validation rules
+
     $validationRules = [
         'firstname' => 'required|min_length[3]|max_length[100]',
         'lastname'  => 'required|min_length[3]|max_length[100]',
@@ -460,7 +460,7 @@ public function viewProfile()
 
     $validation->setRules($validationRules);
 
-    // If the email was changed, validate its uniqueness
+
     if ($emailChanged) {
         $existingUser = $userModel->where('email', $data['email'])->where('user_id !=', $user_id)->first();
         if ($existingUser) {
@@ -473,7 +473,7 @@ public function viewProfile()
         return redirect()->to('student/view-profile')->with('error', 'Validation failed.');
     }
 
-    // Handle Photo Upload
+
     $photo = $this->request->getFile('photo');
     if ($photo && $photo->isValid()) {
         $photoName = $photo->getRandomName();
@@ -483,13 +483,13 @@ public function viewProfile()
         }
         $photo->move($uploadPath, $photoName);
 
-        // Generate a URL for the photo
+
         $data['photo'] = base_url('uploads/user_photos/' . $photoName);
     } else {
         unset($data['photo']);
     }
 
-    // Handle Password Update
+
     if (!empty($data['new_password']) && $data['new_password'] === $data['confirm_password']) {
         $data['password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
     } else {
@@ -499,25 +499,25 @@ public function viewProfile()
     unset($data['new_password'], $data['confirm_password'], $data['role']);
     $data['updated_at'] = date('Y-m-d H:i:s');
 
-    // Try updating the user profile
+
     try {
         if (!$userModel->update($user_id, $data)) {
             $errors = implode(', ', $userModel->errors());
             throw new \Exception($errors);
         }
 
-        // Update session data if firstname is changed
+
         if (isset($data['firstname'])) {
             $session->set('firstname', $data['firstname']);
         }
 
-        // Send email verification link if email was changed
+
         if ($emailChanged) {
-            // Generate a unique token for email verification
+
             $verificationToken = bin2hex(random_bytes(32)); // Generate a random token
             $tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token valid for 1 hour
 
-            // Save the token and its expiration to the user_otps table
+
             $otpData = [
                 'user_id' => $user_id,
                 'email' => $data['email'],
@@ -530,7 +530,7 @@ public function viewProfile()
                 throw new \Exception('Failed to save OTP in the database.');
             }
 
-            // Send the verification email
+
             $verificationLink = base_url("verify-email?token=$verificationToken");
 
             $email = \Config\Services::email();
@@ -558,7 +558,7 @@ public function authenticate()
     $session = session();
     $model = new UserModel();
 
-    // Trim input and validate both username/student_id and password are provided
+
     $input = trim($this->request->getVar('username')); // Can be student_id or username
     $password = trim($this->request->getVar('password'));
 
@@ -567,7 +567,7 @@ public function authenticate()
         return redirect()->to('/login');
     }
 
-    // Fetch user data
+
     $data = $model->where('username', $input)
                   ->orWhere('student_id', $input)
                   ->first();
@@ -575,12 +575,12 @@ public function authenticate()
     if ($data) {
         $hashedPassword = $data['password'];
 
-        // Log debug information for development (remove in production)
+
         log_message('debug', 'Password hash from DB for user ' . $input . ': ' . $hashedPassword);
 
-        // Verify password
+
         if (password_verify($password, $hashedPassword)) {
-            // Case-sensitive comparison
+
             if (
                 ($input === $data['username'] && $input !== $data['username']) ||
                 ($input === $data['student_id'] && strcmp($input, $data['student_id']) !== 0)
@@ -590,7 +590,7 @@ public function authenticate()
                 return redirect()->to('/login');
             }
 
-            // Store session data
+
             $ses_data = [
                 'user_id' => $data['user_id'],
                 'username' => $data['username'],
@@ -602,7 +602,7 @@ public function authenticate()
             ];
             $session->set($ses_data);
 
-            // Redirect based on role
+
             return $data['role'] === 'admin'
                 ? redirect()->to('/admin/dashboard')
                 : redirect()->to('/user/dashboard');
@@ -629,7 +629,7 @@ public function authenticate()
         if ($session->get('role') == 'admin') {
             return redirect()->to('/admin/dashboard');
         } else {
-            // Load available books for students
+
             $bookModel = new BookModel();
             $data['books'] = $bookModel->where('status', 'available')->findAll();
 
@@ -646,7 +646,7 @@ public function authenticate()
 
     $user_id = $session->get('user_id');
     
-    // Join transactions and books tables to get borrowed books with details, including the photo and due date
+
     $borrowedBooks = $this->transactionModel
         ->select('transactions.transaction_id, transactions.borrow_date, transactions.due_date, books.title, books.author, books.isbn, books.published_date, books.photo')
         ->join('books', 'books.book_id = transactions.book_id')
@@ -656,7 +656,7 @@ public function authenticate()
 
     $data['borrowed'] = $borrowedBooks;
 
-    // Load the view with borrowed books data
+
     echo view('student/my_borrowed_books', $data);
 }
 
@@ -675,7 +675,7 @@ public function authenticate()
     $model = new UserModel();
     $otpModel = new \App\Models\OtpModel();
 
-    // Validate the form inputs
+
     $validation = \Config\Services::validation();
     
     $validation->setRules([
@@ -690,24 +690,24 @@ public function authenticate()
     ]);
 
     if ($this->validate('student_registration')) {
-        // Check if the username already exists
+
         $existingUser = $model->where('username', $this->request->getPost('username'))->first();
         if ($existingUser) {
             $session->setFlashdata('msg', 'The username already exists. Please choose another one.');
             return redirect()->to('/register')->withInput();  // Preserve the input values
         }
 
-        // Check if the email already exists
+
         $existingEmail = $model->where('email', $this->request->getPost('email'))->first();
         if ($existingEmail) {
             $session->setFlashdata('msg', 'The email is already registered. Please use a different email address.');
             return redirect()->to('/register')->withInput();  // Preserve the input values
         }
 
-        // Generate student_id in the format SDCA-H5J7
+
         $student_id = 'SDCA' . strtoupper(bin2hex(random_bytes(2)));  // Generates a random 4-character string like H5J7
 
-        // Attempt to create the student
+
         $data = [
             'student_id' => $student_id,  // Add student_id here
             'username' => $this->request->getPost('username'),
@@ -723,17 +723,17 @@ public function authenticate()
         $create = $model->createUser($data);
 
         if ($create) {
-            // Store user_id in the session immediately after registration
+
             $session->set('user_id', $model->insertID());  // Store the user ID in the session
 
-            // Generate the OTP (6-digit number)
+
             $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
             $otpExpiration = date('Y-m-d H:i:s', strtotime('+10 minutes'));
 
             $token = bin2hex(random_bytes(16)); // Generate a secure random token
             $tokenExpiration = date('Y-m-d H:i:s', strtotime('+10 minutes'));
 
-            // Save OTP to the database
+
             $otpData = [
                 'user_id' => $session->get('user_id'),
                 'otp' => $otp, // Store OTP as a string
@@ -747,25 +747,25 @@ public function authenticate()
 
             $otpModel->save($otpData);
 
-            // Send the OTP to the user's email
+
             $this->sendVerificationEmail($data['email'], $otp, $token);
 
-            // Success: Redirect to OTP verification page
+
             $session->setFlashdata('success', 'Registration Successful! You can now check your email for the verification code.');
             return redirect()->to('/verify-otp');
         } else {
-            // Error: Failed to register
+
             $session->setFlashdata('msg', 'Failed to register the student. Please try again later.');
             return redirect()->to('/register');
         }
     } else {
-        // Check for specific validation failure (password mismatch)
+
         if ($validation->hasError('confirm_password')) {
             $session->setFlashdata('msg', 'Passwords do not match. Please try again.');
             return redirect()->to('/register')->withInput();
         }
     
-        // General validation failure
+
         $session->setFlashdata('msg', 'There are errors in the form. Please correct them and try again.');
         return redirect()->to('/register')->withInput()->with('validation', $validation);
     }
@@ -782,24 +782,24 @@ public function authenticate()
         return $this->response->setJSON(['error' => 'Book ID is required']);
     }
 
-    // Load necessary models
+
     $bookModel = new BookModel();
     $transactionModel = new TransactionModel();
 
-    // Get book details
+
     $book = $bookModel->find($book_id);
     if (!$book) {
         return $this->response->setJSON(['error' => 'Book not found']);
     }
 
-    // Get the borrow history for the book
+
     $history = $transactionModel->select('users.firstname, users.lastname, transactions.borrow_date')
                                 ->join('users', 'users.user_id = transactions.user_id')
                                 ->where('transactions.book_id', $book_id)
                                 ->orderBy('transactions.borrow_date', 'DESC') // Sorting by borrow date in descending order
                                 ->findAll();
 
-    // Process the borrow history to create a user field
+
     $history = array_map(function($item) {
         return [
             'user' => $item['firstname'] . ' ' . $item['lastname'],  // Concatenate firstname and lastname
@@ -807,10 +807,10 @@ public function authenticate()
         ];
     }, $history);
 
-    // Log the borrow history to verify its contents
+
     log_message('debug', 'Borrow History: ' . print_r($history, true));
 
-    // Return the details as a JSON response
+
     return $this->response->setJSON([
         'book' => $book,
         'history' => $history

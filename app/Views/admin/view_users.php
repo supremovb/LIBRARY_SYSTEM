@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Users</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- SweetAlert CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.4/dist/sweetalert2.min.css" rel="stylesheet">
-    <!-- Boxicons CDN -->
+    
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -35,7 +35,7 @@
 </head>
 <body>
 
-<!-- Navbar -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <i class="bx bx-book-reader"></i> Library System
@@ -45,11 +45,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <!-- Dashboard Link -->
+                
                 <li class="nav-item">
                     <a href="<?= base_url('admin/dashboard') ?>" class="nav-link"><i class="bx bx-home"></i> Dashboard</a>
                 </li>
-                <!-- Admin-Specific Books Dropdown -->
+                
                 <?php if (session()->get('role') === 'admin'): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="booksDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,7 +65,7 @@
                     </li>
                 <?php endif; ?>
 
-                <!-- Profile Dropdown (Admin/Student) -->
+                
                 <?php if (session()->get('logged_in')): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,7 +86,7 @@
 <h2 class="text-center"><i class="bx bx-group"></i> View Users</h2>
 
 
-    <!-- Search Bar with Boxicon -->
+    
     <div class="d-flex align-items-center mb-3">
         <input type="text" id="search-bar" class="form-control" placeholder="Search Users" onkeyup="searchTable()" />
     </div>
@@ -116,9 +116,9 @@
                         <td><?= $user['year'] ?></td>
                         <td><?= ucfirst($user['role']) ?></td>
                         <td>
-                            <!-- Edit button to trigger modal -->
+                            
                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editRoleModal" onclick="setUserRole(<?= $user['user_id'] ?>, '<?= $user['role'] ?>')"><i class="bx bx-edit"></i> Edit</button>
-                            <!-- Delete button -->
+                            
                             <button class="btn btn-danger btn-sm" onclick="deleteUser(<?= $user['user_id'] ?>)"><i class="bx bx-trash"></i> Delete</button>
                         </td>
                     </tr>
@@ -128,7 +128,7 @@
     </div>
 </div>
 
-<!-- Edit Role Modal -->
+
 <div class="modal fade" id="editRoleModal" tabindex="-1" aria-labelledby="editRoleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -154,10 +154,10 @@
     </div>
 </div>
 
-<!-- Bootstrap JS and Popper.js -->
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-<!-- SweetAlert JS -->
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.4/dist/sweetalert2.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.18/dist/sweetalert2.all.min.js"></script>
@@ -180,7 +180,7 @@
         }
     }
 
-    // Function to handle user deletion
+
 function deleteUser(userId) {
     Swal.fire({
         title: 'Are you sure?',
@@ -191,7 +191,7 @@ function deleteUser(userId) {
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Send the delete request to the backend
+
             fetch('<?= base_url('admin/delete-user') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -229,7 +229,7 @@ function deleteUser(userId) {
 </script>
 
 <script>
-    // Your custom JavaScript goes here
+
     document.getElementById('editRoleForm').addEventListener('submit', function (e) {
         e.preventDefault();
         const userId = document.getElementById('user_id').value;

@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Library System</title>
-    <!-- Bootstrap CSS -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- SweetAlert CSS -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    <!-- Boxicons CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
     <style>
@@ -112,7 +112,7 @@
 
 <body>
     <div class="container mt-5">
-        <!-- Include Navbar -->
+        
         <?= $this->include('layout/navbar'); ?>
         <h2><i class="bx bx-home"></i> Admin Dashboard</h2>
         <div class="d-flex justify-content-between mb-3">
@@ -125,11 +125,11 @@
         </div>
 
         <div class="row">
-            <!-- Displaying Books in Card Style -->
+            
             <?php foreach ($books as $book) : ?>
                 <div class="col-md-3 mb-4">
                     <div class="card">
-                        <!-- Book Photo with Modal Trigger -->
+                        
                         <img src="<?= base_url('uploads/books/' . $book['photo']) ?>" class="card-img-top book-image" alt="<?= $book['title'] ?>" data-toggle="modal" data-target="#bookModal<?= $book['book_id'] ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?= esc($book['title']) ?></h5>
@@ -150,7 +150,7 @@
                     </div>
                 </div>
 
-                <!-- Modal for Book Details -->
+                
                 <div class="modal fade" id="bookModal<?= $book['book_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel<?= $book['book_id'] ?>" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -185,27 +185,27 @@
         </div>
 
         <div class="pagination-container mt-3">
-            <!-- Pagination links would go here -->
+            
         </div>
     </div>
 
-    <!-- jQuery, Bootstrap JS, SweetAlert JS -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-        // Fetch borrower history when a modal is shown
+
         $('.modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
             var modal = $(this); // Current modal
             var bookId = modal.attr('id').replace('bookModal', ''); // Extract book ID
 
-            // Clear previous history and show loading message
+
             var historyList = modal.find(`#borrowerHistory${bookId}`);
             historyList.html('<li>Loading history...</li>');
 
-            // Fetch borrower history via AJAX
+
             $.ajax({
                 url: '<?= base_url("student/get_book_details") ?>',
                 type: 'GET',
@@ -228,7 +228,7 @@
     </script>
 
     <script>
-        // Delete book confirmation
+
         $('.delete-btn').click(function () {
             var book_id = $(this).data('id');
             Swal.fire({
@@ -270,7 +270,7 @@
             });
         });
 
-        // Search functionality
+
         $('#searchInput').on('input', function () {
             var query = $(this).val().toLowerCase();
             $('.card').each(function () {

@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- SweetAlert2 CSS -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    <!-- Boxicons CSS -->
+    
     <link href="https://unpkg.com/boxicons/css/boxicons.min.css" rel="stylesheet">
     <style>
         body {
@@ -56,7 +56,7 @@
                 <?= csrf_field() ?>
                 <input type="hidden" name="token" value="<?= esc($token) ?>">
 
-                <!-- New Password Field -->
+                
                 <div class="form-group">
                     <label for="password"><i class="bx bx-key"></i> New Password</label>
                     <input type="password" name="password" id="password" class="form-control" required placeholder="Enter new password">
@@ -65,7 +65,7 @@
                     <?php endif; ?>
                 </div>
 
-                <!-- Confirm Password Field -->
+                
                 <div class="form-group">
                     <label for="pass_confirm"><i class="bx bx-check-circle"></i> Confirm New Password</label>
                     <input type="password" name="pass_confirm" id="pass_confirm" class="form-control" required placeholder="Confirm new password">
@@ -74,7 +74,7 @@
                     <?php endif; ?>
                 </div>
 
-                <!-- Submit Button -->
+                
                 <button type="submit" class="btn btn-primary">
     <i class="bx bx-refresh"></i> Reset Password
 </button>
@@ -83,10 +83,10 @@
         </div>
     </div>
 
-    <!-- SweetAlert2 JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Custom JavaScript -->
+    
     <script>
         document.getElementById('resetPasswordForm').addEventListener('submit', function(event) {
             var password = document.getElementById('password').value;
@@ -104,7 +104,7 @@
         });
     </script>
 
-    <!-- Success Message -->
+    
     <?php if(session()->getFlashdata('success')): ?>
     <script>
         Swal.fire({
@@ -114,7 +114,7 @@
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Redirect to login page after SweetAlert is closed
+
                 window.location.href = "<?= base_url('/login') ?>";
             }
         });
@@ -122,7 +122,7 @@
 <?php endif; ?>
 
 
-<!-- Error Message -->
+
 <?php if(session()->getFlashdata('error')): ?>
     <script>
         Swal.fire({
@@ -134,7 +134,7 @@
     </script>
 <?php endif; ?>
 
-<!-- Other Flash Messages -->
+
 <?php if(session()->getFlashdata('msg')): ?>
     <script>
         Swal.fire({

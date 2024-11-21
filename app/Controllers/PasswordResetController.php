@@ -12,7 +12,7 @@ class PasswordResetController extends Controller
         $passwordResetModel = new PasswordResetModel();
         $currentTime = date('Y-m-d H:i:s');
 
-        // Delete tokens where expires_at is less than current time
+
         $passwordResetModel->where('expires_at <', $currentTime)->delete();
 
         echo "Expired tokens cleaned up successfully.";

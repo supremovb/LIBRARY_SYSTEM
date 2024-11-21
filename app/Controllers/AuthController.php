@@ -20,7 +20,7 @@ class AuthController extends Controller
     $user = $userModel->where('email', $email)->first();
 
     if ($user) {
-        // Generate reset token and expiry
+
         $resetToken = bin2hex(random_bytes(16));
         $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
@@ -29,7 +29,7 @@ class AuthController extends Controller
             'reset_token_expiry' => $expiry
         ]);
 
-        // Send email (configure email settings in app/Config/Email.php)
+
         $email = \Config\Services::email();
         $email->setFrom('your_email@example.com', 'Your App Name');
         $email->setTo($user['email']);
@@ -40,10 +40,10 @@ class AuthController extends Controller
         );
         $email->send();
 
-        // Flash success message
+
         return redirect()->to('/forgot-password')->with('success', 'A password reset link has been sent to your registered email.');
     } else {
-        // Flash error message if email is not found
+
         return redirect()->to('/forgot-password')->with('error', 'Email not found.');
     }
 }
@@ -72,19 +72,19 @@ class AuthController extends Controller
     $user = $userModel->where('reset_token', $token)->first();
 
     if ($user) {
-        // Update password and reset token
+
         $userModel->update($user['id'], [
             'password' => password_hash($password, PASSWORD_DEFAULT),
             'reset_token' => null,
             'reset_token_expiry' => null
         ]);
 
-        // Set success flash data and redirect to reset-password with the token
+
         session()->setFlashdata('success', 'Password successfully updated.');
         return redirect()->to('/reset-password/' . $token);
     }
 
-    // Set error flash data and redirect to forgot-password page
+
     session()->setFlashdata('error', 'Failed to reset password.');
     return redirect()->to('/forgot-password');
 }

@@ -1,4 +1,4 @@
-<!-- footer.php -->
+
 <head>
     <style>
         body {
@@ -63,23 +63,23 @@
     </style>
 </head>
 
-<!-- Main Content Area -->
+
 <div class="content">
-    <!-- Your page content goes here -->
+    
 </div>
 
-<!-- Footer Section -->
+
 <footer class="footer bg-light">
     <div class="container">
         <span class="text-muted footer-right">Library System &copy; <?php echo date("Y"); ?>. All rights reserved.</span>
         <div class="footer-nav">
-            <!-- Updated About Us link to use the CodeIgniter route -->
+            
             <a href="<?php echo base_url('about-us'); ?>">About Us</a>
         </div>
     </div>
 </footer>
 
-<!-- Bootstrap 4.5.0 JS -->
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

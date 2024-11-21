@@ -33,7 +33,7 @@ class TransactionController extends BaseController
     $book_id = $this->request->getVar('book_id');
     $user_id = $session->get('user_id');
 
-    // Force fresh query to check for pending transactions
+
     $existingTransaction = $this->transactionModel
         ->where('user_id', $user_id)
         ->where('book_id', $book_id)
@@ -44,13 +44,13 @@ class TransactionController extends BaseController
         return $this->response->setJSON(['status' => 'error', 'message' => 'You already have a pending request for this book.']);
     }
 
-    // Check if the book exists and is available
+
     $book = $this->bookModel->find($book_id);
     if (!$book || $book['status'] != 'available') {
         return $this->response->setJSON(['status' => 'error', 'message' => 'Book is not available.']);
     }
 
-    // Create a transaction with status 'pending' (do not decrease book quantity here)
+
     $data = [
         'book_id' => $book_id,
         'user_id' => $user_id,
@@ -103,24 +103,24 @@ public function returnBook()
         return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid transaction.']);
     }
 
-    // Get the current date (return date) and due date for comparison
+
     $return_date = date('Y-m-d');
     $due_date = $transaction['due_date'];
 
-    // Determine if the return is late or on time
+
     $remarks = (strtotime($return_date) > strtotime($due_date)) ? 'Late' : 'On time';
 
-    // Update transaction with return date, status, and remarks
+
     $this->transactionModel->update($transaction_id, [
         'return_date' => $return_date,
         'status' => 'returned',
         'remarks' => $remarks
     ]);
 
-    // Fetch the book details
+
     $book = $this->bookModel->find($transaction['book_id']);
     if ($book) {
-        // Increment the book quantity by 1
+
         $this->bookModel->update($transaction['book_id'], [
             'quantity' => $book['quantity'] + 1
         ]);
@@ -136,7 +136,7 @@ public function returnAllBooks()
         return $this->response->setJSON(['status' => 'error', 'message' => 'You must be logged in as a student.']);
     }
 
-    // Fetch all borrowed books for the logged-in user
+
     $user_id = $this->request->getVar('user_id');
     $transactions = $this->transactionModel->where('user_id', $user_id)
                                            ->where('status', 'borrowed')
@@ -146,26 +146,26 @@ public function returnAllBooks()
         return $this->response->setJSON(['status' => 'error', 'message' => 'You have no borrowed books.']);
     }
 
-    // Begin transaction for returning all books
+
     $db = \Config\Database::connect();
     $db->transStart();
 
     foreach ($transactions as $transaction) {
-        // Get the current date (return date) and due date for comparison
+
         $return_date = date('Y-m-d');
         $due_date = $transaction['due_date'];
 
-        // Determine if the return is late or on time
+
         $remarks = (strtotime($return_date) > strtotime($due_date)) ? 'Late' : 'On time';
 
-        // Update the transaction with return date, status, and remarks
+
         $this->transactionModel->update($transaction['transaction_id'], [
             'return_date' => $return_date,
             'status' => 'returned',
             'remarks' => $remarks
         ]);
 
-        // Fetch the book details and update the quantity
+
         $book = $this->bookModel->find($transaction['book_id']);
         if ($book) {
             $this->bookModel->update($transaction['book_id'], [
@@ -196,7 +196,7 @@ public function returnAllBooks()
         $user_id = $session->get('user_id');
         $transactions = $this->transactionModel->where(['user_id' => $user_id, 'status' => 'borrowed'])->findAll();
 
-        // Fetch book details for each transaction
+
         $data['borrowed'] = [];
         foreach ($transactions as $transaction) {
             $book = $this->bookModel->find($transaction['book_id']);
@@ -207,7 +207,7 @@ public function returnAllBooks()
             ];
         }
 
-        // Fetch available books
+
         $data['books'] = $this->bookModel->where('status', 'available')->findAll();
 
         echo view('student/dashboard', $data);

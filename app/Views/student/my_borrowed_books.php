@@ -9,7 +9,7 @@
     <title>My Borrowed Books - Library System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    <!-- Include Box Icons -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css">
     <style>
         .container {
@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
+    
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <i class="bx bx-book-reader"></i> Library System
@@ -66,7 +66,7 @@
                     <i class="bx bx-home"></i> Dashboard
                 </a>
             </li>
-            <!-- Dropdown for User's First Name -->
+            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bx bx-user-circle"></i> <?= session()->get('firstname') ?>
@@ -88,18 +88,18 @@
 </nav>
 
 
-    <!-- Add "Return All Books" Button, only display if there are borrowed books -->
+    
     <div class="text-center mt-4" id="returnAllBooksContainer" style="display: <?= !empty($borrowed) ? 'block' : 'none' ?>;">
         <button class="btn btn-danger" id="returnAllBooksBtn">
             <i class="bx bx-rotate-left"></i> Return All Books
         </button>
     </div>
 
-    <!-- Borrowed Books in Card Style -->
+    
     <div class="grid-container">
         <?php foreach ($borrowed as $transaction): ?>
             <div class="card">
-                <!-- Display book photo -->
+                
                 <img src="<?= base_url('uploads/books/' . esc($transaction['photo'])) ?>" class="card-img-top" alt="<?= esc($transaction['title']) ?>">
                 <div class="card-body">
                     <h5 class="card-title"><?= esc($transaction['title']) ?></h5>
@@ -108,7 +108,7 @@
                         <strong>ISBN:</strong> <?= esc($transaction['isbn']) ?><br>
                         <strong>Published Date:</strong> <?= esc($transaction['published_date']) ?><br>
                         <strong>Borrowed On:</strong> <?= esc($transaction['borrow_date']) ?><br>
-                        <strong>Due Date:</strong> <?= esc($transaction['due_date']) ?> <!-- Display the due date -->
+                        <strong>Due Date:</strong> <?= esc($transaction['due_date']) ?> 
                     </p>
                     <button class="btn btn-warning btn-sm return-btn" data-id="<?= esc($transaction['transaction_id']) ?>">
                         <i class="bx bx-check-circle"></i> Return

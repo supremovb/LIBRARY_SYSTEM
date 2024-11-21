@@ -50,13 +50,13 @@ abstract class BaseController extends Controller
      */
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
-        // Do Not Edit This Line
+
         parent::initController($request, $response, $logger);
 
-        // Load the session service
+
         $this->session = \Config\Services::session();
 
-        // Call the session timeout check
+
         $this->checkSessionTimeout();
     }
 
@@ -70,15 +70,15 @@ abstract class BaseController extends Controller
         $currentTime = time();
         $lastActivity = $this->session->get('last_activity') ?? $currentTime;
 
-        // Check if the session is active and has timed out (30 minutes = 1800 seconds)
+
         if ($this->session->get('logged_in') && ($currentTime - $lastActivity) > 1800) { // 30 minutes timeout
             $this->session->destroy(); // Destroy session
-            // Redirect with SweetAlert-friendly parameter for session expiration
+
             header('Location: ' . base_url('/login?session_expired=1'));
             exit;
         }
 
-        // Update last activity timestamp
+
         $this->session->set('last_activity', $currentTime);
     }
 }

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library System - Login</title>
-    <!-- Bootstrap 4.5.0 CSS -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- SweetAlert2 CSS -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    <!-- Boxicons for icons -->
+    
     <link rel="stylesheet" href="https://unpkg.com/boxicons/css/boxicons.min.css">
-    <!-- Custom CSS -->
+    
     <style>
         body {
             background-color: #f4f7fc;
@@ -121,7 +121,7 @@
     <div class="container login-container">
         <h2 class="text-center mb-4">Student Login</h2>
 
-        <!-- Flash message for login failure -->
+        
         <?php if(session()->getFlashdata('msg')):?>
             <div class="alert alert-danger" id="flashError">
                 <?= session()->getFlashdata('msg') ?>
@@ -137,7 +137,7 @@
                         <label for="username">Username</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="bx bx-user"></i></span> <!-- Boxicon user -->
+                                <span class="input-group-text"><i class="bx bx-user"></i></span> 
                             </div>
                             <input type="text" id="username" name="username" class="form-control" required placeholder="Enter username" aria-describedby="usernameHelp">
                         </div>
@@ -147,35 +147,35 @@
                         <label for="password">Password</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="bx bx-lock"></i></span> <!-- Boxicon lock -->
+                                <span class="input-group-text"><i class="bx bx-lock"></i></span> 
                             </div>
                             <input type="password" id="password" name="password" class="form-control" required placeholder="Enter password" aria-describedby="passwordHelp">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="togglePassword">
-                                    <i class="bx bx-show"></i> <!-- Boxicon eye for password visibility -->
+                                    <i class="bx bx-show"></i> 
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Display User IP Address -->
+                    
                     <div class="form-group">
                         <label for="ipAddress">IP Address</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="bx bx-laptop"></i></span> <!-- Boxicon laptop -->
+                                <span class="input-group-text"><i class="bx bx-laptop"></i></span> 
                             </div>
                             <input type="text" id="ipAddress" class="form-control blurred" readonly>
                             <div class="input-group-append">
                                 <span class="input-group-text" id="toggleIP">
-                                    <i class="bx bx-show"></i> <!-- Boxicon eye for IP visibility -->
+                                    <i class="bx bx-show"></i> 
                                 </span>
                             </div>
                         </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">
-                        <i class="bx bx-log-in"></i> Login <!-- Boxicon login -->
+                        <i class="bx bx-log-in"></i> Login 
                     </button>
 
                     <div class="text-center mt-3">
@@ -190,19 +190,19 @@
         </div>
     </div>
 
-    <!-- jQuery, Bootstrap JS, SweetAlert JS -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    <!-- Custom JS -->
+    
     <script>
-        // Fetch IP Address and display it
+
         $.get("https://api.ipify.org?format=json", function(data) {
             $('#ipAddress').val(data.ip);
         });
 
-        // Toggle password visibility
+
         $('#togglePassword').on('click', function() {
             var passwordField = $('#password');
             var icon = $(this).find('i');
@@ -216,7 +216,7 @@
             }
         });
 
-        // Toggle IP address visibility and remove blur
+
         $('#toggleIP').on('click', function() {
             var ipField = $('#ipAddress');
             var icon = $(this).find('i');
@@ -230,7 +230,7 @@
             }
         });
 
-        // Form validation for better UX
+
         $('#loginForm').on('submit', function(event) {
             event.preventDefault();
             
@@ -244,7 +244,7 @@
                     text: 'Both fields are required!',
                 });
             } else {
-                // Display loading spinner with SweetAlert
+
                 Swal.fire({
                     title: 'Logging in...',
                     text: 'Please wait while we process your login.',
@@ -262,7 +262,7 @@
             }
         });
 
-        // Flash message handling
+
         <?php if(session()->getFlashdata('msg')): ?>
             Swal.fire({
                 icon: 'error',

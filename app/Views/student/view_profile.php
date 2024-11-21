@@ -1,8 +1,8 @@
 <?php 
-// Extract photo file name from the full URL
+
 $photoFileName = !empty($user['photo']) ? basename($user['photo']) : null;
 
-// Build the photo path
+
 $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_photos/' . $photoFileName)) 
     ? base_url('uploads/user_photos/' . esc($photoFileName)) 
     : base_url('uploads/user_photos/default_photo.png');
@@ -14,12 +14,12 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- FontAwesome for check and X icons -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- Boxicons CDN -->
+    
     <link href="https://unpkg.com/boxicons/css/boxicons.min.css" rel="stylesheet">
     
-    <!-- SweetAlert2 CDN -->
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
@@ -57,7 +57,7 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
 </head>
 <body>
 
-    <!-- Navbar -->
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <i class="bx bx-book-reader"></i> Library System
@@ -87,16 +87,16 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
     <div class="container profile-container">
     <h2><i class="bx bx-user"></i> User Profile</h2>
 
-        <!-- User Photo -->
+        
         <form action="<?= base_url('student/update-profile') ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <!-- Hidden file input -->
+                
                 <input type="file" class="d-none" name="photo" id="photo" onchange="previewPhoto()">
-                <!-- Clickable profile photo -->
+                
                 <img id="photo-preview" src="<?= $photoPath ?>" alt="User Photo" class="profile-photo" onclick="triggerFileInput()">
             </div>
 
-            <!-- User Information -->
+            
             <div class="profile-details">
                 <div class="row">
                     <div class="col-md-4"><strong>Student ID:</strong></div>
@@ -162,11 +162,11 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
                     <div class="col-md-4"><strong>Email:</strong></div>
                     <div class="col-md-8">
                         <div class="position-relative">
-                            <!-- Email Input Field with Boxicon -->
+                            
                             <input type="email" class="form-control pl-5 pr-5" name="email" value="<?= esc($user['email']) ?>" required>
-                            <!-- Boxicon placed inside the input -->
+                            
                             <i class="bx bx-envelope position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
-                            <!-- Email Verified Icon at the end -->
+                            
                             <span class="position-absolute" style="top: 50%; right: 15px; transform: translateY(-50%);">
                                 <?php if (isset($emailVerified) && $emailVerified): ?>
                                     <i class="bx bx-check-circle text-success" title="Email Verified"></i>
@@ -191,14 +191,14 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
                 </div>
             </div>
 
-            <!-- Password Change Fields -->
+            
             <div class="row mt-3">
                 <div class="col-md-4"><strong>New Password:</strong></div>
                 <div class="col-md-8">
                     <div class="position-relative">
-                        <!-- New Password Input Field with Boxicon -->
+                        
                         <input type="password" class="form-control pl-5" name="new_password" placeholder="Enter new password">
-                        <!-- Boxicon for Lock -->
+                        
                         <i class="bx bx-lock position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
                     </div>
                 </div>
@@ -208,9 +208,9 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
                 <div class="col-md-4"><strong>Confirm Password:</strong></div>
                 <div class="col-md-8">
                     <div class="position-relative">
-                        <!-- Confirm Password Input Field with Boxicon -->
+                        
                         <input type="password" class="form-control pl-5" name="confirm_password" placeholder="Confirm new password">
-                        <!-- Boxicon for Lock -->
+                        
                         <i class="bx bx-lock position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
                     </div>
                 </div>
@@ -224,11 +224,11 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
         </form>
     </div>
 
-        <!-- jQuery, Bootstrap JS -->
+        
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Script for Image Preview and File Input Trigger -->
+        
         <script>
             function triggerFileInput() {
                 Swal.fire({
@@ -255,7 +255,7 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
                 }
             }
 
-            // SweetAlert for success and error messages
+
             <?php if (session()->getFlashdata('success')): ?>
                 Swal.fire({
                     icon: 'success',

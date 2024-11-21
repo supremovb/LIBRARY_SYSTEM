@@ -6,7 +6,7 @@
     <title>Student Dashboard - Library System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    <!-- Box Icons -->
+    
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
     <style>
         /* Updated Custom Styles */
@@ -99,7 +99,7 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <i class="bx bx-book-reader"></i> Library System
@@ -129,7 +129,7 @@
     <div class="container">
     <h2><i class="bx bx-user-circle"></i> Student Dashboard</h2>
 
-        <!-- Search Bar Section -->
+        
         <div class="form-group">
     <div class="input-group">
         <div class="input-group-prepend">
@@ -140,7 +140,7 @@
 </div>
 
 
-        <!-- Available Books Section -->
+        
         <h4><i class="bx bx-book"></i> Available Books</h4>
         <div class="card-deck" id="booksList">
             <?php foreach($books as $book): ?>
@@ -162,7 +162,7 @@
         </div>
     </div>
 
-    <!-- Book Details Modal -->
+    
     <div class="modal fade" id="bookDetailsModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -186,12 +186,12 @@
         </div>
     </div>
 
-    <!-- jQuery, Bootstrap JS, SweetAlert JS -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
-        // Search functionality for the books
+
         $('#searchInput').on('input', function () {
             var query = $(this).val().toLowerCase();
             $('.category-row').each(function () {
@@ -206,7 +206,7 @@
             });
         });
 
-        // When a book is clicked to view its details
+
 $(document).on('click', '.book-image', function() {
     const bookId = $(this).data('id');
     $.ajax({
@@ -217,7 +217,7 @@ $(document).on('click', '.book-image', function() {
             const book = response.book;
             const history = response.history || [];
 
-            // Display book details in modal
+
             $('#bookTitle').text(book.title);
             $('#bookImage').attr('src', '<?= base_url('uploads/books/') ?>' + book.photo)
                            .attr('data-id', book.book_id);
@@ -228,7 +228,7 @@ $(document).on('click', '.book-image', function() {
                  <strong>Description:</strong> ${book.description}`
             );
 
-            // Display borrow history
+
             $('#borrowHistory').empty();
             if (history.length > 0) {
                 history.forEach(item => {
@@ -245,7 +245,7 @@ $(document).on('click', '.book-image', function() {
                 $('#borrowHistory').append('<li class="list-group-item">No borrow history available.</li>');
             }
 
-            // Fetch and display book recommendations based on the same category
+
             $.ajax({
                 url: '<?= base_url("student/get_recommendations/") ?>' + book.book_id,
                 type: 'GET',

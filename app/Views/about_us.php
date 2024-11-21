@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About the Creators</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
 
@@ -103,7 +103,7 @@
 
     <div class="container">
         <div class="card-deck">
-            <!-- Creator 1 -->
+            
             <div class="card creator-card" data-toggle="modal" data-target="#modalCreator1">
                 <img src="/library_system/assets/velasquez.jpg" alt="Creator 1">
                 <h3>Anabelle Velasquez</h3>
@@ -114,7 +114,7 @@
                 </div>
             </div>
 
-            <!-- Creator 2 -->
+            
             <div class="card creator-card" data-toggle="modal" data-target="#modalCreator2">
                 <img src="/library_system/assets/alabado.jpg" alt="Creator 2">
                 <h3>Arriane Alabado</h3>
@@ -125,7 +125,7 @@
                 </div>
             </div>
 
-            <!-- Creator 3 -->
+            
             <div class="card creator-card" data-toggle="modal" data-target="#modalCreator3">
                 <img src="/library_system/assets/monton.jpg" alt="Creator 3">
                 <h3>Jirielle Monton</h3>
@@ -136,7 +136,7 @@
                 </div>
             </div>
 
-            <!-- Creator 4 -->
+            
             <div class="card creator-card" data-toggle="modal" data-target="#modalCreator4">
                 <img src="/library_system/assets/paul.jpg" alt="Creator 4">
                 <h3>Paul Andrei Roncesvalles</h3>
@@ -149,8 +149,8 @@
         </div>
     </div>
 
-    <!-- Modals -->
-    <!-- Modal Creator 1 -->
+    
+    
     <div class="modal fade" id="modalCreator1" tabindex="-1" role="dialog" aria-labelledby="modalCreator1Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -172,7 +172,7 @@
         </div>
     </div>
 
-    <!-- Modal Creator 2 -->
+    
     <div class="modal fade" id="modalCreator2" tabindex="-1" role="dialog" aria-labelledby="modalCreator2Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -194,7 +194,7 @@
         </div>
     </div>
 
-    <!-- Modal Creator 3 -->
+    
     <div class="modal fade" id="modalCreator3" tabindex="-1" role="dialog" aria-labelledby="modalCreator3Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -216,7 +216,7 @@
         </div>
     </div>
 
-    <!-- Modal Creator 4 -->
+    
     <div class="modal fade" id="modalCreator4" tabindex="-1" role="dialog" aria-labelledby="modalCreator4Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -238,7 +238,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
