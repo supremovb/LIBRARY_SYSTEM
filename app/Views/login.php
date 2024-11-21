@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library System - Login</title>
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    
+
     <link rel="stylesheet" href="https://unpkg.com/boxicons/css/boxicons.min.css">
-    
+
     <style>
         body {
             background-color: #f4f7fc;
             height: 100vh;
             display: flex;
-            justify-content: center;  /* This ensures vertical centering */
-            align-items: center;  /* This centers content horizontally */
+            justify-content: center;
+            /* This ensures vertical centering */
+            align-items: center;
+            /* This centers content horizontally */
             margin: 0;
         }
 
@@ -111,22 +114,22 @@
         .blurred {
             filter: blur(5px);
         }
-
     </style>
 </head>
+
 <body>
 
-<?= $this->include('layout/header'); ?>
+    <?= $this->include('layout/header'); ?>
 
     <div class="container login-container">
         <h2 class="text-center mb-4">Student Login</h2>
 
-        
-        <?php if(session()->getFlashdata('msg')):?>
+
+        <?php if (session()->getFlashdata('msg')): ?>
             <div class="alert alert-danger" id="flashError">
                 <?= session()->getFlashdata('msg') ?>
             </div>
-        <?php endif;?>
+        <?php endif; ?>
 
 
         <div class="row justify-content-center">
@@ -137,7 +140,7 @@
                         <label for="username">Username</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="bx bx-user"></i></span> 
+                                <span class="input-group-text"><i class="bx bx-user"></i></span>
                             </div>
                             <input type="text" id="username" name="username" class="form-control" required placeholder="Enter username" aria-describedby="usernameHelp">
                         </div>
@@ -147,35 +150,35 @@
                         <label for="password">Password</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="bx bx-lock"></i></span> 
+                                <span class="input-group-text"><i class="bx bx-lock"></i></span>
                             </div>
                             <input type="password" id="password" name="password" class="form-control" required placeholder="Enter password" aria-describedby="passwordHelp">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="togglePassword">
-                                    <i class="bx bx-show"></i> 
+                                    <i class="bx bx-show"></i>
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    
+
                     <div class="form-group">
                         <label for="ipAddress">IP Address</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="bx bx-laptop"></i></span> 
+                                <span class="input-group-text"><i class="bx bx-laptop"></i></span>
                             </div>
                             <input type="text" id="ipAddress" class="form-control blurred" readonly>
                             <div class="input-group-append">
                                 <span class="input-group-text" id="toggleIP">
-                                    <i class="bx bx-show"></i> 
+                                    <i class="bx bx-show"></i>
                                 </span>
                             </div>
                         </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">
-                        <i class="bx bx-log-in"></i> Login 
+                        <i class="bx bx-log-in"></i> Login
                     </button>
 
                     <div class="text-center mt-3">
@@ -190,14 +193,13 @@
         </div>
     </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    
-    <script>
 
+    <script>
         $.get("https://api.ipify.org?format=json", function(data) {
             $('#ipAddress').val(data.ip);
         });
@@ -233,7 +235,7 @@
 
         $('#loginForm').on('submit', function(event) {
             event.preventDefault();
-            
+
             var username = $('#username').val().trim();
             var password = $('#password').val().trim();
 
@@ -263,7 +265,7 @@
         });
 
 
-        <?php if(session()->getFlashdata('msg')): ?>
+        <?php if (session()->getFlashdata('msg')): ?>
             Swal.fire({
                 icon: 'error',
                 title: 'Login Failed',
@@ -274,7 +276,8 @@
         <?php endif; ?>
     </script>
 
-<?= $this->include('layout/footer'); ?>
+    <?= $this->include('layout/footer'); ?>
 
 </body>
+
 </html>

@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Book - Admin</title>
-    
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -43,7 +43,7 @@
 
 <body>
 
-<?= $this->include('layout/navbar'); ?>
+    <?= $this->include('layout/navbar'); ?>
     <div class="container mt-5">
         <h2>Edit Book</h2>
 
@@ -120,13 +120,13 @@
         </form>
     </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-        $('#editBookForm').submit(function (e) {
+        $('#editBookForm').submit(function(e) {
             e.preventDefault();
             $('.loading').addClass('show'); // Show the loading spinner
 
@@ -138,7 +138,7 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function (response) {
+                success: function(response) {
                     $('.loading').removeClass('show'); // Hide the loading spinner
 
                     if (response.status === 'success') {
@@ -157,7 +157,7 @@
                         );
                     }
                 },
-                error: function () {
+                error: function() {
                     $('.loading').removeClass('show'); // Hide the loading spinner
                     Swal.fire(
                         'Oops!',

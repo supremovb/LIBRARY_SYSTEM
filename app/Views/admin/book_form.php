@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Book - Admin</title>
-    
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    
+
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
 
     <style>
@@ -29,14 +29,14 @@
 </head>
 
 <body>
-    
-    
+
+
     <?= $this->include('layout/navbar'); ?>
 
-    
+
 
     <div class="container mt-5">
-    <h2><i class="bx bx-book"></i> Add New Book <i class="bx bx-plus"></i></h2>
+        <h2><i class="bx bx-book"></i> Add New Book <i class="bx bx-plus"></i></h2>
 
 
         <form id="addBookForm" action="admin/create-book" method="POST" enctype="multipart/form-data">
@@ -94,7 +94,7 @@
                 <input type="file" name="photo" class="form-control" accept="image/*" required aria-describedby="photoHelp" id="photoInput">
                 <small id="photoHelp" class="form-text text-muted">Upload a cover photo for the book (required).</small>
 
-                
+
                 <div id="imagePreviewContainer" class="mt-3" style="display: none;">
                     <p><strong>Selected Photo:</strong></p>
                     <img id="imagePreview" src="" alt="Book Photo Preview" class="img-fluid">
@@ -104,7 +104,7 @@
 
             <button type="submit" class="btn btn-primary"><i class="bx bx-save"></i> Add Book</button>
 
-            
+
             <div class="loading mt-3">
                 <div class="spinner-border text-primary" role="status">
                     <span class="sr-only">Loading...</span>
@@ -113,19 +113,18 @@
         </form>
     </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-
-        $('#photoInput').change(function (e) {
+        $('#photoInput').change(function(e) {
             var file = e.target.files[0];
             var reader = new FileReader();
 
             if (file) {
-                reader.onload = function (event) {
+                reader.onload = function(event) {
 
                     $('#imagePreview').attr('src', event.target.result);
                     $('#imageFilename').text('Filename: ' + file.name);
@@ -135,7 +134,7 @@
             }
         });
 
-        $('#addBookForm').submit(function (e) {
+        $('#addBookForm').submit(function(e) {
             e.preventDefault();
 
 
@@ -150,7 +149,7 @@
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function (response) {
+                success: function(response) {
                     $('.loading').removeClass('show'); // Hide loading spinner
 
                     if (response.status === 'success') {
@@ -169,7 +168,7 @@
                         );
                     }
                 },
-                error: function () {
+                error: function() {
                     $('.loading').removeClass('show'); // Hide loading spinner
                     Swal.fire(
                         'Oops!',

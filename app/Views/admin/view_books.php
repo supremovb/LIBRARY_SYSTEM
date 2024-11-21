@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Books</title>
-    
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* Style for card container to adapt to content height */
@@ -15,19 +15,23 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;  /* Removed fixed height constraint */
+            height: 100%;
+            /* Removed fixed height constraint */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         /* Hover effect for card */
         .card:hover {
-            transform: translateY(-10px);  /* Slight lift on hover */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);  /* Adding shadow for emphasis */
+            transform: translateY(-10px);
+            /* Slight lift on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            /* Adding shadow for emphasis */
         }
 
         /* Image size adjustment */
         .card-img-top {
-            height: 200px; /* Reduce image height to free up space */
+            height: 200px;
+            /* Reduce image height to free up space */
             object-fit: cover;
             width: 100%;
             cursor: pointer;
@@ -42,8 +46,10 @@
         .card-title {
             font-size: 1.1rem;
             font-weight: bold;
-            text-overflow: ellipsis; /* Ensures long titles don't overflow */
-            white-space: nowrap;     /* Keeps title on one line */
+            text-overflow: ellipsis;
+            /* Ensures long titles don't overflow */
+            white-space: nowrap;
+            /* Keeps title on one line */
             overflow: hidden;
         }
 
@@ -74,18 +80,18 @@
 
 <body>
 
-    
+
     <?= $this->include('layout/navbar'); ?>
 
     <div class="container mt-5">
-    <h2 class="text-center mb-4"><i class="bx bx-book"></i> All Books</h2>
+        <h2 class="text-center mb-4"><i class="bx bx-book"></i> All Books</h2>
         <div class="row">
-            
+
             <?php if (!empty($books) && is_array($books)): ?>
                 <?php foreach ($books as $book): ?>
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            
+
                             <img src="<?= base_url('uploads/books/' . $book['photo']) ?>" class="card-img-top" alt="<?= $book['title'] ?>" data-toggle="modal" data-target="#bookModal<?= $book['book_id'] ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?= $book['title'] ?></h5>
@@ -97,7 +103,7 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="modal fade" id="bookModal<?= $book['book_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel<?= $book['book_id'] ?>" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -108,7 +114,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    
+
                                     <img src="<?= base_url('uploads/books/' . $book['photo']) ?>" class="img-fluid mb-3" alt="<?= $book['title'] ?>">
                                     <p><strong>Author:</strong> <?= $book['author'] ?></p>
                                     <p><strong>ISBN:</strong> <?= $book['isbn'] ?></p>
@@ -127,7 +133,7 @@
         </div>
     </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard - Library System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    
+
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
     <style>
         /* Updated Custom Styles */
         .container {
             margin-top: 50px;
         }
+
         .card {
-            width: 100%; /* Ensure consistent sizing */
-            margin: 0; /* Remove margin to avoid extra spacing */
+            width: 100%;
+            /* Ensure consistent sizing */
+            margin: 0;
+            /* Remove margin to avoid extra spacing */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            border-radius: 8px; /* Rounded corners */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+            border-radius: 8px;
+            /* Rounded corners */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Smooth transition for hover effect */
         }
 
         .card:hover {
-            transform: scale(1.05); /* Slightly increase the card size */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+            transform: scale(1.05);
+            /* Slightly increase the card size */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            /* More prominent shadow */
         }
 
         .card img {
@@ -35,28 +44,41 @@
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
         }
+
         .card-deck {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
-            gap: 1.5rem; /* Space between cards */
+            grid-template-columns: repeat(4, 1fr);
+            /* 4 cards per row */
+            gap: 1.5rem;
+            /* Space between cards */
         }
+
         .card-body {
-            padding: 1rem; /* Adds padding inside card content */
-            text-align: center; /* Centers text for better readability */
+            padding: 1rem;
+            /* Adds padding inside card content */
+            text-align: center;
+            /* Centers text for better readability */
         }
+
         .card-title {
-            font-size: 1.25rem; /* Slightly larger font for titles */
+            font-size: 1.25rem;
+            /* Slightly larger font for titles */
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
+
         .card-text {
-            font-size: 0.9rem; /* Makes the text smaller to fit details */
-            color: #555; /* Subtle color for better contrast */
+            font-size: 0.9rem;
+            /* Makes the text smaller to fit details */
+            color: #555;
+            /* Subtle color for better contrast */
         }
 
         .modal-content {
-            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent */
+            background-color: rgba(255, 255, 255, 0.9);
+            /* Semi-transparent */
         }
+
         .modal-body img {
             max-width: 100%;
             height: auto;
@@ -65,6 +87,7 @@
             margin-left: auto;
             margin-right: auto;
         }
+
         .borrow-history {
             max-height: 200px;
             overflow-y: auto;
@@ -73,11 +96,13 @@
             padding: 10px;
             background-color: #f9f9f9;
         }
+
         .borrow-history ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
+
         .borrow-history .list-group-item {
             display: flex;
             justify-content: space-between;
@@ -87,9 +112,11 @@
             font-size: 0.9rem;
             gap: 1rem;
         }
+
         .borrow-history .list-group-item span {
             white-space: nowrap;
         }
+
         .modal-dialog {
             display: flex;
             align-items: center;
@@ -98,12 +125,13 @@
         }
     </style>
 </head>
+
 <body>
-    
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <i class="bx bx-book-reader"></i> Library System
-    </a>
+        <a class="navbar-brand" href="#">
+            <i class="bx bx-book-reader"></i> Library System
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -127,28 +155,28 @@
     </nav>
 
     <div class="container">
-    <h2><i class="bx bx-user-circle"></i> Student Dashboard</h2>
+        <h2><i class="bx bx-user-circle"></i> Student Dashboard</h2>
 
-        
+
         <div class="form-group">
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bx bx-search"></i></span>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="bx bx-search"></i></span>
+                </div>
+                <input type="text" id="searchInput" class="form-control search-bar" placeholder="Search by name or ISBN" aria-label="Search Categories">
+            </div>
         </div>
-        <input type="text" id="searchInput" class="form-control search-bar" placeholder="Search by name or ISBN" aria-label="Search Categories">
-    </div>
-</div>
 
 
-        
+
         <h4><i class="bx bx-book"></i> Available Books</h4>
         <div class="card-deck" id="booksList">
-            <?php foreach($books as $book): ?>
+            <?php foreach ($books as $book): ?>
                 <div class="card category-row" data-title="<?= esc(strtolower($book['title'])) ?>" data-author="<?= esc(strtolower($book['author'])) ?>" data-isbn="<?= esc(strtolower($book['isbn'])) ?>">
-                    <img src="<?= base_url('uploads/books/' . esc($book['photo'])) ?>" 
-                         class="card-img-top book-image" 
-                         alt="<?= esc($book['title']) ?>" 
-                         data-id="<?= esc($book['book_id']) ?>">
+                    <img src="<?= base_url('uploads/books/' . esc($book['photo'])) ?>"
+                        class="card-img-top book-image"
+                        alt="<?= esc($book['title']) ?>"
+                        data-id="<?= esc($book['book_id']) ?>">
                     <div class="card-body">
                         <h5 class="card-title category-name"><?= esc($book['title']) ?></h5>
                         <p class="card-text category-description">
@@ -162,7 +190,7 @@
         </div>
     </div>
 
-    
+
     <div class="modal fade" id="bookDetailsModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -186,15 +214,14 @@
         </div>
     </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
-
-        $('#searchInput').on('input', function () {
+        $('#searchInput').on('input', function() {
             var query = $(this).val().toLowerCase();
-            $('.category-row').each(function () {
+            $('.category-row').each(function() {
                 var name = $(this).find('.category-name').text().toLowerCase();
                 var description = $(this).find('.category-description').text().toLowerCase();
 
@@ -207,55 +234,57 @@
         });
 
 
-$(document).on('click', '.book-image', function() {
-    const bookId = $(this).data('id');
-    $.ajax({
-        url: '<?= base_url("student/get_book_details") ?>',
-        type: 'GET',
-        data: { book_id: bookId },
-        success: function(response) {
-            const book = response.book;
-            const history = response.history || [];
+        $(document).on('click', '.book-image', function() {
+            const bookId = $(this).data('id');
+            $.ajax({
+                url: '<?= base_url("student/get_book_details") ?>',
+                type: 'GET',
+                data: {
+                    book_id: bookId
+                },
+                success: function(response) {
+                    const book = response.book;
+                    const history = response.history || [];
 
 
-            $('#bookTitle').text(book.title);
-            $('#bookImage').attr('src', '<?= base_url('uploads/books/') ?>' + book.photo)
-                           .attr('data-id', book.book_id);
-            $('#bookDetails').html(
-                `<strong>Author:</strong> ${book.author}<br>
+                    $('#bookTitle').text(book.title);
+                    $('#bookImage').attr('src', '<?= base_url('uploads/books/') ?>' + book.photo)
+                        .attr('data-id', book.book_id);
+                    $('#bookDetails').html(
+                        `<strong>Author:</strong> ${book.author}<br>
                  <strong>ISBN:</strong> ${book.isbn}<br>
                  <strong>Published:</strong> ${book.published_date}<br>
                  <strong>Description:</strong> ${book.description}`
-            );
+                    );
 
 
-            $('#borrowHistory').empty();
-            if (history.length > 0) {
-                history.forEach(item => {
-                    const user = item.user || 'Unknown User';
-                    const date = item.date || 'Unknown Date';
-                    $('#borrowHistory').append(
-                        `<li class="list-group-item">
+                    $('#borrowHistory').empty();
+                    if (history.length > 0) {
+                        history.forEach(item => {
+                            const user = item.user || 'Unknown User';
+                            const date = item.date || 'Unknown Date';
+                            $('#borrowHistory').append(
+                                `<li class="list-group-item">
                             <span class="user-name">${user}</span>
                             <span class="borrow-date">${date}</span>
                         </li>`
-                    );
-                });
-            } else {
-                $('#borrowHistory').append('<li class="list-group-item">No borrow history available.</li>');
-            }
+                            );
+                        });
+                    } else {
+                        $('#borrowHistory').append('<li class="list-group-item">No borrow history available.</li>');
+                    }
 
 
-            $.ajax({
-                url: '<?= base_url("student/get_recommendations/") ?>' + book.book_id,
-                type: 'GET',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        const recommendedBooks = response.books;
-                        let recommendationsHtml = '<h6>Recommended Books</h6><div class="card-deck">';
+                    $.ajax({
+                        url: '<?= base_url("student/get_recommendations/") ?>' + book.book_id,
+                        type: 'GET',
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                const recommendedBooks = response.books;
+                                let recommendationsHtml = '<h6>Recommended Books</h6><div class="card-deck">';
 
-                        recommendedBooks.forEach(function(recommendedBook) {
-                            recommendationsHtml += `
+                                recommendedBooks.forEach(function(recommendedBook) {
+                                    recommendationsHtml += `
                                 <div class="card category-row">
                                     <img src="<?= base_url('uploads/books/') ?>${recommendedBook.photo}" 
                                          class="card-img-top book-image" 
@@ -269,61 +298,62 @@ $(document).on('click', '.book-image', function() {
                                     </div>
                                 </div>
                             `;
-                        });
-                        recommendationsHtml += '</div>';
-                        $('#recommendations').html(recommendationsHtml); // Update the recommendations section
-                    } else {
-                        $('#recommendations').html('<p>No recommendations available at the moment.</p>');
-                    }
+                                });
+                                recommendationsHtml += '</div>';
+                                $('#recommendations').html(recommendationsHtml); // Update the recommendations section
+                            } else {
+                                $('#recommendations').html('<p>No recommendations available at the moment.</p>');
+                            }
+                        },
+                        error: function() {
+                            $('#recommendations').html('<p>Failed to fetch recommendations.</p>');
+                        }
+                    });
+
+                    $('#bookDetailsModal').modal('show');
                 },
                 error: function() {
-                    $('#recommendations').html('<p>Failed to fetch recommendations.</p>');
+                    Swal.fire('Error', 'Failed to fetch book details.', 'error');
                 }
             });
-
-            $('#bookDetailsModal').modal('show');
-        },
-        error: function() {
-            Swal.fire('Error', 'Failed to fetch book details.', 'error');
-        }
-    });
-});
+        });
 
 
         $(document).on('click', '.borrow-btn', function() {
-    const bookId = $('#bookDetailsModal').find('#bookImage').data('id');
-    Swal.fire({
-        title: 'Confirm Borrow',
-        text: "Do you want to borrow this book?",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, Borrow',
-        cancelButtonText: 'No, Cancel'
-    }).then(result => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: '<?= base_url("student/borrow_book") ?>',
-                type: 'POST',
-                data: { book_id: bookId },
-                success: function(response) {
-                    if (response.status === 'success') { // Check for 'status' instead of 'success'
-                        Swal.fire('Success', response.message, 'success').then(() => {
-                            location.reload(); // Automatically refresh the page
-                        });
-                        $('#bookDetailsModal').modal('hide');
-                    } else {
-                        Swal.fire('Error', response.message, 'error'); // Display the error message from response
-                    }
-                },
-                error: function() {
-                    Swal.fire('Error', 'An error occurred while borrowing the book.', 'error');
+            const bookId = $('#bookDetailsModal').find('#bookImage').data('id');
+            Swal.fire({
+                title: 'Confirm Borrow',
+                text: "Do you want to borrow this book?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Borrow',
+                cancelButtonText: 'No, Cancel'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '<?= base_url("student/borrow_book") ?>',
+                        type: 'POST',
+                        data: {
+                            book_id: bookId
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') { // Check for 'status' instead of 'success'
+                                Swal.fire('Success', response.message, 'success').then(() => {
+                                    location.reload(); // Automatically refresh the page
+                                });
+                                $('#bookDetailsModal').modal('hide');
+                            } else {
+                                Swal.fire('Error', response.message, 'error'); // Display the error message from response
+                            }
+                        },
+                        error: function() {
+                            Swal.fire('Error', 'An error occurred while borrowing the book.', 'error');
+                        }
+                    });
                 }
             });
-        }
-    });
-});
-
-
+        });
     </script>
 </body>
+
 </html>

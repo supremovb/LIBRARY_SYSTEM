@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Approve or Reject Transactions</title>
-    
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <link href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" rel="stylesheet">
     <style>
         body {
@@ -46,7 +46,8 @@
             margin-top: 20px;
         }
 
-        .table th, .table td {
+        .table th,
+        .table td {
             padding: 12px;
             text-align: left;
             border: 1px solid #ddd;
@@ -137,18 +138,18 @@
 </head>
 
 <body>
-    
+
     <?= $this->include('layout/navbar'); ?>
 
     <div class="container mt-5">
-    <h2><i class="bx bx-bookmark"></i> Pending Borrowed Books</h2>
+        <h2><i class="bx bx-bookmark"></i> Pending Borrowed Books</h2>
 
 
         <?php if (session()->getFlashdata('message')): ?>
             <div class="alert"><?= session()->getFlashdata('message') ?></div>
         <?php endif; ?>
 
-        
+
         <div id="searchInputWrapper" style="position: relative;">
             <i class="uil uil-search search-icon" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
             <input type="text" id="searchInput" class="form-control" placeholder="Search by Book Title or Borrower" style="padding-left: 30px;">
@@ -156,14 +157,14 @@
 
 
         <div class="d-flex justify-content-between mb-3">
-            
+
             <form id="approveAllForm" action="<?= site_url('admin/approveAllTransactions') ?>" method="POST">
                 <input type="date" name="due_date" id="approveAllDate" required>
                 <button type="button" class="btn btn-success" id="approveAllBtn">
                     <i class="uil uil-check-circle"></i> Approve All
                 </button>
             </form>
-            
+
             <form id="rejectAllForm" action="<?= site_url('admin/rejectAllTransactions') ?>" method="POST">
                 <input type="hidden" name="action" value="reject_all">
                 <button type="button" class="btn btn-danger" id="rejectAllBtn">
@@ -209,68 +210,65 @@
             </tbody>
         </table>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-
-    document.getElementById('approveAllBtn').addEventListener('click', function () {
-        const dueDate = document.getElementById('approveAllDate').value;
-        if (!dueDate) {
-            Swal.fire('Error', 'Please select a due date.', 'error');
-            return;
-        }
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'You are about to approve all pending transactions.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, approve all!',
-            cancelButtonText: 'Cancel',
-            confirmButtonColor: '#28a745',
-            cancelButtonColor: '#6c757d',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('approveAllForm').submit();
+        document.getElementById('approveAllBtn').addEventListener('click', function() {
+            const dueDate = document.getElementById('approveAllDate').value;
+            if (!dueDate) {
+                Swal.fire('Error', 'Please select a due date.', 'error');
+                return;
             }
-        });
-    });
 
-
-    document.getElementById('rejectAllBtn').addEventListener('click', function () {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You are about to reject all pending transactions.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, reject all!',
-        cancelButtonText: 'Cancel',
-        confirmButtonColor: '#dc3545',
-        cancelButtonColor: '#6c757d',
-    }).then((result) => {
-        if (result.isConfirmed) {
-
-            document.getElementById('rejectAllForm').submit();
-        }
-    });
-});
-
-
-$('#searchInput').on('input', function () {
-            var value = $(this).val().toLowerCase();
-            $("#transactionTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to approve all pending transactions.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, approve all!',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#6c757d',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('approveAllForm').submit();
+                }
             });
         });
 
-</script>
+
+        document.getElementById('rejectAllBtn').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to reject all pending transactions.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, reject all!',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    document.getElementById('rejectAllForm').submit();
+                }
+            });
+        });
+
+
+        $('#searchInput').on('input', function() {
+            var value = $(this).val().toLowerCase();
+            $("#transactionTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    </script>
 
     <script>
-
-        $('.btn-danger').on('click', function (e) {
+        $('.btn-danger').on('click', function(e) {
             e.preventDefault();
             const href = $(this).attr('href');
 

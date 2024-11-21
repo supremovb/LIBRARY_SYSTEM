@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Library System</title>
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    
+
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
     <style>
@@ -112,7 +112,7 @@
 
 <body>
     <div class="container mt-5">
-        
+
         <?= $this->include('layout/navbar'); ?>
         <h2><i class="bx bx-home"></i> Admin Dashboard</h2>
         <div class="d-flex justify-content-between mb-3">
@@ -125,11 +125,11 @@
         </div>
 
         <div class="row">
-            
+
             <?php foreach ($books as $book) : ?>
                 <div class="col-md-3 mb-4">
                     <div class="card">
-                        
+
                         <img src="<?= base_url('uploads/books/' . $book['photo']) ?>" class="card-img-top book-image" alt="<?= $book['title'] ?>" data-toggle="modal" data-target="#bookModal<?= $book['book_id'] ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?= esc($book['title']) ?></h5>
@@ -150,7 +150,7 @@
                     </div>
                 </div>
 
-                
+
                 <div class="modal fade" id="bookModal<?= $book['book_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel<?= $book['book_id'] ?>" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -185,18 +185,17 @@
         </div>
 
         <div class="pagination-container mt-3">
-            
+
         </div>
     </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-
-        $('.modal').on('show.bs.modal', function (event) {
+        $('.modal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
             var modal = $(this); // Current modal
             var bookId = modal.attr('id').replace('bookModal', ''); // Extract book ID
@@ -209,18 +208,20 @@
             $.ajax({
                 url: '<?= base_url("student/get_book_details") ?>',
                 type: 'GET',
-                data: { book_id: bookId },
-                success: function (response) {
+                data: {
+                    book_id: bookId
+                },
+                success: function(response) {
                     if (response.history && response.history.length > 0) {
                         historyList.empty();
-                        response.history.forEach(function (entry) {
+                        response.history.forEach(function(entry) {
                             historyList.append(`<li>${entry.user} borrowed on ${entry.date}</li>`);
                         });
                     } else {
                         historyList.html('<li>No borrow history found.</li>');
                     }
                 },
-                error: function () {
+                error: function() {
                     historyList.html('<li>Unable to fetch history.</li>');
                 }
             });
@@ -228,8 +229,7 @@
     </script>
 
     <script>
-
-        $('.delete-btn').click(function () {
+        $('.delete-btn').click(function() {
             var book_id = $(this).data('id');
             Swal.fire({
                 title: 'Are you sure?',
@@ -248,7 +248,7 @@
                             _method: 'DELETE',
                             book_id: book_id
                         },
-                        success: function (response) {
+                        success: function(response) {
                             if (response.status == 'success') {
                                 Swal.fire(
                                     'Deleted!',
@@ -271,9 +271,9 @@
         });
 
 
-        $('#searchInput').on('input', function () {
+        $('#searchInput').on('input', function() {
             var query = $(this).val().toLowerCase();
-            $('.card').each(function () {
+            $('.card').each(function() {
                 var title = $(this).find('.card-title').text().toLowerCase();
                 var author = $(this).find('.card-text').eq(0).text().toLowerCase();
                 var isbn = $(this).find('.card-text').eq(1).text().toLowerCase();

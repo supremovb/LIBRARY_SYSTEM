@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories - Library System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -13,7 +14,8 @@
         /* Ensure descriptions break properly */
         .description-cell {
             word-wrap: break-word;
-            max-width: 300px; /* Adjust width for better layout */
+            max-width: 300px;
+            /* Adjust width for better layout */
             overflow-wrap: break-word;
         }
 
@@ -28,8 +30,10 @@
         }
 
         /* Reduce width of Actions column */
-        .table th:nth-child(4), .table td:nth-child(4) {
-            width: 150px; /* Adjust width to fit the buttons */
+        .table th:nth-child(4),
+        .table td:nth-child(4) {
+            width: 150px;
+            /* Adjust width to fit the buttons */
             text-align: center;
         }
 
@@ -39,21 +43,22 @@
         }
     </style>
 </head>
+
 <body>
-    
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <i class="bx bx-book-reader"></i> Library System
-    </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="<?= base_url('admin/dashboard') ?>" class="nav-link"><i class="bx bx-home"></i> Dashboard</a>
-                    </li>
-                    <?php if (session()->get('role') === 'admin'): ?>
+        <a class="navbar-brand" href="#">
+            <i class="bx bx-book-reader"></i> Library System
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="<?= base_url('admin/dashboard') ?>" class="nav-link"><i class="bx bx-home"></i> Dashboard</a>
+                </li>
+                <?php if (session()->get('role') === 'admin'): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="booksDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bx bx-book"></i> Books
@@ -66,8 +71,8 @@
                             <li><a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>"><i class="bx bx-check-circle"></i> View Borrowed Books</a></li>
                         </ul>
                     </li>
-                    <?php endif; ?>
-                    <?php if (session()->get('logged_in')): ?>
+                <?php endif; ?>
+                <?php if (session()->get('logged_in')): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bx bx-user"></i> <?= session()->get('firstname') ?>
@@ -78,17 +83,17 @@
                             <li><a class="dropdown-item" href="<?= base_url('user/logout') ?>"><i class="bx bx-log-out"></i> Logout</a></li>
                         </ul>
                     </li>
-                    <?php endif; ?>
-                </ul>
-            </div>
+                <?php endif; ?>
+            </ul>
+        </div>
         </div>
     </nav>
 
-    
+
     <div class="container mt-5">
         <h2>Categories</h2>
-    
-        
+
+
         <div class="input-group search-bar">
             <span class="input-group-text"><i class="bx bx-search"></i></span>
             <input type="text" id="searchInput" class="form-control" placeholder="Search by name or description" aria-label="Search Categories">
@@ -130,7 +135,7 @@
             </tbody>
         </table>
 
-        
+
         <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -160,7 +165,7 @@
             </div>
         </div>
 
-        
+
         <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -190,130 +195,130 @@
         </div>
     </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
 
     <script>
+        $(document).ready(function() {
 
-$(document).ready(function() {
-
-    $('.edit-category').on('click', function() {
-        var categoryId = $(this).data('category-id');
-        var categoryName = $(this).data('category-name');
-        var categoryDescription = $(this).data('category-description');
-
-
-        $('#categoryName').val(categoryName);
-        $('#categoryDescription').val(categoryDescription);
+            $('.edit-category').on('click', function() {
+                var categoryId = $(this).data('category-id');
+                var categoryName = $(this).data('category-name');
+                var categoryDescription = $(this).data('category-description');
 
 
-        $('input[name="category_id"]').val(categoryId);
+                $('#categoryName').val(categoryName);
+                $('#categoryDescription').val(categoryDescription);
 
 
-        $('#editCategoryModal').modal('show');
-    });
+                $('input[name="category_id"]').val(categoryId);
 
 
-    $('#editCategoryForm').on('submit', function(e) {
-        e.preventDefault();
+                $('#editCategoryModal').modal('show');
+            });
 
-        var formData = $(this).serialize(); // Serialize form data
 
-        $.ajax({
-            url: $(this).attr('action'),
-            method: 'POST',
-            data: formData,
-            dataType: 'json', // Expect JSON response
-            success: function(response) {
-                if (response.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Category Updated!',
-                        text: response.message,
-                        confirmButtonText: 'OK'
-                    }).then(() => {
+            $('#editCategoryForm').on('submit', function(e) {
+                e.preventDefault();
 
-                        location.reload(); // Reload to reflect changes
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: response.message,
-                        confirmButtonText: 'OK'
-                    });
-                }
-            },
-            error: function() {
+                var formData = $(this).serialize(); // Serialize form data
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    dataType: 'json', // Expect JSON response
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Category Updated!',
+                                text: response.message,
+                                confirmButtonText: 'OK'
+                            }).then(() => {
+
+                                location.reload(); // Reload to reflect changes
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: response.message,
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'An error occurred while processing the request.',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            });
+
+
+
+
+            $('.delete-category').on('click', function() {
+                var categoryId = $(this).data('category-id');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        window.location.href = '<?= base_url('admin/delete-category/') ?>' + categoryId;
+                    }
+                });
+            });
+
+
+            <?php if (session()->get('message')): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: '<?= session()->get('message') ?>',
+                    confirmButtonText: 'OK'
+                });
+            <?php endif; ?>
+
+            <?php if (session()->get('error')): ?>
                 Swal.fire({
                     icon: 'error',
                     title: 'Error!',
-                    text: 'An error occurred while processing the request.',
+                    text: '<?= session()->get('error') ?>',
                     confirmButtonText: 'OK'
                 });
-            }
+            <?php endif; ?>
+
+
+            $('#searchInput').on('input', function() {
+                var query = $(this).val().toLowerCase();
+                $('.category-row').each(function() {
+                    var name = $(this).find('.category-name').text().toLowerCase();
+                    var description = $(this).find('.category-description').text().toLowerCase();
+
+                    if (name.includes(query) || description.includes(query)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
         });
-    });
-
-    
-
-
-    $('.delete-category').on('click', function() {
-        var categoryId = $(this).data('category-id');
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-                window.location.href = '<?= base_url('admin/delete-category/') ?>' + categoryId;
-            }
-        });
-    });
-
-
-    <?php if (session()->get('message')): ?>
-        Swal.fire({
-            icon: 'success',
-            title: 'Deleted!',
-            text: '<?= session()->get('message') ?>',
-            confirmButtonText: 'OK'
-        });
-    <?php endif; ?>
-
-    <?php if (session()->get('error')): ?>
-        Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: '<?= session()->get('error') ?>',
-            confirmButtonText: 'OK'
-        });
-    <?php endif; ?>
-
-
-    $('#searchInput').on('input', function () {
-        var query = $(this).val().toLowerCase();
-        $('.category-row').each(function () {
-            var name = $(this).find('.category-name').text().toLowerCase();
-            var description = $(this).find('.category-description').text().toLowerCase();
-
-            if (name.includes(query) || description.includes(query)) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    });
-});
-</script>
+    </script>
 
 
 </body>
+
 </html>
