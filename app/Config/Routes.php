@@ -139,6 +139,21 @@ $routes->post('admin/update-category', 'AdminController::updateCategory');
 
 $routes->post('student/borrow_book', 'TransactionController::borrow');
 
+$routes->get('admin/view-users', 'AdminController::viewUsers');
+
+$routes->post('admin/approveAllTransactions', 'AdminController::approveAllTransactions');
+
+$routes->post('admin/rejectAllTransactions', 'AdminController::rejectAllTransactions');
+
+$routes->post('transaction/returnAllBooks', 'TransactionController::returnAllBooks');
+
+$routes->post('admin/edit-role', 'AdminController::editRole');
+
+$routes->get('admin/edit-role', 'AdminController::editRole');
+
+$routes->post('admin/delete-user', 'AdminController::deleteUser');
+
+$routes->post('admin/delete-category/(:num)', 'AdminController::deleteCategory/$1');
 
 
 $routes->get('/admin/user/logout', 'AdminController::logout');

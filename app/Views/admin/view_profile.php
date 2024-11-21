@@ -16,8 +16,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <!-- FontAwesome for check and X icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     
+    <!-- Boxicons CDN -->
+    <link href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" rel="stylesheet">
+
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -45,7 +47,8 @@
 <body>
 <?= $this->include('layout/navbar'); ?>
     <div class="container profile-container">
-        <h2>User Profile</h2>
+    <h2><i class="bx bx-id-card"></i> User Profile</h2>
+
 
        <!-- Display Validation Errors -->
     <?php if (session()->getFlashdata('validationErrors')): ?>
@@ -80,26 +83,46 @@
 
             <!-- User Information -->
             <div class="profile-details">
+                <div class="row">
+                    <div class="col-md-4"><strong>Student ID:</strong></div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="student_id" value="<?= esc($user['student_id']) ?>" readonly>
+                    </div>
+                </div>
                 
                 <div class="row">
                     <div class="col-md-4"><strong>First Name:</strong></div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="firstname" value="<?= esc($user['firstname']) ?>" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4"><strong>Last Name:</strong></div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="lastname" value="<?= esc($user['lastname']) ?>" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="uil uil-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="firstname" value="<?= esc($user['firstname']) ?>" required>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Removed Course and Year Fields -->
+                <div class="row">
+                    <div class="col-md-4"><strong>Last Name:</strong></div>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="uil uil-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="lastname" value="<?= esc($user['lastname']) ?>" required>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-4"><strong>Role:</strong></div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="role" value="<?= esc($user['role']) ?>" readonly>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="uil uil-shield-check"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="role" value="<?= esc($user['role']) ?>" readonly>
+                        </div>
                     </div>
                 </div>
 
@@ -107,7 +130,12 @@
                         <div class="col-md-4"><strong>Email:</strong></div>
                         <div class="col-md-8">
                             <div class="d-flex align-items-center">
-                                <input type="email" class="form-control" name="email" value="<?= esc($user['email']) ?>" required>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="uil uil-envelope"></i></span>
+                                    </div>
+                                    <input type="email" class="form-control" name="email" value="<?= esc($user['email']) ?>" required>
+                                </div>
                                 <span class="ml-2">
                                     <?php if ($emailVerified): ?>
                                         <i class="fas fa-check-circle text-success" title="Email Verified"></i>
@@ -119,11 +147,15 @@
                         </div>
                     </div>
 
-
                 <div class="row">
                     <div class="col-md-4"><strong>Username:</strong></div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="username" value="<?= esc($user['username']) ?>" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="uil uil-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="username" value="<?= esc($user['username']) ?>" required>
+                        </div>
                     </div>
                 </div>
 
@@ -131,19 +163,30 @@
                 <div class="row mt-3">
                     <div class="col-md-4"><strong>New Password:</strong></div>
                     <div class="col-md-8">
-                        <input type="password" class="form-control" name="new_password" placeholder="Enter new password">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="uil uil-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" name="new_password" placeholder="Enter new password">
+                        </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-4"><strong>Confirm Password:</strong></div>
                     <div class="col-md-8">
-                        <input type="password" class="form-control" name="confirm_password" placeholder="Confirm new password">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="uil uil-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm new password">
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="form-group mt-3">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-primary"><i class="uil uil-save"></i> Save Changes</button>
             </div>
         </form>
     
@@ -181,7 +224,6 @@
         }
 
         // SweetAlert for success and error messages
-        // SweetAlert for success, error, and validation messages
         <?php if (session()->getFlashdata('success')): ?>
     Swal.fire({
         icon: 'success',

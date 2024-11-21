@@ -1,6 +1,5 @@
 <?= $this->include('layout/header'); ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.4/dist/sweetalert2.min.css">
+    <!-- Boxicons Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons/css/boxicons.min.css">
     <!-- Custom CSS -->
     <style>
         body {
@@ -53,47 +54,98 @@
                         </div>
                     <?php endif; ?>
 
+                    <!-- Username -->
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-user"></i></span> <!-- Boxicon user -->
+                            </div>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
                     </div>
 
+                    <!-- Password -->
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-lock"></i></span> <!-- Boxicon lock -->
+                            </div>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
                     </div>
 
+                    <!-- Confirm Password -->
                     <div class="form-group">
                         <label for="confirm_password">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-lock"></i></span> <!-- Boxicon lock -->
+                            </div>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        </div>
                     </div>
 
+                    <!-- Email -->
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-envelope"></i></span> <!-- Boxicon envelope -->
+                            </div>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
                     </div>
 
+                    <!-- First Name -->
                     <div class="form-group">
                         <label for="firstname">First Name</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-user"></i></span> <!-- Boxicon user -->
+                            </div>
+                            <input type="text" class="form-control" id="firstname" name="firstname" required>
+                        </div>
                     </div>
 
+                    <!-- Last Name -->
                     <div class="form-group">
                         <label for="lastname">Last Name</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-user"></i></span> <!-- Boxicon user -->
+                            </div>
+                            <input type="text" class="form-control" id="lastname" name="lastname" required>
+                        </div>
                     </div>
 
+                    <!-- Course -->
                     <div class="form-group">
                         <label for="course">Course</label>
-                        <input type="text" class="form-control" id="course" name="course" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-book"></i></span> <!-- Boxicon book -->
+                            </div>
+                            <input type="text" class="form-control" id="course" name="course" required>
+                        </div>
                     </div>
 
+                    <!-- Year -->
                     <div class="form-group">
                         <label for="year">Year</label>
-                        <input type="text" class="form-control" id="year" name="year" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-calendar"></i></span> <!-- Boxicon calendar -->
+                            </div>
+                            <input type="text" class="form-control" id="year" name="year" required>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    <!-- Register button with Boxicon icon -->
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="bx bx-user-plus"></i> Register <!-- Boxicon user-plus -->
+                    </button>
 
                     <div class="text-center mt-3">
                         <p>Already have an account? <a href="<?= base_url('user/login') ?>">Login here</a></p>

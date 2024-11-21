@@ -558,30 +558,35 @@ public function authenticate()
     $session = session();
     $model = new UserModel();
 
-    // Trim input and validate both username and password are provided
-    $username = trim($this->request->getVar('username'));
+    // Trim input and validate both username/student_id and password are provided
+    $input = trim($this->request->getVar('username')); // Can be student_id or username
     $password = trim($this->request->getVar('password'));
 
-    if (empty($username) || empty($password)) {
-        $session->setFlashdata('msg', 'Username and Password are required.');
+    if (empty($input) || empty($password)) {
+        $session->setFlashdata('msg', 'Student ID/Username and Password are required.');
         return redirect()->to('/login');
     }
 
-    // Fetch user data using case-sensitive comparison
-    $data = $model->where('username', $username)->first();
+    // Fetch user data
+    $data = $model->where('username', $input)
+                  ->orWhere('student_id', $input)
+                  ->first();
 
     if ($data) {
         $hashedPassword = $data['password'];
 
         // Log debug information for development (remove in production)
-        log_message('debug', 'Password hash from DB for user ' . $username . ': ' . $hashedPassword);
+        log_message('debug', 'Password hash from DB for user ' . $input . ': ' . $hashedPassword);
 
-        // Verify case-sensitive password
+        // Verify password
         if (password_verify($password, $hashedPassword)) {
-            // Ensure case-sensitive username check
-            if ($username !== $data['username']) {
-                log_message('error', 'Case mismatch in username for user: ' . $username);
-                $session->setFlashdata('msg', 'Username is incorrect (case-sensitive).');
+            // Case-sensitive comparison
+            if (
+                ($input === $data['username'] && $input !== $data['username']) ||
+                ($input === $data['student_id'] && strcmp($input, $data['student_id']) !== 0)
+            ) {
+                log_message('error', 'Case mismatch in Student ID/Username: ' . $input);
+                $session->setFlashdata('msg', 'Student ID/Username is incorrect (case-sensitive).');
                 return redirect()->to('/login');
             }
 
@@ -589,8 +594,10 @@ public function authenticate()
             $ses_data = [
                 'user_id' => $data['user_id'],
                 'username' => $data['username'],
+                'student_id' => $data['student_id'],
                 'role' => $data['role'],
                 'firstname' => $data['firstname'],
+                'lastname' => $data['lastname'],
                 'logged_in' => TRUE
             ];
             $session->set($ses_data);
@@ -600,16 +607,17 @@ public function authenticate()
                 ? redirect()->to('/admin/dashboard')
                 : redirect()->to('/user/dashboard');
         } else {
-            log_message('error', 'Password mismatch for username: ' . $username);
+            log_message('error', 'Password mismatch for input: ' . $input);
             $session->setFlashdata('msg', 'Password is incorrect.');
             return redirect()->to('/login');
         }
     } else {
-        log_message('error', 'Username not found: ' . $username);
-        $session->setFlashdata('msg', 'Username not found.');
+        log_message('error', 'Student ID/Username not found: ' . $input);
+        $session->setFlashdata('msg', 'Student ID/Username not found.');
         return redirect()->to('/login');
     }
 }
+
 
     public function dashboard()
     {
@@ -682,8 +690,7 @@ public function authenticate()
     ]);
 
     if ($this->validate('student_registration')) {
-                        // Check if the username already exists
-                // Check if the username already exists
+        // Check if the username already exists
         $existingUser = $model->where('username', $this->request->getPost('username'))->first();
         if ($existingUser) {
             $session->setFlashdata('msg', 'The username already exists. Please choose another one.');
@@ -697,10 +704,12 @@ public function authenticate()
             return redirect()->to('/register')->withInput();  // Preserve the input values
         }
 
-
+        // Generate student_id in the format SDCA-H5J7
+        $student_id = 'SDCA' . strtoupper(bin2hex(random_bytes(2)));  // Generates a random 4-character string like H5J7
 
         // Attempt to create the student
         $data = [
+            'student_id' => $student_id,  // Add student_id here
             'username' => $this->request->getPost('username'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),  // Hash password
             'firstname' => $this->request->getPost('firstname'),
@@ -760,7 +769,6 @@ public function authenticate()
         $session->setFlashdata('msg', 'There are errors in the form. Please correct them and try again.');
         return redirect()->to('/register')->withInput()->with('validation', $validation);
     }
-    
 }
 
 

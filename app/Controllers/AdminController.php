@@ -22,6 +22,64 @@ class AdminController extends BaseController
         $this->categoryModel = new CategoryModel();
     }
 
+    public function viewUsers()
+{
+    // Load the necessary model
+    $userModel = new \App\Models\UserModel();
+
+    // Get all users
+    $users = $userModel->findAll();
+
+    // Pass users data to the view
+    return view('admin/view_users', ['users' => $users]);
+}
+
+
+public function editRole()
+{
+    $userModel = new UserModel();
+
+    $request = $this->request->getJSON();
+    $userId = $request->user_id;
+    $role = $request->role;
+
+    $data = ['role' => $role];
+    
+    if ($userModel->update($userId, $data)) {
+        return $this->response->setJSON([
+            'success' => true, 
+            'message' => 'User role updated successfully!'
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'success' => false, 
+            'message' => 'Failed to update user role. Please try again.'
+        ]);
+    }
+}
+
+
+public function deleteUser()
+{
+    // Get user_id from the request body (sent as JSON)
+    $request = $this->request->getJSON();
+    $user_id = $request->user_id;
+
+    // Perform the deletion logic (e.g., using your model)
+    $model = new UserModel();
+    $user = $model->find($user_id);
+    
+    if ($user) {
+        $model->delete($user_id);
+        return $this->response->setJSON(['success' => true, 'message' => 'User deleted successfully.']);
+    } else {
+        return $this->response->setJSON(['success' => false, 'message' => 'User not found.']);
+    }
+}
+
+
+
+
 
     // Method to display the form
     public function add_Category()
@@ -61,6 +119,7 @@ class AdminController extends BaseController
 }
 
 
+
 public function editCategory($categoryId)
     {
         // Fetch the category by ID from the database
@@ -75,27 +134,34 @@ public function editCategory($categoryId)
     }
 
 
-public function updateCategory()
+    public function updateCategory()
 {
+    // Get category ID and other data from POST request
     $categoryId = $this->request->getPost('category_id');
     $name = $this->request->getPost('name');
     $description = $this->request->getPost('description');
 
-    $categoryModel = new CategoryModel();
-
-    $categoryData = [
-        'name' => $name,
-        'description' => $description
-    ];
-
-    if ($categoryModel->update($categoryId, $categoryData)) {
-        session()->setFlashdata('success', 'Category updated successfully!');
-    } else {
-        session()->setFlashdata('error', 'An error occurred while updating the category.');
+    // Ensure the categoryId exists
+    $category = $this->categoryModel->find($categoryId);
+    if (!$category) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Category not found.']);
     }
 
-    return redirect()->to(base_url('admin/edit-category/' . $categoryId));
+    // Prepare the data to update
+    $categoryData = [
+        'name' => $name,
+        'description' => $description,
+    ];
+
+    // Update the category
+    if ($this->categoryModel->update($categoryId, $categoryData)) {
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Category updated successfully!']);
+    } else {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'An error occurred while updating the category.']);
+    }
 }
+
+    
 
 
 
@@ -111,24 +177,31 @@ public function categories()
 
 
 public function deleteCategory($categoryId)
-    {
-        // Load the Category model
-        $categoryModel = new CategoryModel();
+{
+    // Load the Category model
+    $categoryModel = new CategoryModel();
 
-        // Check if the category exists
-        $category = $categoryModel->find($categoryId);
+    // Check if the category exists
+    $category = $categoryModel->find($categoryId);
 
-        if ($category) {
-            // Delete the category
-            $categoryModel->delete($categoryId);
+    if ($category) {
+        // Delete the category
+        $categoryModel->delete($categoryId);
 
-            // Set success message and redirect back to categories page
-            return redirect()->to(base_url('admin/categories'))->with('message', 'Category deleted successfully.');
-        } else {
-            // Set error message and redirect back to categories page if category is not found
-            return redirect()->to(base_url('admin/categories'))->with('error', 'Category not found.');
-        }
+        // Set success message in session
+        session()->setFlashdata('message', 'Category deleted successfully.');
+
+        // Redirect back to categories page
+        return redirect()->to(base_url('admin/categories'));
+    } else {
+        // Set error message in session
+        session()->setFlashdata('error', 'Category not found.');
+
+        // Redirect back to categories page if category is not found
+        return redirect()->to(base_url('admin/categories'));
     }
+}
+
 
 
 
@@ -191,9 +264,12 @@ public function deleteCategory($categoryId)
     if (!$currentUser) {
         return redirect()->to('admin/view-profile')->with('error', 'User not found.');
     }
-
+    
+    
     // Check if the email has been changed
     $emailChanged = isset($data['email']) && $currentUser['email'] !== $data['email'];
+
+    $studentIdChanged = isset($data['student_id']) && $currentUser['student_id'] !== $data['student_id'];
 
     // Handle Password Update
     if (!empty($data['new_password']) && $data['new_password'] !== $data['confirm_password']) {
@@ -210,19 +286,34 @@ public function deleteCategory($categoryId)
         unset($data['username']); // Don't update username if it's not changed
     }
 
+    // Check if username is unchanged
+    if (isset($data['student_id']) && $currentUser['student_id'] === $data['student_id']) {
+        unset($data['student_id']); // Don't update username if it's not changed
+    }
+
     // Validation
     $validation = \Config\Services::validation();
     $validationRules = [
         'firstname' => 'required|min_length[3]|max_length[100]',
         'lastname'  => 'required|min_length[3]|max_length[100]',
         'username'  => 'required|min_length[3]|max_length[50]',
+        'student_id' => 'permit_empty|alpha_numeric|min_length[3]|max_length[20]',
         'email'     => 'permit_empty|valid_email|max_length[100]',
         'new_password' => 'permit_empty|min_length[6]|max_length[255]',
         'confirm_password' => 'permit_empty|matches[new_password]',
     ];
 
+    // Skip validation for student_id if it hasn't changed
+    if (!$studentIdChanged) {
+        $validationRules['student_id'] = 'permit_empty'; // Allow student_id to remain unchanged
+    }
+
     if (!isset($data['username']) || $currentUser['username'] === $data['username']) {
         $validationRules['username'] = 'permit_empty'; // Allow empty value for username
+    }
+
+    if (!isset($data['student_id']) || $currentUser['student_id'] === $data['student_id']) {
+        $validationRules['student_id'] = 'permit_empty'; // Allow empty value for username
     }
 
     $validation->setRules($validationRules);
@@ -381,7 +472,6 @@ public function verifyEmail()
     
 
 
-    // Store new book
     public function createBook()
 {
     try {
@@ -421,6 +511,7 @@ public function verifyEmail()
             'description' => $this->request->getPost('description'), // Add description here
             'photo' => $newFileName,
             'category_id' => $this->request->getPost('category'), // Get category from form
+            'quantity' => $this->request->getPost('quantity'), // New quantity field
         ];
 
         // Validate required fields
@@ -463,35 +554,48 @@ public function verifyEmail()
 }
 
 
-
 public function approveTransaction($transactionId)
 {
     $transactionModel = new \App\Models\TransactionModel();
     $bookModel = new \App\Models\BookModel();
     $dueDate = $this->request->getPost('due_date'); // Get due date from the form
 
-    // Check if the due date is provided
+    // Validate due date
     if (empty($dueDate)) {
         session()->setFlashdata('message', 'Please provide a valid due date.');
         return redirect()->back();
     }
 
-    // Fetch the transaction details to get the associated book ID
+    // Fetch the transaction and associated book
     $transaction = $transactionModel->find($transactionId);
     if (!$transaction) {
         session()->setFlashdata('message', 'Transaction not found.');
         return redirect()->to('/admin/approve_reject_transactions');
     }
 
-    // Update the transaction and book status
+    $book = $bookModel->find($transaction['book_id']);
+    if (!$book) {
+        session()->setFlashdata('message', 'Book not found.');
+        return redirect()->to('/admin/approve_reject_transactions');
+    }
+
+    // Begin transaction
     $db = \Config\Database::connect();
     $db->transStart();
 
+    // Approve transaction
     $transactionModel->update($transactionId, [
         'status' => 'borrowed',
         'due_date' => $dueDate,
     ]);
-    $bookModel->update($transaction['book_id'], ['status' => 'borrowed']);
+
+    // Reduce book quantity
+    $newQuantity = $book['quantity'] - 1;
+    $bookStatus = ($newQuantity > 0) ? 'available' : 'out of stock';
+    $bookModel->update($transaction['book_id'], [
+        'quantity' => $newQuantity,
+        'status' => $bookStatus,
+    ]);
 
     $db->transComplete();
 
@@ -504,24 +608,39 @@ public function approveTransaction($transactionId)
     return redirect()->to('/admin/approve_reject_transactions');
 }
 
+
+
 public function rejectTransaction($transactionId)
 {
     $transactionModel = new \App\Models\TransactionModel();
     $bookModel = new \App\Models\BookModel();
 
-    // Fetch the transaction details to get the associated book ID
+    // Fetch the transaction and associated book
     $transaction = $transactionModel->find($transactionId);
     if (!$transaction) {
         session()->setFlashdata('message', 'Transaction not found.');
         return redirect()->to('/admin/approve_reject_transactions');
     }
 
-    // Update the transaction and book status
+    $book = $bookModel->find($transaction['book_id']);
+    if (!$book) {
+        session()->setFlashdata('message', 'Book not found.');
+        return redirect()->to('/admin/approve_reject_transactions');
+    }
+
+    // Begin transaction
     $db = \Config\Database::connect();
     $db->transStart();
 
+    // Reject the transaction
     $transactionModel->update($transactionId, ['status' => 'rejected']);
-    $bookModel->update($transaction['book_id'], ['status' => 'available']);
+
+    // Do not change book quantity or status, as the book is still available and not checked out
+    // $newQuantity = $book['quantity'] + 1;  // No longer necessary
+    // $bookModel->update($transaction['book_id'], [
+    //     'quantity' => $newQuantity,        // No longer necessary
+    //     'status' => 'available',           // No longer necessary
+    // ]);
 
     $db->transComplete();
 
@@ -533,6 +652,7 @@ public function rejectTransaction($transactionId)
 
     return redirect()->to('/admin/approve_reject_transactions');
 }
+
 
 
 
@@ -558,9 +678,92 @@ public function approve_reject_transactions()
     return view('admin/approve_reject_transactions', $data);
 }
 
+public function approveAllTransactions()
+{
+    $transactionModel = new \App\Models\TransactionModel();
+    $bookModel = new \App\Models\BookModel();
+    $dueDate = $this->request->getPost('due_date');
+
+    if (empty($dueDate)) {
+        session()->setFlashdata('message', 'Please provide a valid due date.');
+        return redirect()->back();
+    }
+
+    // Fetch all pending transactions
+    $pendingTransactions = $transactionModel->where('status', 'pending')->findAll();
+
+    $db = \Config\Database::connect();
+    $db->transStart();
+
+    foreach ($pendingTransactions as $transaction) {
+        $book = $bookModel->find($transaction['book_id']);
+        if (!$book || $book['quantity'] <= 0) {
+            continue; // Skip if book is not found or out of stock
+        }
+
+        // Approve transaction
+        $transactionModel->update($transaction['transaction_id'], [
+            'status' => 'borrowed',
+            'due_date' => $dueDate,
+        ]);
+
+        // Reduce book quantity
+        $newQuantity = $book['quantity'] - 1;
+        $bookModel->update($transaction['book_id'], [
+            'quantity' => $newQuantity,
+            'status' => ($newQuantity > 0) ? 'available' : 'out of stock',
+        ]);
+    }
+
+    $db->transComplete();
+
+    if ($db->transStatus() === false) {
+        session()->setFlashdata('message', 'Failed to approve all transactions.');
+    } else {
+        session()->setFlashdata('message', 'All transactions approved successfully.');
+    }
+
+    return redirect()->to('/admin/approve_reject_transactions');
+}
+
+public function rejectAllTransactions()
+{
+    $transactionModel = new \App\Models\TransactionModel();
+    $bookModel = new \App\Models\BookModel();
+
+    // Fetch all pending transactions
+    $pendingTransactions = $transactionModel->where('status', 'pending')->findAll();
+
+    $db = \Config\Database::connect();
+    $db->transStart();
+
+    foreach ($pendingTransactions as $transaction) {
+        // Reject transaction
+        $transactionModel->update($transaction['transaction_id'], ['status' => 'rejected']);
+
+        // Increment book quantity
+        $book = $bookModel->find($transaction['book_id']);
+        if ($book) {
+            $newQuantity = $book['quantity'] + 1;
+            $bookModel->update($transaction['book_id'], [
+                'quantity' => $newQuantity,
+                'status' => 'available',
+            ]);
+        }
+    }
+
+    $db->transComplete();
+
+    if ($db->transStatus() === false) {
+        session()->setFlashdata('message', 'Failed to reject all transactions.');
+    } else {
+        session()->setFlashdata('message', 'All transactions rejected successfully.');
+    }
+
+    return redirect()->to('/admin/approve_reject_transactions');
+}
 
 
-    
 
     // Show the form to edit a book
 public function editBook($book_id)
@@ -573,6 +776,8 @@ public function editBook($book_id)
 
     // Fetch all categories to show in the form
     $data['categories'] = $categoryModel->findAll();
+
+    $data['book']['quantity'] = $bookModel->find($book_id)['quantity'];
 
     
 
@@ -594,7 +799,11 @@ public function editBook($book_id)
         // If the title is updated, proceed to validate it
         $validationRules = [
             'title' => 'required|min_length[3]|max_length[255]',
+            'quantity' => 'required|integer|greater_than_equal_to[0]',
         ];
+
+        
+
     
         // Get existing book data to compare ISBN
         $existingBookData = $bookModel->find($book_id);
@@ -623,6 +832,7 @@ public function editBook($book_id)
             'status' => $this->request->getPost('status'),
             'description' => $this->request->getPost('description'), // Optional field
             'category_id' => $this->request->getPost('category'), // Update the category_id if provided
+            'quantity' => $this->request->getPost('quantity'),
         ];
         
         // Handle photo upload if provided

@@ -1,5 +1,3 @@
-<?= $this->include('layout/header'); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,33 +8,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    <!-- Font Awesome for the eye icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Boxicons for icons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons/css/boxicons.min.css">
     <!-- Custom CSS -->
     <style>
         body {
-    background-color: #f4f7fc;
-    height: 100vh;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: flex-start; /* Align items to the top, allowing room for margin */
-    margin: 0;
-    padding-top: 50px; /* Push the content down slightly */
-}
+            background-color: #f4f7fc;
+            height: 100vh;
+            display: flex;
+            justify-content: center;  /* This ensures vertical centering */
+            align-items: center;  /* This centers content horizontally */
+            margin: 0;
+        }
 
-.login-container {
-    max-width: 350px;
-    width: 100%;
-    background-color: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 140px; /* Add margin-top to push the container down */
-}
-
+        .login-container {
+            max-width: 350px;
+            width: 100%;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 80px;
+        }
 
         .form-group {
             width: 100%;
@@ -111,12 +107,19 @@
             font-size: 1.5em;
         }
 
+        /* Add blur effect for IP address field */
+        .blurred {
+            filter: blur(5px);
+        }
+
     </style>
 </head>
 <body>
 
+<?= $this->include('layout/header'); ?>
+
     <div class="container login-container">
-        <h2 class="text-center mb-4">Login</h2>
+        <h2 class="text-center mb-4">Student Login</h2>
 
         <!-- Flash message for login failure -->
         <?php if(session()->getFlashdata('msg')):?>
@@ -125,31 +128,54 @@
             </div>
         <?php endif;?>
 
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <form action="<?= base_url('user/authenticate') ?>" method="post" id="loginForm">
                     <?= csrf_field() ?>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" class="form-control" required placeholder="Enter username" aria-describedby="usernameHelp">
-                        
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-user"></i></span> <!-- Boxicon user -->
+                            </div>
+                            <input type="text" id="username" name="username" class="form-control" required placeholder="Enter username" aria-describedby="usernameHelp">
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-lock"></i></span> <!-- Boxicon lock -->
+                            </div>
                             <input type="password" id="password" name="password" class="form-control" required placeholder="Enter password" aria-describedby="passwordHelp">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="togglePassword">
-                                    <i class="fas fa-eye"></i> <!-- Eye icon -->
+                                    <i class="bx bx-show"></i> <!-- Boxicon eye for password visibility -->
                                 </span>
                             </div>
                         </div>
-                
+                    </div>
+
+                    <!-- Display User IP Address -->
+                    <div class="form-group">
+                        <label for="ipAddress">IP Address</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-laptop"></i></span> <!-- Boxicon laptop -->
+                            </div>
+                            <input type="text" id="ipAddress" class="form-control blurred" readonly>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="toggleIP">
+                                    <i class="bx bx-show"></i> <!-- Boxicon eye for IP visibility -->
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">
-                        <i class="fas fa-sign-in-alt"></i> Login
+                        <i class="bx bx-log-in"></i> Login <!-- Boxicon login -->
                     </button>
 
                     <div class="text-center mt-3">
@@ -171,6 +197,11 @@
 
     <!-- Custom JS -->
     <script>
+        // Fetch IP Address and display it
+        $.get("https://api.ipify.org?format=json", function(data) {
+            $('#ipAddress').val(data.ip);
+        });
+
         // Toggle password visibility
         $('#togglePassword').on('click', function() {
             var passwordField = $('#password');
@@ -178,10 +209,24 @@
 
             if (passwordField.attr('type') === 'password') {
                 passwordField.attr('type', 'text');
-                icon.removeClass('fa-eye').addClass('fa-eye-slash'); // Change to "eye-slash" when visible
+                icon.removeClass('bx-show').addClass('bx-hide');
             } else {
                 passwordField.attr('type', 'password');
-                icon.removeClass('fa-eye-slash').addClass('fa-eye'); // Change to "eye" when hidden
+                icon.removeClass('bx-hide').addClass('bx-show');
+            }
+        });
+
+        // Toggle IP address visibility and remove blur
+        $('#toggleIP').on('click', function() {
+            var ipField = $('#ipAddress');
+            var icon = $(this).find('i');
+
+            if (ipField.hasClass('blurred')) {
+                ipField.removeClass('blurred');
+                icon.removeClass('bx-show').addClass('bx-hide');
+            } else {
+                ipField.addClass('blurred');
+                icon.removeClass('bx-hide').addClass('bx-show');
             }
         });
 
@@ -199,45 +244,25 @@
                     text: 'Both fields are required!',
                 });
             } else {
-                // If validation passes, submit the form
-                this.submit();
+                // Display loading spinner with SweetAlert
+                Swal.fire({
+                    title: 'Logging in...',
+                    text: 'Please wait while we process your login.',
+                    imageUrl: 'http://localhost/library_system/assets/loading.gif',
+                    imageWidth: 100,
+                    imageHeight: 100,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    willOpen: () => {
+                        setTimeout(() => {
+                            $('#loginForm')[0].submit();
+                        }, 2000);
+                    }
+                });
             }
         });
 
-                <?php if(session()->getFlashdata('registration_success')): ?>
-            Swal.fire({
-                icon: 'success',
-                title: 'Registration Successful',
-                text: '<?= session()->getFlashdata('registration_success') ?>',
-                timer: 3000,
-                timerProgressBar: true,
-            });
-        <?php endif; ?>
-
-        <?php if(session()->getFlashdata('password_reset_success')): ?>
-    Swal.fire({
-        icon: 'success',
-        title: 'Password Reset Successful',
-        text: '<?= session()->getFlashdata('password_reset_success') ?>',
-        timer: 3000,
-        timerProgressBar: true,
-    });
-<?php endif; ?>
-
-            <?php if(session()->getFlashdata('email_verification_success')): ?>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Email Verified',
-                    text: '<?= session()->getFlashdata('email_verification_success') ?>',
-                    timer: 3000,
-                    timerProgressBar: true,
-                });
-            <?php endif; ?>
-
-
-            // Fade in the flash message
-            $('#flashError').fadeIn('slow').delay(3000).fadeOut('slow');
-
+        // Flash message handling
         <?php if(session()->getFlashdata('msg')): ?>
             Swal.fire({
                 icon: 'error',
@@ -245,18 +270,6 @@
                 text: '<?= session()->getFlashdata('msg') ?>',
                 timer: 3000,
                 timerProgressBar: true,
-            });
-            setTimeout(function() {
-                $('#flashError').fadeOut('slow');
-            }, 1000);
-        <?php endif; ?>
-
-        <?php if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1): ?>
-            Swal.fire({
-                icon: 'warning',
-                title: 'Session Expired',
-                text: 'Your session has expired. Please log in again.',
-                confirmButtonText: 'OK'
             });
         <?php endif; ?>
     </script>

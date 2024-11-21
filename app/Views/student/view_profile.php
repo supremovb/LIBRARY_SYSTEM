@@ -1,29 +1,29 @@
-    <?php 
-    // Extract photo file name from the full URL
-    $photoFileName = !empty($user['photo']) ? basename($user['photo']) : null;
+<?php 
+// Extract photo file name from the full URL
+$photoFileName = !empty($user['photo']) ? basename($user['photo']) : null;
 
-    // Build the photo path
-    $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_photos/' . $photoFileName)) 
-        ? base_url('uploads/user_photos/' . esc($photoFileName)) 
-        : base_url('uploads/user_photos/default_photo.png');
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>User Profile</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <!-- FontAwesome for check and X icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        
-        <!-- SweetAlert2 CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+// Build the photo path
+$photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_photos/' . $photoFileName)) 
+    ? base_url('uploads/user_photos/' . esc($photoFileName)) 
+    : base_url('uploads/user_photos/default_photo.png');
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- FontAwesome for check and X icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Boxicons CDN -->
+    <link href="https://unpkg.com/boxicons/css/boxicons.min.css" rel="stylesheet">
+    
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        
-
-        <style>
-            .profile-container {
+    <style>
+        .profile-container {
             margin-top: 50px;
             text-align: center;
         }
@@ -41,66 +41,137 @@
         .profile-details .row {
             margin-bottom: 15px;
         }
-        </style>
-    </head>
-    <body>
-    <?= $this->include('layout/navbar'); ?>
-        <div class="container profile-container">
-            <h2>User Profile</h2>
+        .input-icon {
+            position: relative;
+        }
+        .input-icon i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .form-control {
+            padding-left: 30px; /* Adds space for the icon */
+        }
+    </style>
+</head>
+<body>
 
-            <!-- User Photo -->
-            <form action="<?= base_url('student/update-profile') ?>" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <!-- Hidden file input -->
-                    <input type="file" class="d-none" name="photo" id="photo" onchange="previewPhoto()">
-                    <!-- Clickable profile photo -->
-                    <img id="photo-preview" src="<?= $photoPath ?>" alt="User Photo" class="profile-photo" onclick="triggerFileInput()">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <i class="bx bx-book-reader"></i> Library System
+    </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('dashboard') ?>"><i class="bx bx-home"></i> Dashboard</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-user"></i> <?= session()->get('firstname') ?> <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="<?= base_url('student/my-borrowed-books') ?>"><i class="bx bx-book"></i> My Borrowed Books</a>
+                        <a class="dropdown-item" href="<?= base_url('student/view-profile') ?>"><i class="bx bx-user-circle"></i> View Profile</a>
+                        <a class="dropdown-item" href="<?= base_url('user/logout') ?>"><i class="bx bx-log-out"></i> Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container profile-container">
+    <h2><i class="bx bx-user"></i> User Profile</h2>
+
+        <!-- User Photo -->
+        <form action="<?= base_url('student/update-profile') ?>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <!-- Hidden file input -->
+                <input type="file" class="d-none" name="photo" id="photo" onchange="previewPhoto()">
+                <!-- Clickable profile photo -->
+                <img id="photo-preview" src="<?= $photoPath ?>" alt="User Photo" class="profile-photo" onclick="triggerFileInput()">
+            </div>
+
+            <!-- User Information -->
+            <div class="profile-details">
+                <div class="row">
+                    <div class="col-md-4"><strong>Student ID:</strong></div>
+                    <div class="col-md-8">
+                        <div class="input-icon">
+                            <input type="text" class="form-control" name="student_id" value="<?= esc($user['student_id']) ?>" readonly>
+                            <i class="bx bx-id-card"></i>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- User Information -->
-                <div class="profile-details">
-                    
-                    <div class="row">
-                        <div class="col-md-4"><strong>First Name:</strong></div>
-                        <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4"><strong>First Name:</strong></div>
+                    <div class="col-md-8">
+                        <div class="input-icon">
                             <input type="text" class="form-control" name="firstname" value="<?= esc($user['firstname']) ?>" required>
+                            <i class="bx bx-user"></i>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4"><strong>Last Name:</strong></div>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="lastname" value="<?= esc($user['lastname']) ?>" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><strong>Course:</strong></div>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="course" value="<?= esc($user['course']) ?>" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><strong>Year:</strong></div>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="year" value="<?= esc($user['year']) ?>" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><strong>Role:</strong></div>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="role" value="<?= esc($user['role']) ?>" readonly>
-                        </div>
-                    </div>
+                </div>
 
-                    <div class="row">
+                <div class="row">
+                    <div class="col-md-4"><strong>Last Name:</strong></div>
+                    <div class="col-md-8">
+                        <div class="input-icon">
+                            <input type="text" class="form-control" name="lastname" value="<?= esc($user['lastname']) ?>" required>
+                            <i class="bx bx-user"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><strong>Course:</strong></div>
+                    <div class="col-md-8">
+                        <div class="input-icon">
+                            <input type="text" class="form-control" name="course" value="<?= esc($user['course']) ?>" required>
+                            <i class="bx bx-book"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><strong>Year:</strong></div>
+                    <div class="col-md-8">
+                        <div class="input-icon">
+                            <input type="text" class="form-control" name="year" value="<?= esc($user['year']) ?>" required>
+                            <i class="bx bx-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><strong>Role:</strong></div>
+                    <div class="col-md-8">
+                        <div class="input-icon">
+                            <input type="text" class="form-control" name="role" value="<?= esc($user['role']) ?>" readonly>
+                            <i class="bx bx-briefcase"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-4"><strong>Email:</strong></div>
                     <div class="col-md-8">
-                        <div class="d-flex align-items-center">
-                            <input type="email" class="form-control" name="email" value="<?= esc($user['email']) ?>" required>
-                            <span class="ml-2">
+                        <div class="position-relative">
+                            <!-- Email Input Field with Boxicon -->
+                            <input type="email" class="form-control pl-5 pr-5" name="email" value="<?= esc($user['email']) ?>" required>
+                            <!-- Boxicon placed inside the input -->
+                            <i class="bx bx-envelope position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
+                            <!-- Email Verified Icon at the end -->
+                            <span class="position-absolute" style="top: 50%; right: 15px; transform: translateY(-50%);">
                                 <?php if (isset($emailVerified) && $emailVerified): ?>
-                                    <i class="fas fa-check-circle text-success" title="Email Verified"></i>
+                                    <i class="bx bx-check-circle text-success" title="Email Verified"></i>
                                 <?php else: ?>
-                                    <i class="fas fa-times-circle text-danger" title="Email Not Verified"></i>
+                                    <i class="bx bx-x-circle text-danger" title="Email Not Verified"></i>
                                 <?php endif; ?>
                             </span>
                         </div>
@@ -108,35 +179,50 @@
                 </div>
 
 
-                    <div class="row">
-                        <div class="col-md-4"><strong>Username:</strong></div>
-                        <div class="col-md-8">
+
+                <div class="row">
+                    <div class="col-md-4"><strong>Username:</strong></div>
+                    <div class="col-md-8">
+                        <div class="input-icon">
                             <input type="text" class="form-control" name="username" value="<?= esc($user['username']) ?>" required>
-                        </div>
-                    </div>
-
-                    <!-- Password Change Fields -->
-                    <div class="row mt-3">
-                        <div class="col-md-4"><strong>New Password:</strong></div>
-                        <div class="col-md-8">
-                            <input type="password" class="form-control" name="new_password" placeholder="Enter new password">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><strong>Confirm Password:</strong></div>
-                        <div class="col-md-8">
-                            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm new password">
+                            <i class="bx bx-user-circle"></i>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+            <!-- Password Change Fields -->
+            <div class="row mt-3">
+                <div class="col-md-4"><strong>New Password:</strong></div>
+                <div class="col-md-8">
+                    <div class="position-relative">
+                        <!-- New Password Input Field with Boxicon -->
+                        <input type="password" class="form-control pl-5" name="new_password" placeholder="Enter new password">
+                        <!-- Boxicon for Lock -->
+                        <i class="bx bx-lock position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
+                    </div>
                 </div>
-            </form>
+            </div>
 
-        
-        </div>
+            <div class="row">
+                <div class="col-md-4"><strong>Confirm Password:</strong></div>
+                <div class="col-md-8">
+                    <div class="position-relative">
+                        <!-- Confirm Password Input Field with Boxicon -->
+                        <input type="password" class="form-control pl-5" name="confirm_password" placeholder="Confirm new password">
+                        <!-- Boxicon for Lock -->
+                        <i class="bx bx-lock position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group mt-3 text-center">
+                <button type="submit" class="btn btn-primary"><i class="bx bx-save"></i> Save Changes</button>
+            </div>
+
+        </form>
+    </div>
 
         <!-- jQuery, Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

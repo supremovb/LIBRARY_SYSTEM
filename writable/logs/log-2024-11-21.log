@@ -1,0 +1,869 @@
+CRITICAL - 2024-11-21 07:29:13 --> ErrorException: Undefined variable $user
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 109.
+ 1 APPPATH\Views\admin\book_list.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 109)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 07:29:29 --> ErrorException: Undefined variable $user
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 109.
+ 1 APPPATH\Views\admin\book_list.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 109)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 07:35:09 --> ErrorException: Undefined variable $user
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 109.
+ 1 APPPATH\Views\admin\book_list.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 109)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 07:49:25 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 141.
+ 1 APPPATH\Views\admin\book_list.php(141): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 141)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 07:49:26 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 141.
+ 1 APPPATH\Views\admin\book_list.php(141): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 141)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-21 07:58:02 --> mysqli_sql_exception: Duplicate entry 'Fiction' for key 'categories.name' in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\library_system\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\library_system\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\library_system\app\Controllers\AdminController.php(54): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->addCategory()
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-11-21 08:11:31 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: admin/create-book]
+in APPPATH\Views\admin\book_form.php on line 109.
+ 1 APPPATH\Views\admin\book_form.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php', 109)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_form', [], true)
+ 5 APPPATH\Controllers\AdminController.php(379): view('admin/book_form', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->addBook()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 08:11:34 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: admin/create-book]
+in APPPATH\Views\admin\book_form.php on line 109.
+ 1 APPPATH\Views\admin\book_form.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php', 109)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_form', [], true)
+ 5 APPPATH\Controllers\AdminController.php(379): view('admin/book_form', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->addBook()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 08:11:35 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: admin/create-book]
+in APPPATH\Views\admin\book_form.php on line 109.
+ 1 APPPATH\Views\admin\book_form.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php', 109)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_form', [], true)
+ 5 APPPATH\Controllers\AdminController.php(379): view('admin/book_form', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->addBook()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 08:11:35 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: admin/create-book]
+in APPPATH\Views\admin\book_form.php on line 109.
+ 1 APPPATH\Views\admin\book_form.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php', 109)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_form', [], true)
+ 5 APPPATH\Controllers\AdminController.php(379): view('admin/book_form', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->addBook()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 08:11:35 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: admin/create-book]
+in APPPATH\Views\admin\book_form.php on line 109.
+ 1 APPPATH\Views\admin\book_form.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php', 109)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_form', [], true)
+ 5 APPPATH\Controllers\AdminController.php(379): view('admin/book_form', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->addBook()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 08:11:36 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: admin/create-book]
+in APPPATH\Views\admin\book_form.php on line 109.
+ 1 APPPATH\Views\admin\book_form.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php', 109)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_form.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_form', [], true)
+ 5 APPPATH\Controllers\AdminController.php(379): view('admin/book_form', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->addBook()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-21 08:45:54 --> mysqli_sql_exception: Duplicate entry '9789718162408' for key 'books.isbn' in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `bo...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `bo...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `bo...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `bo...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\library_system\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\library_system\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\library_system\app\Controllers\AdminController.php(438): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->createBook()
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+ERROR - 2024-11-21 08:45:54 --> Failed to insert book into the database. Errors: {"CodeIgniter\\Database\\MySQLi\\Connection":"Duplicate entry '9789718162408' for key 'books.isbn'"}
+ERROR - 2024-11-21 08:55:13 --> Password mismatch for username: kenjixprimo
+ERROR - 2024-11-21 09:22:42 --> Password mismatch for username: alabado
+ERROR - 2024-11-21 09:27:27 --> Password mismatch for username: alabado
+ERROR - 2024-11-21 09:29:04 --> Password mismatch for username: alabado
+CRITICAL - 2024-11-21 10:17:50 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: admin/view-users]
+in APPPATH\Views\admin\view_users.php on line 40.
+ 1 APPPATH\Views\admin\view_users.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\view_users.php', 40)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\view_users.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/view_users', [], true)
+ 5 APPPATH\Controllers\AdminController.php(34): view('admin/view_users', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->viewUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 10:19:49 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "layouts/app.php"
+[Method: GET, Route: admin/view-users]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('layouts/app.php')
+ 2 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layouts/app', [], true)
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/view_users', [], true)
+ 4 APPPATH\Controllers\AdminController.php(34): view('admin/view_users', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->viewUsers()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 10:20:51 --> RuntimeException: View themes, no current section.
+[Method: GET, Route: admin/view-users]
+in SYSTEMPATH\View\View.php on line 442.
+ 1 APPPATH\Views\admin\view_users.php(58): CodeIgniter\View\View->endSection()
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\view_users.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/view_users', [], true)
+ 5 APPPATH\Controllers\AdminController.php(34): view('admin/view_users', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->viewUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 10:22:09 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "layouts/app.php"
+[Method: GET, Route: admin/view-users]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('layouts/app.php')
+ 2 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layouts/app', [], true)
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/view_users', [], true)
+ 4 APPPATH\Controllers\AdminController.php(34): view('admin/view_users', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->viewUsers()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 10:29:03 --> ErrorException: Undefined variable $users
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\layout\navbar.php on line 132.
+ 1 APPPATH\Views\layout\navbar.php(132): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $users', 'C:\\laragon\\www\\library_system\\app\\Views\\layout\\navbar.php', 132)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\layout\\navbar.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(487): CodeIgniter\View\View->render('layout/navbar', null, true)
+ 5 APPPATH\Views\admin\book_list.php(115): CodeIgniter\View\View->include('layout/navbar')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 9 APPPATH\Controllers\AdminController.php(375): view('admin/book_list', [...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 13:32:11 --> ParseError: syntax error, unexpected identifier "created_at", expecting "]"
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Models\BookModel.php on line 26.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\library_system\\app\\Models\\BookModel.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\BookModel')
+ 3 APPPATH\Controllers\AdminController.php(371): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\BookModel')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-21 14:09:31 --> Password mismatch for username: kenjixprimo
+ERROR - 2024-11-21 15:06:42 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-11-21 15:06:42 --> 220 smtp.gmail.com ESMTP 41be03b00d2f7-7fbb64fefd0sm1447633a12.35 - gsmtp
+
+hello: 250-smtp.gmail.com at your service, [112.202.100.14]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+starttls: 220 2.0.0 Ready to start TLS
+
+hello: 250-smtp.gmail.com at your service, [112.202.100.14]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+from: 250 2.1.0 OK 41be03b00d2f7-7fbb64fefd0sm1447633a12.35 - gsmtp
+
+to: 250 2.1.5 OK 41be03b00d2f7-7fbb64fefd0sm1447633a12.35 - gsmtp
+
+data: 354 Go ahead 41be03b00d2f7-7fbb64fefd0sm1447633a12.35 - gsmtp
+
+
+quit: 250 2.0.0 OK  1732201602 41be03b00d2f7-7fbb64fefd0sm1447633a12.35 - gsmtp
+
+The following SMTP error was encountered: 250 2.0.0 OK  1732201602 41be03b00d2f7-7fbb64fefd0sm1447633a12.35 - gsmtp
+
+The following SMTP error was encountered: 
+ERROR - 2024-11-21 15:06:42 --> Password reset email failed to send to chastinitakyla18@gmail.com
+ERROR - 2024-11-21 15:09:50 --> Update Error: First name can only contain letters and spaces.
+ERROR - 2024-11-21 15:10:08 --> Update Error: First name can only contain letters and spaces.
+CRITICAL - 2024-11-21 16:35:03 --> ParseError: syntax error, unexpected token "public", expecting end of file
+[Method: GET, Route: admin/view-users]
+in APPPATH\Controllers\AdminController.php on line 69.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\library_system\\app\\Controllers\\AdminController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\AdminController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\AdminController')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\AdminController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 16:56:34 --> ErrorException: Attempt to read property "user_id" on null
+[Method: GET, Route: admin/edit-role]
+in APPPATH\Controllers\AdminController.php on line 43.
+ 1 APPPATH\Controllers\AdminController.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "user_id" on null', 'C:\\laragon\\www\\library_system\\app\\Controllers\\AdminController.php', 43)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->editRole()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 17:17:29 --> CodeIgniter\Database\Exceptions\DatabaseException: Updates are not allowed unless they contain a "where" or "like" clause.
+[Method: POST, Route: admin/update-category]
+in SYSTEMPATH\Model.php on line 456.
+ 1 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate(null, [...])
+ 2 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update(null, [...])
+ 3 APPPATH\Controllers\AdminController.php(149): CodeIgniter\Model->update(null, [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->updateCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 17:17:42 --> CodeIgniter\Database\Exceptions\DatabaseException: Updates are not allowed unless they contain a "where" or "like" clause.
+[Method: POST, Route: admin/update-category]
+in SYSTEMPATH\Model.php on line 456.
+ 1 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate(null, [...])
+ 2 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update(null, [...])
+ 3 APPPATH\Controllers\AdminController.php(149): CodeIgniter\Model->update(null, [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->updateCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 17:19:17 --> CodeIgniter\Database\Exceptions\DatabaseException: Updates are not allowed unless they contain a "where" or "like" clause.
+[Method: POST, Route: admin/update-category]
+in SYSTEMPATH\Model.php on line 456.
+ 1 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate(null, [...])
+ 2 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update(null, [...])
+ 3 APPPATH\Controllers\AdminController.php(149): CodeIgniter\Model->update(null, [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->updateCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 17:19:23 --> CodeIgniter\Database\Exceptions\DatabaseException: Updates are not allowed unless they contain a "where" or "like" clause.
+[Method: POST, Route: admin/update-category]
+in SYSTEMPATH\Model.php on line 456.
+ 1 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate(null, [...])
+ 2 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update(null, [...])
+ 3 APPPATH\Controllers\AdminController.php(149): CodeIgniter\Model->update(null, [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->updateCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-21 17:25:37 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:26:16 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:26:21 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:26:30 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:28:09 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:28:25 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:28:33 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:30:41 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:30:49 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:30:56 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:31:19 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:35:20 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(185): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:35:29 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(185): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:35:55 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(185): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:38:06 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:38:06 --> Error deleting category: 21
+ERROR - 2024-11-21 17:40:35 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:40:35 --> Error deleting category: 21
+ERROR - 2024-11-21 17:44:09 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(185): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:44:13 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(185): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:44:20 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(185): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:44:57 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:46:00 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:46:42 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:47:32 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:48:22 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('21')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 17:50:10 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`library_system`.`books`, CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)) in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('DELETE FROM `ca...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ca...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ca...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2843): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ca...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\laragon\www\library_system\system\BaseModel.php(1158): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\laragon\www\library_system\app\Controllers\AdminController.php(188): CodeIgniter\BaseModel->delete(Array)
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\AdminController->deleteCategory('14')
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-11-21 18:48:09 --> Password mismatch for input: SDCAB1DE
+ERROR - 2024-11-21 18:51:27 --> Student ID/Username not found: supremopkv
+ERROR - 2024-11-21 18:51:52 --> Password mismatch for input: supremopkvxx
+CRITICAL - 2024-11-21 19:03:57 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: student/view-profile]
+in APPPATH\Views\student\view_profile.php on line 55.
+ 1 APPPATH\Views\student\view_profile.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\student\\view_profile.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\student\\view_profile.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('student/view_profile', [], true)
+ 5 APPPATH\Controllers\UserController.php(398): view('student/view_profile', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->viewProfile()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-21 19:04:00 --> ErrorException: Undefined variable $photoPath
+[Method: GET, Route: student/view-profile]
+in APPPATH\Views\student\view_profile.php on line 55.
+ 1 APPPATH\Views\student\view_profile.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $photoPath', 'C:\\laragon\\www\\library_system\\app\\Views\\student\\view_profile.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\student\\view_profile.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('student/view_profile', [], true)
+ 5 APPPATH\Controllers\UserController.php(398): view('student/view_profile', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->viewProfile()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-21 19:35:02 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+
+ERROR - 2024-11-21 19:35:17 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+
+ERROR - 2024-11-21 19:35:28 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+
+ERROR - 2024-11-21 19:35:51 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+
+ERROR - 2024-11-21 19:38:08 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+
+ERROR - 2024-11-21 19:38:53 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+
+ERROR - 2024-11-21 19:43:45 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+
+ERROR - 2024-11-21 19:43:49 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+
+ERROR - 2024-11-21 19:44:19 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+
+ERROR - 2024-11-21 19:45:05 --> Database Update Failed: Array
+(
+    [student_id] => Student ID is already in use.
+)
+

@@ -356,3 +356,115 @@ in APPPATH\Controllers\AdminController.php on line 266.
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
 ERROR - 2024-11-20 12:11:36 --> Case mismatch in username for user: SUPREMOPKV
+ERROR - 2024-11-20 19:04:40 --> Username not found: sdad
+ERROR - 2024-11-20 19:15:29 --> Case mismatch in username for user: Alabado
+ERROR - 2024-11-20 19:20:40 --> Password mismatch for username: kenjixprimo
+ERROR - 2024-11-20 19:28:36 --> Username not found: DSAD
+ERROR - 2024-11-20 19:28:41 --> Username not found: DSADSA
+ERROR - 2024-11-20 19:28:47 --> Username not found: DSAD
+ERROR - 2024-11-20 19:35:03 --> Username not found: dsadsa
+ERROR - 2024-11-20 19:35:09 --> Username not found: dsadsa
+ERROR - 2024-11-20 19:35:34 --> Username not found: dsad
+ERROR - 2024-11-20 19:36:53 --> Username not found: dsad
+ERROR - 2024-11-20 19:37:15 --> Username not found: dsad
+ERROR - 2024-11-20 19:37:20 --> Username not found: sadsa
+ERROR - 2024-11-20 19:37:24 --> Username not found: sdsa
+ERROR - 2024-11-20 19:37:40 --> Username not found: dssad
+CRITICAL - 2024-11-20 19:49:09 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 201.
+ 1 APPPATH\Views\admin\book_list.php(201): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 201)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 19:49:12 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 201.
+ 1 APPPATH\Views\admin\book_list.php(201): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 201)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 19:49:12 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 201.
+ 1 APPPATH\Views\admin\book_list.php(201): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 201)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 19:49:13 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 201.
+ 1 APPPATH\Views\admin\book_list.php(201): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 201)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 19:50:54 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 201.
+ 1 APPPATH\Views\admin\book_list.php(201): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 201)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 19:53:17 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 201.
+ 1 APPPATH\Views\admin\book_list.php(201): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 201)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-20 19:53:36 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\admin\book_list.php on line 201.
+ 1 APPPATH\Views\admin\book_list.php(201): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php', 201)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\admin\\book_list.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/book_list', [], true)
+ 5 APPPATH\Controllers\AdminController.php(362): view('admin/book_list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

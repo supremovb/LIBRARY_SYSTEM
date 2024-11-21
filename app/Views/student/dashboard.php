@@ -6,44 +6,53 @@
     <title>Student Dashboard - Library System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <!-- Box Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
     <style>
-       /* Updated Custom Styles */
-.container {
-    margin-top: 50px;
-}
-.card {
-    width: 100%; /* Ensure consistent sizing */
-    margin: 0; /* Remove margin to avoid extra spacing */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    border-radius: 8px; /* Rounded corners */
-}
-.card img {
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-.card-deck {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
-    gap: 1.5rem; /* Space between cards */
-}
-.card-body {
-    padding: 1rem; /* Adds padding inside card content */
-    text-align: center; /* Centers text for better readability */
-}
-.card-title {
-    font-size: 1.25rem; /* Slightly larger font for titles */
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-.card-text {
-    font-size: 0.9rem; /* Makes the text smaller to fit details */
-    color: #555; /* Subtle color for better contrast */
-}
+        /* Updated Custom Styles */
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            width: 100%; /* Ensure consistent sizing */
+            margin: 0; /* Remove margin to avoid extra spacing */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border-radius: 8px; /* Rounded corners */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .card:hover {
+            transform: scale(1.05); /* Slightly increase the card size */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+        }
+
+        .card img {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .card-deck {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+            gap: 1.5rem; /* Space between cards */
+        }
+        .card-body {
+            padding: 1rem; /* Adds padding inside card content */
+            text-align: center; /* Centers text for better readability */
+        }
+        .card-title {
+            font-size: 1.25rem; /* Slightly larger font for titles */
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .card-text {
+            font-size: 0.9rem; /* Makes the text smaller to fit details */
+            color: #555; /* Subtle color for better contrast */
+        }
 
         .modal-content {
             background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent */
@@ -92,24 +101,25 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Library System</a>
+    <a class="navbar-brand" href="#">
+        <i class="bx bx-book-reader"></i> Library System
+    </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('dashboard') ?>">Dashboard</a>
+                    <a class="nav-link" href="<?= base_url('dashboard') ?>"><i class="bx bx-home"></i> Dashboard</a>
                 </li>
-                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?= session()->get('firstname') ?> <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= base_url('student/my-borrowed-books') ?>">My Borrowed Books</a>
-                        <a class="dropdown-item" href="<?= base_url('student/view-profile') ?>">View Profile</a>
-                        <a class="dropdown-item" href="<?= base_url('user/logout') ?>">Logout</a>
+                        <a class="dropdown-item" href="<?= base_url('student/my-borrowed-books') ?>"><i class="bx bx-book"></i> My Borrowed Books</a>
+                        <a class="dropdown-item" href="<?= base_url('student/view-profile') ?>"><i class="bx bx-user"></i> View Profile</a>
+                        <a class="dropdown-item" href="<?= base_url('user/logout') ?>"><i class="bx bx-log-out"></i> Logout</a>
                     </div>
                 </li>
             </ul>
@@ -117,39 +127,40 @@
     </nav>
 
     <div class="container">
-    <h2>Student Dashboard</h2>
+    <h2><i class="bx bx-user-circle"></i> Student Dashboard</h2>
 
-    <!-- Search Bar Section -->
-    <div class="form-group">
+        <!-- Search Bar Section -->
+        <div class="form-group">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="bx bx-search"></i></span>
+        </div>
         <input type="text" id="searchInput" class="form-control search-bar" placeholder="Search by name or ISBN" aria-label="Search Categories">
-    </div>
-
-    <!-- Available Books Section -->
-    <h4>Available Books</h4>
-
-    
-    
-    <div class="card-deck" id="booksList">
-        <?php foreach($books as $book): ?>
-            <div class="card category-row" data-title="<?= esc(strtolower($book['title'])) ?>" data-author="<?= esc(strtolower($book['author'])) ?>" data-isbn="<?= esc(strtolower($book['isbn'])) ?>">
-                <img src="<?= base_url('uploads/books/' . esc($book['photo'])) ?>" 
-                     class="card-img-top book-image" 
-                     alt="<?= esc($book['title']) ?>" 
-                     data-id="<?= esc($book['book_id']) ?>">
-                <div class="card-body">
-                    <h5 class="card-title category-name"><?= esc($book['title']) ?></h5>
-                    <p class="card-text category-description">
-                        <strong>Author:</strong> <?= esc($book['author']) ?><br>
-                        <strong>ISBN:</strong> <?= esc($book['isbn']) ?><br>
-                        <strong>Published:</strong> <?= esc($book['published_date']) ?>
-                    </p>
-                </div>
-            </div>
-        <?php endforeach; ?>
     </div>
 </div>
 
-                
+
+        <!-- Available Books Section -->
+        <h4><i class="bx bx-book"></i> Available Books</h4>
+        <div class="card-deck" id="booksList">
+            <?php foreach($books as $book): ?>
+                <div class="card category-row" data-title="<?= esc(strtolower($book['title'])) ?>" data-author="<?= esc(strtolower($book['author'])) ?>" data-isbn="<?= esc(strtolower($book['isbn'])) ?>">
+                    <img src="<?= base_url('uploads/books/' . esc($book['photo'])) ?>" 
+                         class="card-img-top book-image" 
+                         alt="<?= esc($book['title']) ?>" 
+                         data-id="<?= esc($book['book_id']) ?>">
+                    <div class="card-body">
+                        <h5 class="card-title category-name"><?= esc($book['title']) ?></h5>
+                        <p class="card-text category-description">
+                            <strong>Author:</strong> <?= esc($book['author']) ?><br>
+                            <strong>ISBN:</strong> <?= esc($book['isbn']) ?><br>
+                            <strong>Published:</strong> <?= esc($book['published_date']) ?>
+                        </p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
 
     <!-- Book Details Modal -->
     <div class="modal fade" id="bookDetailsModal" tabindex="-1" aria-hidden="true">
@@ -164,7 +175,7 @@
                 <div class="modal-body text-center">
                     <img id="bookImage" alt="Book Photo">
                     <p id="bookDetails"></p>
-                    <button class="btn btn-success borrow-btn">Borrow</button>
+                    <button class="btn btn-success borrow-btn"><i class="bx bx-bookmark"></i> Borrow</button>
                     <hr>
                     <h6>Borrow History</h6>
                     <div class="borrow-history">

@@ -17,7 +17,8 @@ class BookModel extends Model
         'published_date', 
         'status', 
         'photo',
-        'category_id' // Photo field for the book cover
+        'category_id',
+        'quantity' // Added the quantity field here
     ]; // Fields allowed for mass assignment
 
     // Enable automatic timestamps if needed (e.g., for created_at/updated_at fields)
@@ -35,7 +36,8 @@ class BookModel extends Model
         'published_date' => 'required|valid_date',
         'status'         => 'in_list[available,borrowed,pending]',
         'photo'          => 'permit_empty|mime_in[photo,image/jpg,image/jpeg,image/png]|max_size[photo,2048]',
-        'category_id' => 'required|is_not_unique[categories.category_id]',
+        'category_id'    => 'required|is_not_unique[categories.category_id]',
+        'quantity'       => 'required|integer|min_length[1]' // Validation for quantity
     ];
 
     // Validation messages for errors
@@ -70,16 +72,24 @@ class BookModel extends Model
             'mime_in'  => 'The uploaded photo must be a JPG, JPEG, or PNG image.',
             'max_size' => 'The uploaded photo cannot exceed 2MB in size.',
         ],
+        'quantity' => [
+            'required' => 'The quantity of books is required.',
+            'integer'  => 'The quantity must be a valid number.',
+            'min_length' => 'The quantity must be at least 1.',
+        ],
     ];
 
     protected $skipValidation = false; // Validation will always run before saving/updating data
 
-        // In BookModel.php
-public function get_books_by_category($category_id)
-{
-    return $this->where('category_id', $category_id)->findAll();
+    // Custom Method: Get books by category
+    public function get_books_by_category($category_id)
+    {
+        return $this->where('category_id', $category_id)->findAll();
+    }
+
+    // Custom Method: Get books by status
+    public function get_books_by_status($status)
+    {
+        return $this->where('status', $status)->findAll();
+    }
 }
-
-}
-
-

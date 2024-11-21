@@ -8,6 +8,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons/css/boxicons.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
@@ -49,59 +51,14 @@
 
     <div class="container">
         <div class="card">
-            <h2>Reset Password</h2>
+            <h2><i class="bx bx-lock-alt"></i> Reset Password</h2>
             <form action="<?= base_url('/update-password') ?>" method="POST" id="resetPasswordForm">
                 <?= csrf_field() ?>
                 <input type="hidden" name="token" value="<?= esc($token) ?>">
 
-                <!-- SweetAlert Notifications -->
-                <?php if(session()->getFlashdata('success')): ?>
-                    <script>
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: '<?= session()->getFlashdata('success'); ?>',
-                            confirmButtonText: 'OK'
-                        });
-                    </script>
-                <?php endif; ?>
-
-                <?php if(session()->getFlashdata('error')): ?>
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: '<?= session()->getFlashdata('error'); ?>',
-                            confirmButtonText: 'OK'
-                        });
-                    </script>
-                <?php endif; ?>
-
-                <?php if(session()->getFlashdata('msg')): ?>
-                    <script>
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: '<?= session()->getFlashdata('msg'); ?>',
-                            confirmButtonText: 'OK'
-                        });
-                    </script>
-                <?php endif; ?>
-
-                <?php if(session()->getFlashdata('errors')): ?>
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Validation Error',
-                            text: 'Please fix the errors below.',
-                            confirmButtonText: 'OK'
-                        });
-                    </script>
-                <?php endif; ?>
-
                 <!-- New Password Field -->
                 <div class="form-group">
-                    <label for="password">New Password</label>
+                    <label for="password"><i class="bx bx-key"></i> New Password</label>
                     <input type="password" name="password" id="password" class="form-control" required placeholder="Enter new password">
                     <?php if(isset(session()->getFlashdata('errors')['password'])): ?>
                         <small class="text-danger"><?= session()->getFlashdata('errors')['password']; ?></small>
@@ -110,7 +67,7 @@
 
                 <!-- Confirm Password Field -->
                 <div class="form-group">
-                    <label for="pass_confirm">Confirm New Password</label>
+                    <label for="pass_confirm"><i class="bx bx-check-circle"></i> Confirm New Password</label>
                     <input type="password" name="pass_confirm" id="pass_confirm" class="form-control" required placeholder="Confirm new password">
                     <?php if(isset(session()->getFlashdata('errors')['pass_confirm'])): ?>
                         <small class="text-danger"><?= session()->getFlashdata('errors')['pass_confirm']; ?></small>
@@ -118,7 +75,10 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">Reset Password</button>
+                <button type="submit" class="btn btn-primary">
+    <i class="bx bx-refresh"></i> Reset Password
+</button>
+
             </form>
         </div>
     </div>
@@ -143,6 +103,59 @@
             }
         });
     </script>
+
+    <!-- Success Message -->
+    <?php if(session()->getFlashdata('success')): ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Password Reset Successful',
+            text: 'Your password has been successfully updated.',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to login page after SweetAlert is closed
+                window.location.href = "<?= base_url('/login') ?>";
+            }
+        });
+    </script>
+<?php endif; ?>
+
+
+<!-- Error Message -->
+<?php if(session()->getFlashdata('error')): ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '<?= session()->getFlashdata('error'); ?>',
+            confirmButtonText: 'OK'
+        });
+    </script>
+<?php endif; ?>
+
+<!-- Other Flash Messages -->
+<?php if(session()->getFlashdata('msg')): ?>
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: '<?= session()->getFlashdata('msg'); ?>',
+            confirmButtonText: 'OK'
+        });
+    </script>
+<?php endif; ?>
+
+<?php if(session()->getFlashdata('errors')): ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fix the errors below.',
+            confirmButtonText: 'OK'
+        });
+    </script>
+<?php endif; ?>
 
 </body>
 </html>

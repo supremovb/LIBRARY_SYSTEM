@@ -10,7 +10,7 @@ class UserModel extends Model
     protected $primaryKey = 'user_id';    // Primary key column
 
     protected $allowedFields = [
-        'username', 
+        'username',
         'password', 
         'email',  // Added email field
         'role', 
@@ -30,8 +30,9 @@ class UserModel extends Model
     // Validation rules for data integrity
     protected $validationRules = [
         'username'  => 'required|alpha_numeric|min_length[3]|max_length[50]|is_unique[users.username,user_id,{user_id}]',
+        'student_id'=> 'permit_empty|alpha_numeric|min_length[6]|max_length[20]|is_unique[users.student_id,user_id,{user_id}]', // Add validation for student_id
         'password'  => 'required|min_length[6]',
-        'role'      => 'required|in_list[admin,student]',
+        'role'      => 'required|in_list[admin,student,librarian]',
         'photo'     => 'permit_empty|valid_url',
         'firstname' => 'required|alpha_space|min_length[2]|max_length[50]',
         'lastname'  => 'required|alpha_space|min_length[2]|max_length[50]',
@@ -47,6 +48,13 @@ class UserModel extends Model
             'min_length' => 'Username must be at least 3 characters long.',
             'max_length' => 'Username cannot exceed 50 characters.',
             'is_unique'  => 'Username is already taken.',
+        ],
+        'student_id' => [
+            'permit_empty' => 'Student ID can be left empty.',
+            'alpha_numeric' => 'Student ID must be alphanumeric.',
+            'min_length' => 'Student ID must be at least 6 characters long.',
+            'max_length' => 'Student ID cannot exceed 20 characters.',
+            'is_unique' => 'Student ID is already in use.',
         ],
         'password' => [
             'required'   => 'Password is required.',
@@ -96,6 +104,11 @@ class UserModel extends Model
     public function findUserByUsername($username)
     {
         return $this->where('username', $username)->first();
+    }
+
+    public function findUserByStudentId($student_id)
+    {
+        return $this->where('student_id', $student_id)->first(); // New method to find user by student_id
     }
 
     public function verifyPassword($inputPassword, $storedPassword)

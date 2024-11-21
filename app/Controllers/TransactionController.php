@@ -44,13 +44,13 @@ class TransactionController extends BaseController
         return $this->response->setJSON(['status' => 'error', 'message' => 'You already have a pending request for this book.']);
     }
 
-    // Check book availability
+    // Check if the book exists and is available
     $book = $this->bookModel->find($book_id);
     if (!$book || $book['status'] != 'available') {
         return $this->response->setJSON(['status' => 'error', 'message' => 'Book is not available.']);
     }
 
-    // Create a transaction with status 'pending'
+    // Create a transaction with status 'pending' (do not decrease book quantity here)
     $data = [
         'book_id' => $book_id,
         'user_id' => $user_id,
@@ -59,13 +59,12 @@ class TransactionController extends BaseController
     ];
 
     if ($this->transactionModel->insert($data)) {
-        // Ensure the new data is committed before responding
-        $this->transactionModel->db->reconnect();
         return $this->response->setJSON(['status' => 'success', 'message' => 'Borrow request submitted successfully.']);
     }
 
     return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to submit borrow request.']);
 }
+
 
 
 
@@ -100,8 +99,8 @@ public function returnBook()
     $transaction_id = $this->request->getVar('transaction_id');
     $transaction = $this->transactionModel->find($transaction_id);
 
-    if ($transaction['status'] != 'borrowed') {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid transaction']);
+    if (!$transaction || $transaction['status'] != 'borrowed') {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid transaction.']);
     }
 
     // Get the current date (return date) and due date for comparison
@@ -115,14 +114,76 @@ public function returnBook()
     $this->transactionModel->update($transaction_id, [
         'return_date' => $return_date,
         'status' => 'returned',
-        'remarks' => $remarks // Update the remarks field
+        'remarks' => $remarks
     ]);
 
-    // Update the book status to available
-    $this->bookModel->update($transaction['book_id'], ['status' => 'available']);
+    // Fetch the book details
+    $book = $this->bookModel->find($transaction['book_id']);
+    if ($book) {
+        // Increment the book quantity by 1
+        $this->bookModel->update($transaction['book_id'], [
+            'quantity' => $book['quantity'] + 1
+        ]);
+    }
 
-    return $this->response->setJSON(['status' => 'success', 'message' => 'Book returned successfully']);
+    return $this->response->setJSON(['status' => 'success', 'message' => 'Book returned successfully.']);
 }
+
+public function returnAllBooks()
+{
+    $session = session();
+    if (!$session->get('logged_in') || $session->get('role') != 'student') {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'You must be logged in as a student.']);
+    }
+
+    // Fetch all borrowed books for the logged-in user
+    $user_id = $this->request->getVar('user_id');
+    $transactions = $this->transactionModel->where('user_id', $user_id)
+                                           ->where('status', 'borrowed')
+                                           ->findAll();
+
+    if (empty($transactions)) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'You have no borrowed books.']);
+    }
+
+    // Begin transaction for returning all books
+    $db = \Config\Database::connect();
+    $db->transStart();
+
+    foreach ($transactions as $transaction) {
+        // Get the current date (return date) and due date for comparison
+        $return_date = date('Y-m-d');
+        $due_date = $transaction['due_date'];
+
+        // Determine if the return is late or on time
+        $remarks = (strtotime($return_date) > strtotime($due_date)) ? 'Late' : 'On time';
+
+        // Update the transaction with return date, status, and remarks
+        $this->transactionModel->update($transaction['transaction_id'], [
+            'return_date' => $return_date,
+            'status' => 'returned',
+            'remarks' => $remarks
+        ]);
+
+        // Fetch the book details and update the quantity
+        $book = $this->bookModel->find($transaction['book_id']);
+        if ($book) {
+            $this->bookModel->update($transaction['book_id'], [
+                'quantity' => $book['quantity'] + 1
+            ]);
+        }
+    }
+
+    $db->transComplete();
+
+    if ($db->transStatus() === false) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to return all books.']);
+    } else {
+        return $this->response->setJSON(['status' => 'success', 'message' => 'All books returned successfully.']);
+    }
+}
+
+
 
 
     public function myBorrowedBooks()
