@@ -7,7 +7,6 @@
             <a href="<?= base_url('dashboard') ?>" class="nav-link"><i class="bx bx-tachometer"></i> Dashboard</a>
         </li>
 
-
         <?php if (session()->get('role') === 'admin'): ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="booksDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,17 +18,38 @@
                     <a class="dropdown-item" href="<?= base_url('admin/create-book') ?>"><i class="bx bx-book-add"></i> Add Book</a>
                     <a class="dropdown-item" href="<?= base_url('admin/view-books') ?>"><i class="bx bx-book-open"></i> View Books</a>
                     <a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>"><i class="bx bx-book"></i> View Pending Books</a>
+                    <!-- New Button -->
+                    <a class="dropdown-item" href="<?= base_url('admin/borrowed-books') ?>"><i class="bx bx-bookmark"></i> View Borrowed Books</a>
+                </div>
+            </li>
+
+            <!-- Reports Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bx bx-bar-chart-alt-2"></i> Reports
+                </a>
+                <div class="dropdown-menu" aria-labelledby="reportsDropdown">
+                    <a class="dropdown-item" href="<?= base_url('admin/generate-book-report') ?>"><i class="bx bx-book"></i> Generate Book's Report</a>
+                    <a class="dropdown-item" href="<?= base_url('admin/generate-user-report') ?>"><i class="bx bx-group"></i> Generate User's Report</a>
+                    <a class="dropdown-item" href="<?= base_url('admin/generate-transaction-report') ?>"><i class="bx bx-receipt"></i> Generate Transaction's Report</a>
                 </div>
             </li>
         <?php endif; ?>
 
+        <?php if (session()->get('role') === 'admin'): ?>
+
+
+        <?php endif; ?>
 
         <?php if (isset($userRole) && $userRole === 'Student'): ?>
             <li class="nav-item">
                 <a href="<?= base_url('student/my-borrowed-books') ?>" class="nav-link"><i class="bx bx-bookmark"></i> My Borrowed Books</a>
             </li>
+            <!-- New Book Reviews Link for Students -->
+            <li class="nav-item">
+                <a href="<?= base_url('student/book-reviews') ?>" class="nav-link"><i class="bx bx-comment"></i> Book Reviews</a>
+            </li>
         <?php endif; ?>
-
 
         <?php if (session()->get('logged_in')): ?>
             <li class="nav-item dropdown">
@@ -42,10 +62,11 @@
                                     ? base_url('admin/view-profile')
                                     : base_url('student/view-profile') ?>"><i class="bx bx-user-circle"></i> View Profile</a>
 
-
                     <?php if (session()->get('role') === 'admin'): ?>
                         <a class="dropdown-item" href="<?= base_url('admin/view-users') ?>"><i class="bx bx-group"></i> View Users</a>
                     <?php endif; ?>
+
+                    
 
                     <a class="dropdown-item" href="<?= base_url('user/logout') ?>"><i class="bx bx-log-out"></i> Logout</a>
                 </div>

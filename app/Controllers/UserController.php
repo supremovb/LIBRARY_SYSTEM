@@ -7,6 +7,8 @@ use App\Models\BookModel;
 use App\Models\PasswordResetModel;
 use App\Models\TransactionModel;
 use App\Models\OtpModel;
+use App\Models\CategoryModel;
+use App\Models\BookReviewModel;
 use CodeIgniter\Controller;
 
 class UserController extends BaseController
@@ -28,6 +30,22 @@ class UserController extends BaseController
         $this->email = \Config\Services::email();
     }
 
+    public function submitReview()
+    {
+        $bookId = $this->request->getPost('book_id');
+        $rating = $this->request->getPost('rating');
+        $reviewText = $this->request->getPost('review_text');
+        $userId = session()->get('user_id'); // Assuming user ID is stored in the session
+
+        $bookReviewModel = new \App\Models\BookReview();
+        $review = $bookReviewModel->createReview($bookId, $userId, $rating, $reviewText);
+
+        if ($review) {
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Review submitted successfully.']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to submit review.']);
+        }
+    }
 
     public function get_recommendations($book_id)
     {
@@ -643,6 +661,8 @@ class UserController extends BaseController
 
 
 
+    // UserController.php
+
     public function dashboard()
     {
         $session = session();
@@ -653,13 +673,35 @@ class UserController extends BaseController
         if ($session->get('role') == 'admin') {
             return redirect()->to('/admin/dashboard');
         } else {
-
             $bookModel = new BookModel();
-            $data['books'] = $bookModel->where('status', 'available')->findAll();
+            $categoryModel = new CategoryModel();
+            $transactionModel = new TransactionModel();
 
-            echo view('student/dashboard', $data);
+            // Get user ID from the session
+            $userId = $session->get('user_id');
+
+            // Get the user's borrowed categories from the transactions table
+            $borrowedCategories = $transactionModel->getUserBorrowedCategories($userId);
+
+            if (!empty($borrowedCategories)) {
+                // Fetch books that belong to the same categories and are highly rated (rating 3 or more)
+                $data['recommendedBooks'] = $bookModel->getBooksByCategories($borrowedCategories, $userId);
+            } else {
+                // If no borrowing history, recommend books based on rating (3 or higher) from all categories
+                $data['recommendedBooks'] = $bookModel->getBooksByCategories([], $userId);  // Empty array for categories
+            }
+
+            // Fetch all available books
+            $data['books'] = $bookModel->findAll();
+
+            // Fetch all categories for filter
+            $data['categories'] = $categoryModel->findAll();
+
+            return view('student/dashboard', $data);
         }
     }
+
+
 
     public function myBorrowedBooks()
     {

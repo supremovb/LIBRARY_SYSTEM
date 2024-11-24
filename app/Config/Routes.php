@@ -165,8 +165,36 @@ $routes->get('/admin/notifyOverdueBooks', 'AdminController::notifyOverdueBooks')
 $routes->get('notification/fetch-notifications', 'NotificationController::fetchNotifications');
 $routes->get('notification/unread-count', 'NotificationController::getUnreadCount');
 
+
+
+$routes->get('admin/borrowed-books', 'AdminController::borrowedBooks');
+
+
+$routes->post('admin/send-notification-to-overdue', 'NotificationController::sendNotificationToOverdue');
+
+$routes->get('admin/generate-book-report', 'ReportsController::generateBookReport');
+$routes->get('admin/generate-user-report', 'ReportsController::generateUserReport');
+$routes->get('admin/generate-transaction-report', 'ReportsController::generateTransactionReport');
+
+// In app/config/Routes.php
+$routes->post('user/submit-review', 'UserController::submitReview');
+
+
+$routes->get('student/book-reviews', 'BookReviewController::index');
+
+$routes->post('book_review/delete/(:num)', 'BookReviewController::delete/$1');
+
+$routes->post('book_review/update', 'BookReviewController::update');
+
 $routes->post('admin/rejectAllTransactions', 'AdminController::rejectAllTransactions');
 
+$routes->get('admin/rejectAllTransactions', 'AdminController::rejectAllTransactions');
+
+// app/Config/Routes.php
+$routes->get('admin/undefined', 'AdminController::rejectAllTransactions');
+
+// In your Routes file
+$routes->get('student/view-history', 'TransactionController::view_history');
 
 
 $routes->get('/admin/user/logout', 'AdminController::logout');

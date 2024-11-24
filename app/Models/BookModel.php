@@ -87,6 +87,41 @@ class BookModel extends Model
         return $this->where('category_id', $category_id)->findAll();
     }
 
+    // BookModel.php
+
+    public function getBooksByCategories($categories, $userId)
+    {
+        $builder = $this->db->table('books')
+            ->select('books.*, AVG(book_review.rating) as avg_rating')
+            ->join('book_review', 'books.book_id = book_review.book_id', 'left') // Join book_reviews table
+            ->groupBy('books.book_id');  // Group by book_id to calculate average rating
+
+        // If there are borrowed categories, filter by those
+        if (!empty($categories)) {
+            $builder->whereIn('books.category_id', array_column($categories, 'category_id'));
+        }
+
+        // Always filter for books with a rating of 3 or more
+        $builder->having('avg_rating >=', 3)
+            ->orderBy('avg_rating', 'DESC');  // Order by rating if available
+
+        // Attempt to get the results
+        $query = $builder->get();
+
+        // Check if the query was successful
+        if ($query !== false) {
+            return $query->getResult();  // Return the result if successful
+        } else {
+            // Log the error or handle failure gracefully
+            log_message('error', 'Query failed: ' . $this->db->getLastQuery());
+            return [];  // Return an empty array or handle the error accordingly
+        }
+    }
+
+
+
+
+
     // Custom Method: Get books by status
     public function get_books_by_status($status)
     {

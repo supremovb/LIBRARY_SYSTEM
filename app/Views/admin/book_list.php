@@ -107,6 +107,39 @@
                 font-size: 0.75rem;
             }
         }
+
+        /* Back to top button styles */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            font-size: 24px;
+            display: none;
+            /* Hidden by default */
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #backToTopBtn:hover {
+            background-color: #0056b3;
+        }
+
+        #backToTop {
+            transition: transform 0.3s ease;
+        }
+
+        #backToTop:hover {
+            transform: scale(1.1);
+            /* Slightly enlarge on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            /* Bigger shadow on hover */
+        }
     </style>
 </head>
 
@@ -184,15 +217,39 @@
             <?php endforeach; ?>
         </div>
 
-        <div class="pagination-container mt-3">
+        <!-- Back to Top Button -->
+        <a href="#" id="backToTop" class="btn" style="display: none; position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 50px; height: 50px; background: linear-gradient(135deg, #4e73df, #1a5ab1); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); font-size: 24px; transition: all 0.3s ease-in-out; border: none;">
+            <i class="bx bx-up-arrow-alt"></i>
+        </a>
 
-        </div>
+    </div>
     </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        // Show the back to top button when scrolling down
+        window.addEventListener("scroll", function() {
+            let button = document.getElementById("backToTop");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.style.display = "flex"; // Show button
+            } else {
+                button.style.display = "none"; // Hide button
+            }
+        });
+
+        // Smooth scroll to the top when the button is clicked
+        document.getElementById("backToTop").addEventListener("click", function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 
     <script>
         $('.modal').on('show.bs.modal', function(event) {

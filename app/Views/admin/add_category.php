@@ -56,8 +56,21 @@
                                 <li><a class="dropdown-item" href="<?= base_url('admin/create-book') ?>"><i class="bx bx-book-add"></i> Add Book</a></li>
                                 <li><a class="dropdown-item" href="<?= base_url('admin/view-books') ?>"><i class="bx bx-list-ul"></i> View Books</a></li>
                                 <li><a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>"><i class="bx bx-book"></i> View Pending Books</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('admin/borrowed-books') ?>"><i class="bx bx-bookmark"></i> View Borrowed Books</a></li>
                             </ul>
                         </li>
+                        <!-- Reports Dropdown Menu -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-bar-chart-alt-2"></i> Reports
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
+                                <li><a class="dropdown-item" href="<?= base_url('admin/generate-book-report') ?>"><i class="bx bx-book"></i> Generate Book's Report</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('admin/generate-user-report') ?>"><i class="bx bx-group"></i> Generate User's Report</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('admin/generate-transaction-report') ?>"><i class="bx bx-receipt"></i> Generate Transaction's Report</a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bx bx-user"></i> <?= session()->get('firstname') ?>

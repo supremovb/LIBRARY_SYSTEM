@@ -18,6 +18,25 @@ class TransactionController extends BaseController
         $this->bookModel = new BookModel();
     }
 
+    public function view_history()
+    {
+        // Fetch the logged-in user's ID
+        $userId = session()->get('user_id');
+
+        // Load the models
+        $transactionModel = new TransactionModel();
+        $bookModel = new BookModel();
+
+        // Get all transactions for the logged-in user, including book titles
+        $transactions = $transactionModel->select('transactions.*, books.title')
+            ->join('books', 'transactions.book_id = books.book_id', 'left')
+            ->where('transactions.user_id', $userId)
+            ->findAll();
+
+        // Pass data to the view
+        return view('student/view_history', ['transactions' => $transactions]);
+    }
+
     public function borrow()
     {
         $session = session();

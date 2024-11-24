@@ -93,7 +93,7 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
 
             <div class="profile-details">
                 <div class="row">
-                    <div class="col-md-4"><strong>Student ID:</strong></div>
+                    <div class="col-md-4"><strong>Admin ID:</strong></div>
                     <div class="col-md-8">
                         <input type="text" class="form-control" name="student_id" value="<?= esc($user['student_id']) ?>" readonly>
 

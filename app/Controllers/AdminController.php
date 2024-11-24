@@ -22,6 +22,25 @@ class AdminController extends BaseController
         $this->categoryModel = new CategoryModel();
     }
 
+    public function borrowedBooks()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('transactions');
+
+        // Join tables to get necessary data
+        $builder->select('transactions.borrow_date, transactions.due_date, transactions.return_date, users.firstname, users.lastname, books.title');
+        $builder->join('users', 'transactions.user_id = users.user_id'); // Join with users table
+        $builder->join('books', 'transactions.book_id = books.book_id'); // Join with books table
+        $builder->where('transactions.status', 'borrowed'); // Only get borrowed books
+
+        $data['borrowedBooks'] = $builder->get()->getResult();
+
+        return view('admin/borrowed_books', $data);
+    }
+
+
+
+
     public function viewUsers()
     {
 
@@ -767,8 +786,6 @@ class AdminController extends BaseController
     public function rejectAllTransactions()
     {
         $transactionModel = new \App\Models\TransactionModel();
-        $bookModel = new \App\Models\BookModel();
-
 
         $pendingTransactions = $transactionModel->where('status', 'pending')->findAll();
 
@@ -776,18 +793,9 @@ class AdminController extends BaseController
         $db->transStart();
 
         foreach ($pendingTransactions as $transaction) {
-
-            $transactionModel->update($transaction['transaction_id'], ['status' => 'rejected']);
-
-
-            $book = $bookModel->find($transaction['book_id']);
-            if ($book) {
-                $newQuantity = $book['quantity'] + 1;
-                $bookModel->update($transaction['book_id'], [
-                    'quantity' => $newQuantity,
-                    'status' => 'available',
-                ]);
-            }
+            $transactionModel->update($transaction['transaction_id'], [
+                'status' => 'rejected',
+            ]);
         }
 
         $db->transComplete();
@@ -800,7 +808,6 @@ class AdminController extends BaseController
 
         return redirect()->to('/admin/approve_reject_transactions');
     }
-
 
 
 

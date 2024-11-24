@@ -38,57 +38,83 @@ class TransactionModel extends Model
         'status'      => 'required|in_list[borrowed,returned,pending,rejected]'
     ];
 
+    // TransactionModel.php
+    // TransactionModel.php
+
+    public function getUserBorrowedCategories($userId)
+    {
+        return $this->db->table('transactions')
+            ->select('transactions.*, books.*, categories.name')
+            ->join('books', 'transactions.book_id = books.book_id')
+            ->join('categories', 'books.category_id = categories.category_id')
+            ->where('transactions.user_id', $userId)
+            ->get()
+            ->getResult();
+    }
+
+
     public function getPendingTransactions($user_id = null)
-{
-    $builder = $this->db->table('transactions')
-        ->select([
-            'transactions.transaction_id',
-            'transactions.user_id',
-            'transactions.book_id',
-            'transactions.borrow_date',
-            'transactions.due_date',
-            'transactions.status',
-            'COALESCE(users.firstname, "Unknown") as firstname',
-            'COALESCE(users.lastname, "") as lastname',
-            'COALESCE(books.title, "No Title") as title'
-        ])
-        ->join('users', 'users.user_id = transactions.user_id', 'left')  // Make sure user_id is correct
-        ->join('books', 'books.book_id = transactions.book_id', 'left')  // Ensure book_id is correct
-        ->where('transactions.status', 'pending');
+    {
+        $builder = $this->db->table('transactions')
+            ->select([
+                'transactions.transaction_id',
+                'transactions.user_id',
+                'transactions.book_id',
+                'transactions.borrow_date',
+                'transactions.due_date',
+                'transactions.status',
+                'COALESCE(users.firstname, "Unknown") as firstname',
+                'COALESCE(users.lastname, "") as lastname',
+                'COALESCE(books.title, "No Title") as title'
+            ])
+            ->join('users', 'users.user_id = transactions.user_id', 'left')  // Make sure user_id is correct
+            ->join('books', 'books.book_id = transactions.book_id', 'left')  // Ensure book_id is correct
+            ->where('transactions.status', 'pending');
 
-    if ($user_id !== null) {
-        $builder->where('transactions.user_id', $user_id);
+        if ($user_id !== null) {
+            $builder->where('transactions.user_id', $user_id);
+        }
+
+        log_message('debug', 'SQL Query: ' . $builder->getCompiledSelect());
+
+        return $builder->get()->getResultArray();
     }
 
-    log_message('debug', 'SQL Query: ' . $builder->getCompiledSelect());
+    public function showPendingTransactions($user_id = null)
+    {
+        // Get the pending transactions from the model
+        $pendingTransactions = $this->getPendingTransactions($user_id);
 
-    return $builder->get()->getResultArray();
-}
+        // Debug: Log the query result for pending transactions
+        if (empty($pendingTransactions)) {
+            log_message('debug', 'No pending transactions found.');
+        } else {
+            log_message('debug', 'Pending Transactions: ' . print_r($pendingTransactions, true));
+        }
 
-public function showPendingTransactions($user_id = null)
-{
-    // Get the pending transactions from the model
-    $pendingTransactions = $this->getPendingTransactions($user_id);
-
-    // Debug: Log the query result for pending transactions
-    if (empty($pendingTransactions)) {
-        log_message('debug', 'No pending transactions found.');
-    } else {
-        log_message('debug', 'Pending Transactions: ' . print_r($pendingTransactions, true));
+        // Pass the transactions to the view
+        return view('admin/approve_reject_transactions', ['pendingTransactions' => $pendingTransactions]);
     }
 
-    // Pass the transactions to the view
-    return view('admin/approve_reject_transactions', ['pendingTransactions' => $pendingTransactions]);
-}
+    public function getOverdueBooks()
+    {
+        $overdueBooks = $this->where('return_date', null)
+            ->where('due_date <', date('Y-m-d'))
+            ->findAll();
 
-    
+        // Debug: log the results to check
+        log_message('error', 'Overdue books: ' . print_r($overdueBooks, true));
+
+        return $overdueBooks;
+    }
+
 
 
     // Additional method to fetch overdue transactions based on current date and due date
     public function getOverdueTransactions()
     {
         return $this->where('due_date <', date('Y-m-d'))
-                    ->where('status !=', 'returned')
-                    ->findAll();
+            ->where('status !=', 'returned')
+            ->findAll();
     }
 }

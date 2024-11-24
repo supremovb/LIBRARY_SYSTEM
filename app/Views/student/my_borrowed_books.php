@@ -80,6 +80,23 @@
                         <i class="bx bx-home"></i> Dashboard
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('student/book-reviews') ?>" class="nav-link"><i class="bx bx-comment"></i> Book Reviews</a>
+                </li>
+
+                <!-- Navbar -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-bell"></i> Notifications
+                        <span class="badge badge-danger" id="notificationCount" style="display: none;"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right p-3" aria-labelledby="notificationDropdown" style="max-height: 400px; overflow-y: auto; width: 300px;">
+                        <ul id="notificationList" class="list-group list-group-flush">
+                            <!-- Notifications will be dynamically loaded here -->
+                        </ul>
+                    </div>
+
+                </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -92,6 +109,7 @@
                         <a class="dropdown-item" href="<?= base_url('student/view-profile') ?>">
                             <i class="bx bx-id-card"></i> View Profile
                         </a>
+                        <a class="dropdown-item" href="<?= base_url('student/view-history') ?>"><i class="bx bx-history"></i> History</a>
                         <a class="dropdown-item" href="<?= base_url('user/logout') ?>">
                             <i class="bx bx-log-out"></i> Logout
                         </a>
@@ -140,6 +158,88 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            function updateNotifications() {
+                $.ajax({
+                    url: '<?= base_url('NotificationController/updateNotifications') ?>',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        // Update notification list
+                        const notificationList = $("#notificationList");
+                        notificationList.empty();
+
+                        response.notifications.forEach(notification => {
+                            const listItem = `
+                        <li class="list-group-item">
+                            ${notification.message}
+                            <small class="text-muted float-right">${new Date(notification.created_at).toLocaleString()}</small>
+                        </li>`;
+                            notificationList.append(listItem);
+                        });
+
+                        // Update unread count
+                        const notificationCount = $("#notificationCount");
+                        if (response.unread_count > 0) {
+                            notificationCount.text(response.unread_count).show();
+                        } else {
+                            notificationCount.hide();
+                        }
+                    },
+                    error: function() {
+                        console.error("Failed to update notifications.");
+                    }
+                });
+            }
+
+            // Trigger notification update when dropdown is clicked
+            $("#notificationDropdown").on('click', function() {
+                updateNotifications();
+            });
+
+            // Initial update on page load
+            updateNotifications();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Fetch unread notifications count
+            function fetchNotificationCount() {
+                $.get("<?= base_url('notification/unread-count') ?>", function(data) {
+                    $('#notificationCount').text(data.unread_count || '');
+                });
+            }
+
+            // Load notifications into the dropdown
+            $('#notificationDropdown').on('click', function() {
+                const notificationList = $('#notificationList');
+                $.get("<?= base_url('notification/fetch-notifications') ?>", function(notifications) {
+                    notificationList.empty();
+                    if (notifications.length > 0) {
+                        notifications.forEach(notification => {
+                            const listItem = `
+                        <li class="list-group-item">
+                            <strong>${notification.type}</strong>: ${notification.message}
+                            <small class="text-muted d-block">${new Date(notification.created_at).toLocaleString()}</small>
+                        </li>`;
+                            notificationList.append(listItem);
+                        });
+                    } else {
+                        notificationList.append('<li class="list-group-item text-center">No notifications found</li>');
+                    }
+                });
+            });
+
+            // Fetch notification count periodically
+            fetchNotificationCount();
+            setInterval(fetchNotificationCount, 30000); // Update every 30 seconds
+        });
+    </script>
+
     <script>
         $(document).on('click', '.return-btn', function() {
             var transaction_id = $(this).data('id');

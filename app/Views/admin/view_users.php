@@ -69,15 +69,29 @@
                             <a class="dropdown-item" href="<?= base_url('admin/create-book') ?>"><i class="bx bx-plus"></i> Add Book</a>
                             <a class="dropdown-item" href="<?= base_url('admin/view-books') ?>"><i class="bx bx-book-open"></i> View Books</a>
                             <a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>"><i class="bx bx-book"></i> View Pending Books</a>
+                            <a class="dropdown-item" href="<?= base_url('admin/borrowed-books') ?>"><i class="bx bx-bookmark"></i> View Borrowed Books</a>
                         </div>
                     </li>
+
+                    <!-- Reports Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bx bx-bar-chart-alt-2"></i> Reports
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
+                            <li><a class="dropdown-item" href="<?= base_url('admin/generate-book-report') ?>"><i class="bx bx-book"></i> Generate Book's Report</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('admin/generate-user-report') ?>"><i class="bx bx-group"></i> Generate User's Report</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('admin/generate-transaction-report') ?>"><i class="bx bx-receipt"></i> Generate Transaction's Report</a></li>
+                        </ul>
+                    </li>
+
                 <?php endif; ?>
 
 
                 <?php if (session()->get('logged_in')): ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <?= session()->get('firstname') ?> <span class="caret"></span> <i class="bx bx-user-circle"></i>
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bx bx-user"></i> <?= session()->get('firstname') ?>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="<?= session()->get('role') === 'admin' ? base_url('admin/view-profile') : base_url('student/view-profile') ?>"><i class="bx bx-user"></i> View Profile</a>
@@ -105,7 +119,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th>User ID</th>
-                        <th>Student ID</th>
+                        <th>Admin/Student ID</th>
                         <th>Full Name</th>
                         <th>Email</th>
                         <th>Course</th>
