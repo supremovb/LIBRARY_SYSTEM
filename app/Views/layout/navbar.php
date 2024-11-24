@@ -18,7 +18,7 @@
                     <a class="dropdown-item" href="<?= base_url('admin/add-category') ?>"><i class="bx bx-plus-circle"></i> Add Category</a>
                     <a class="dropdown-item" href="<?= base_url('admin/create-book') ?>"><i class="bx bx-book-add"></i> Add Book</a>
                     <a class="dropdown-item" href="<?= base_url('admin/view-books') ?>"><i class="bx bx-book-open"></i> View Books</a>
-                    <a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>"><i class="bx bx-check-circle"></i> View Borrowed Books</a>
+                    <a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>"><i class="bx bx-book"></i> View Pending Books</a>
                 </div>
             </li>
         <?php endif; ?>

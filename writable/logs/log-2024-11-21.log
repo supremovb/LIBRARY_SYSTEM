@@ -867,3 +867,10 @@ ERROR - 2024-11-21 19:45:05 --> Database Update Failed: Array
     [student_id] => Student ID is already in use.
 )
 
+ERROR - 2024-11-21 20:21:14 --> Student ID/Username not found: alabado
+ERROR - 2024-11-21 20:23:50 --> Password mismatch for input: supremopkvxx
+ERROR - 2024-11-21 20:25:24 --> Update Error: Student ID is already in use.
+ERROR - 2024-11-21 20:25:43 --> Update Error: Student ID is already in use.
+ERROR - 2024-11-21 20:33:18 --> Update Error: Student ID is already in use.
+ERROR - 2024-11-21 20:35:03 --> Update Error: Student ID is already in use.
+ERROR - 2024-11-21 20:35:43 --> Update Error: Student ID is already in use.

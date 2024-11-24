@@ -155,22 +155,18 @@ $routes->post('admin/delete-user', 'AdminController::deleteUser');
 
 $routes->post('admin/delete-category/(:num)', 'AdminController::deleteCategory/$1');
 
+$routes->get('/student/notifications', 'NotificationController::index');
+$routes->get('/notifications/getUnreadCount', 'NotificationController::getUnreadCount');
+$routes->post('/notifications/markAsRead', 'NotificationController::markAsRead');
+
+$routes->get('/admin/notifyNearDueBooks', 'AdminController::notifyNearDueBooks');
+$routes->get('/admin/notifyOverdueBooks', 'AdminController::notifyOverdueBooks');
+
+$routes->get('notification/fetch-notifications', 'NotificationController::fetchNotifications');
+$routes->get('notification/unread-count', 'NotificationController::getUnreadCount');
+
+$routes->post('admin/rejectAllTransactions', 'AdminController::rejectAllTransactions');
+
+
 
 $routes->get('/admin/user/logout', 'AdminController::logout');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -8,7 +8,7 @@ use App\Models\TransactionModel;
 use App\Models\UserModel;
 use App\Models\OtpModel;
 use App\Models\CategoryModel;
-
+use App\Models\Notification_model;
 
 
 class AdminController extends BaseController
@@ -477,11 +477,9 @@ class AdminController extends BaseController
         try {
             $file = $this->request->getFile('photo');
 
-
             if (!$file || !$file->isValid()) {
                 throw new \RuntimeException($file ? $file->getErrorString() : 'No file uploaded.');
             }
-
 
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
             $fileExtension = strtolower($file->getExtension());
@@ -490,30 +488,26 @@ class AdminController extends BaseController
                 throw new \RuntimeException('Invalid file type: ' . $fileExtension);
             }
 
-
             $uploadPath = FCPATH . 'uploads/books/';
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 0755, true);
             }
-
 
             $newFileName = $file->getRandomName();
             if (!$file->move($uploadPath, $newFileName)) {
                 throw new \RuntimeException('Failed to move uploaded file.');
             }
 
-
             $bookData = [
                 'title' => $this->request->getPost('title'),
                 'author' => $this->request->getPost('author'),
                 'isbn' => $this->request->getPost('isbn'),
                 'published_date' => $this->request->getPost('published_date'),
-                'description' => $this->request->getPost('description'), // Add description here
+                'description' => $this->request->getPost('description'),
                 'photo' => $newFileName,
-                'category_id' => $this->request->getPost('category'), // Get category from form
-                'quantity' => $this->request->getPost('quantity'), // New quantity field
+                'category_id' => $this->request->getPost('category'),
+                'quantity' => $this->request->getPost('quantity'),
             ];
-
 
             foreach ($bookData as $key => $value) {
                 if (empty($value) && $key !== 'photo') {
@@ -521,37 +515,81 @@ class AdminController extends BaseController
                 }
             }
 
-
             $bookModel = new BookModel();
-
-
             $bookModel->skipValidation(true);
             $inserted = $bookModel->insert($bookData);
-            $bookModel->skipValidation(false); // Re-enable validation
+            $bookModel->skipValidation(false);
 
-            if (!$inserted) {
+            if ($inserted) {
+                // Initialize the notification model after the book is inserted
+                $notificationModel = new \App\Models\Notification_model();
+
+                // Send notification to all students about new book arrival
+                $message = 'A new book "' . $bookData['title'] . '" has arrived. Check it out now!';
+                $notificationModel->sendNotificationToAllStudents($message, 'NEW_ARRIVAL');
+
+                return $this->response->setJSON([
+                    'status' => 'success',
+                    'message' => 'Book created and notification sent successfully.',
+                ]);
+            } else {
                 $errors = $bookModel->errors();
-                throw new \RuntimeException(
-                    'Failed to insert book into the database. Errors: ' . json_encode($errors)
-                );
+                throw new \RuntimeException('Failed to insert book into the database. Errors: ' . json_encode($errors));
             }
-
-
-            return $this->response->setJSON([
-                'status' => 'success',
-                'message' => 'Book created successfully.',
-            ]);
         } catch (\Exception $e) {
-
             log_message('error', $e->getMessage());
-
-
             return $this->response->setJSON([
                 'status' => 'error',
                 'message' => $e->getMessage(),
             ]);
         }
     }
+
+
+
+    public function notifyNearDueBooks()
+    {
+        $bookModel = new \App\Models\BookModel();
+        $notificationModel = new \App\Models\Notification_model();
+
+        // Get books with near due dates
+        $nearDueBooks = $bookModel->getNearDueBooks();
+
+        foreach ($nearDueBooks as $borrowedBook) {
+            $message = 'Your borrowed book "' . $borrowedBook->title . '" is due in 3 days. Please return it on time.';
+            $notificationModel->insert([
+                'user_id' => $borrowedBook->user_id,
+                'message' => $message,
+                'type' => 'near_due',
+                'status' => 'UNREAD'
+            ]);
+        }
+
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Notifications for near due books have been sent.']);
+    }
+
+    public function notifyOverdueBooks()
+    {
+        $bookModel = new \App\Models\BookModel();
+        $notificationModel = new \App\Models\Notification_model();
+
+        // Get overdue books
+        $overdueBooks = $bookModel->getOverdueBooks();
+
+        foreach ($overdueBooks as $borrowedBook) {
+            $message = 'Your borrowed book "' . $borrowedBook->title . '" is overdue. Please return it as soon as possible.';
+            $notificationModel->insert([
+                'user_id' => $borrowedBook->user_id,
+                'message' => $message,
+                'type' => 'overdue',
+                'status' => 'UNREAD'
+            ]);
+        }
+
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Notifications for overdue books have been sent.']);
+    }
+
+
 
 
     public function approveTransaction($transactionId)

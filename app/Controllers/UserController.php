@@ -359,6 +359,17 @@ class UserController extends BaseController
         echo view('login');
     }
 
+    public function adminDashboard()
+    {
+        $session = session();
+        if ($session->get('role') !== 'admin') {
+            return redirect()->to('/login');
+        }
+        // Load admin dashboard view
+        echo view('admin/dashboard');
+    }
+
+
 
 
 
@@ -421,6 +432,7 @@ class UserController extends BaseController
 
 
         $emailChanged = isset($data['email']) && $currentUser['email'] !== $data['email'];
+        $studentIdChanged = isset($data['student_id']) && $currentUser['student_id'] !== $data['student_id'];
 
 
         if (!empty($data['new_password']) && $data['new_password'] !== $data['confirm_password']) {
@@ -439,6 +451,14 @@ class UserController extends BaseController
             unset($data['username']); // Don't update username if it's not changed
         }
 
+        if (!isset($data['student_id']) || $currentUser['student_id'] === $data['student_id']) {
+            $validationRules['student_id'] = 'permit_empty'; // Allow empty value for username
+        }
+
+        if (isset($data['student_id']) && $currentUser['student_id'] === $data['student_id']) {
+            unset($data['student_id']); // Don't update username if it's not changed
+        }
+
 
         $validation = \Config\Services::validation();
 
@@ -447,6 +467,7 @@ class UserController extends BaseController
             'firstname' => 'required|min_length[3]|max_length[100]',
             'lastname'  => 'required|min_length[3]|max_length[100]',
             'username'  => 'required|min_length[3]|max_length[50]',
+            'student_id' => 'permit_empty|alpha_numeric|min_length[3]|max_length[20]',
             'email'     => 'permit_empty|valid_email|max_length[100]',  // Set as permit_empty so we can skip it when not changed
             'new_password' => 'permit_empty|min_length[6]|max_length[255]',
             'confirm_password' => 'permit_empty|matches[new_password]',
@@ -459,6 +480,10 @@ class UserController extends BaseController
         }
 
         $validation->setRules($validationRules);
+
+        if (!$studentIdChanged) {
+            $validationRules['student_id'] = 'permit_empty'; // Allow student_id to remain unchanged
+        }
 
 
         if ($emailChanged) {
@@ -558,39 +583,26 @@ class UserController extends BaseController
         $session = session();
         $model = new UserModel();
 
-
-        $input = trim($this->request->getVar('username')); // Can be student_id or username
+        $input = trim($this->request->getVar('username'));
         $password = trim($this->request->getVar('password'));
+        $role = trim($this->request->getVar('role')); // Get the role input
 
-        if (empty($input) || empty($password)) {
-            $session->setFlashdata('msg', 'Student ID/Username and Password are required.');
+        if (empty($input) || empty($password) || empty($role)) {
+            $session->setFlashdata('msg', 'All fields are required.');
             return redirect()->to('/login');
         }
 
-
-        $data = $model->where('username', $input)
-            ->orWhere('student_id', $input)
-            ->first();
+        $data = $model->where('username', $input)->orWhere('student_id', $input)->first();
 
         if ($data) {
-            $hashedPassword = $data['password'];
-
-
-            log_message('debug', 'Password hash from DB for user ' . $input . ': ' . $hashedPassword);
-
-
-            if (password_verify($password, $hashedPassword)) {
-
-                if (
-                    ($input === $data['username'] && $input !== $data['username']) ||
-                    ($input === $data['student_id'] && strcmp($input, $data['student_id']) !== 0)
-                ) {
-                    log_message('error', 'Case mismatch in Student ID/Username: ' . $input);
-                    $session->setFlashdata('msg', 'Student ID/Username is incorrect (case-sensitive).');
+            if (password_verify($password, $data['password'])) {
+                // Check if the role from the form matches the role from the database
+                if ($data['role'] !== $role) {
+                    $session->setFlashdata('msg', 'You are not authorized as the selected role.');
                     return redirect()->to('/login');
                 }
 
-
+                // Set session data
                 $ses_data = [
                     'user_id' => $data['user_id'],
                     'username' => $data['username'],
@@ -602,21 +614,33 @@ class UserController extends BaseController
                 ];
                 $session->set($ses_data);
 
-
-                return $data['role'] === 'admin'
-                    ? redirect()->to('/admin/dashboard')
-                    : redirect()->to('/user/dashboard');
+                // Redirect based on role
+                if ($role === 'admin') {
+                    // Make sure the user is an admin
+                    if ($data['role'] !== 'admin') {
+                        $session->setFlashdata('msg', 'You are not an admin. You cannot access the admin dashboard.');
+                        return redirect()->to('/login');
+                    }
+                    return redirect()->to('/admin/dashboard');
+                } elseif ($role === 'student') {
+                    // Make sure the user is a student
+                    if ($data['role'] !== 'student') {
+                        $session->setFlashdata('msg', 'You are not a student. You cannot access the student dashboard.');
+                        return redirect()->to('/login');
+                    }
+                    return redirect()->to('/user/dashboard');
+                }
             } else {
-                log_message('error', 'Password mismatch for input: ' . $input);
                 $session->setFlashdata('msg', 'Password is incorrect.');
                 return redirect()->to('/login');
             }
         } else {
-            log_message('error', 'Student ID/Username not found: ' . $input);
-            $session->setFlashdata('msg', 'Student ID/Username not found.');
+            $session->setFlashdata('msg', 'Username/Student ID not found.');
             return redirect()->to('/login');
         }
     }
+
+
 
 
     public function dashboard()
@@ -675,14 +699,18 @@ class UserController extends BaseController
         $model = new UserModel();
         $otpModel = new \App\Models\OtpModel();
 
-
         $validation = \Config\Services::validation();
 
         $validation->setRules([
-            'email' => 'required|valid_email|is_unique[users.email]',
+            'email' => [
+                'required',
+                'valid_email',
+                'is_unique[users.email]',
+                'regex_match[/^[a-zA-Z0-9._%+-]+@sdca\.edu\.ph$/]'  // Validate email domain
+            ],
             'username' => 'required|alpha_numeric|min_length[3]|max_length[50]|is_unique[users.username]',
             'password' => 'required|min_length[6]',
-            'confirm_password' => 'required|matches[password]', // Ensure confirm password matches password
+            'confirm_password' => 'required|matches[password]',
             'firstname' => 'required|alpha_space|min_length[2]|max_length[50]',
             'lastname' => 'required|alpha_space|min_length[2]|max_length[50]',
             'course' => 'required|alpha_space|min_length[2]|max_length[50]',
@@ -697,35 +725,37 @@ class UserController extends BaseController
                 return redirect()->to('/register')->withInput();  // Preserve the input values
             }
 
-
             $existingEmail = $model->where('email', $this->request->getPost('email'))->first();
             if ($existingEmail) {
                 $session->setFlashdata('msg', 'The email is already registered. Please use a different email address.');
                 return redirect()->to('/register')->withInput();  // Preserve the input values
             }
 
+            // Check if email domain is valid before proceeding
+            $email = $this->request->getPost('email');
+            if (!preg_match('/@sdca\.edu\.ph$/', $email)) {
+                $session->setFlashdata('msg', 'Please register with an email address from the SDCA');
+                return redirect()->to('/register')->withInput();  // Preserve the input values
+            }
 
             $student_id = 'SDCA' . strtoupper(bin2hex(random_bytes(2)));  // Generates a random 4-character string like H5J7
 
-
             $data = [
-                'student_id' => $student_id,  // Add student_id here
+                'student_id' => $student_id,
                 'username' => $this->request->getPost('username'),
-                'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),  // Hash password
+                'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
                 'firstname' => $this->request->getPost('firstname'),
                 'lastname' => $this->request->getPost('lastname'),
                 'course' => $this->request->getPost('course'),
                 'year' => $this->request->getPost('year'),
                 'role' => 'student',
-                'email' => $this->request->getPost('email'),  // Added email to the data array
+                'email' => $this->request->getPost('email'),  // Add email
             ];
 
             $create = $model->createUser($data);
 
             if ($create) {
-
                 $session->set('user_id', $model->insertID());  // Store the user ID in the session
-
 
                 $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
                 $otpExpiration = date('Y-m-d H:i:s', strtotime('+10 minutes'));
@@ -733,10 +763,9 @@ class UserController extends BaseController
                 $token = bin2hex(random_bytes(16)); // Generate a secure random token
                 $tokenExpiration = date('Y-m-d H:i:s', strtotime('+10 minutes'));
 
-
                 $otpData = [
                     'user_id' => $session->get('user_id'),
-                    'otp' => $otp, // Store OTP as a string
+                    'otp' => $otp,
                     'otp_expiration' => $otpExpiration,
                     'token' => $token,
                     'token_expiration' => $tokenExpiration,
@@ -747,30 +776,24 @@ class UserController extends BaseController
 
                 $otpModel->save($otpData);
 
-
                 $this->sendVerificationEmail($data['email'], $otp, $token);
-
 
                 $session->setFlashdata('success', 'Registration Successful! You can now check your email for the verification code.');
                 return redirect()->to('/verify-otp');
             } else {
-
                 $session->setFlashdata('msg', 'Failed to register the student. Please try again later.');
                 return redirect()->to('/register');
             }
         } else {
-
             if ($validation->hasError('confirm_password')) {
                 $session->setFlashdata('msg', 'Passwords do not match. Please try again.');
                 return redirect()->to('/register')->withInput();
             }
 
-
             $session->setFlashdata('msg', 'There are errors in the form. Please correct them and try again.');
             return redirect()->to('/register')->withInput()->with('validation', $validation);
         }
     }
-
 
 
 

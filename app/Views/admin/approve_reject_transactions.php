@@ -167,10 +167,11 @@
 
             <form id="rejectAllForm" action="<?= site_url('admin/rejectAllTransactions') ?>" method="POST">
                 <input type="hidden" name="action" value="reject_all">
-                <button type="button" class="btn btn-danger" id="rejectAllBtn">
+                <button type="submit" class="btn btn-danger" id="rejectAllBtn">
                     <i class="uil uil-times-circle"></i> Reject All
                 </button>
             </form>
+
         </div>
 
         <table class="table">
@@ -240,7 +241,8 @@
         });
 
 
-        document.getElementById('rejectAllBtn').addEventListener('click', function() {
+        document.getElementById('rejectAllBtn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the form from submitting immediately
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You are about to reject all pending transactions.',
@@ -252,11 +254,14 @@
                 cancelButtonColor: '#6c757d',
             }).then((result) => {
                 if (result.isConfirmed) {
-
+                    // After confirmation, submit the form
                     document.getElementById('rejectAllForm').submit();
                 }
             });
         });
+
+
+
 
 
         $('#searchInput').on('input', function() {

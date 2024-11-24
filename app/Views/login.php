@@ -14,28 +14,44 @@
 
     <style>
         body {
-            background-color: #f4f7fc;
+            background: url('http://localhost/library_system/assets/login_bg.png') no-repeat center center fixed;
+            background-size: cover;
             height: 100vh;
+            margin: 0;
             display: flex;
             justify-content: center;
-            /* This ensures vertical centering */
+            /* Centers content horizontally */
             align-items: center;
-            /* This centers content horizontally */
-            margin: 0;
+            /* Centers content vertically */
         }
 
         .login-container {
-            max-width: 350px;
-            width: 100%;
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 250px;
+            /* Reduced maximum width */
+            width: 85%;
+            /* Reduced responsive width for smaller screens */
+            padding: 15px;
+            /* Slightly reduced padding */
+            border-radius: 15px;
+            /* Smoother, rounded corners */
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Added light transparency */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            /* Softer shadow for better depth */
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 80px;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: auto;
+            /* Ensures dynamic adjustment */
         }
+
+
+
 
         .form-group {
             width: 100%;
@@ -122,7 +138,7 @@
     <?= $this->include('layout/header'); ?>
 
     <div class="container login-container">
-        <h2 class="text-center mb-4">Student Login</h2>
+        <h2 class="text-center mb-4">LOGIN</h2>
 
 
         <?php if (session()->getFlashdata('msg')): ?>
@@ -137,7 +153,7 @@
                 <form action="<?= base_url('user/authenticate') ?>" method="post" id="loginForm">
                     <?= csrf_field() ?>
                     <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="username" id="usernameLabel">Username/Student ID</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="bx bx-user"></i></span>
@@ -145,6 +161,7 @@
                             <input type="text" id="username" name="username" class="form-control" required placeholder="Enter username" aria-describedby="usernameHelp">
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -183,6 +200,14 @@
 
                     <div class="text-center mt-3">
                         <a href="<?= base_url('/forgot-password') ?>">Forgot Password?</a>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Login As:</label>
+                        <select id="role" name="role" class="form-control">
+                            <option value="student">Student</option>
+                            <option value="admin">Admin</option>
+                        </select>
                     </div>
 
                     <div class="text-center mt-3">
@@ -231,6 +256,19 @@
                 icon.removeClass('bx-hide').addClass('bx-show');
             }
         });
+
+        $('#role').on('change', function() {
+            var role = $(this).val(); // Get the selected role
+
+            // Change the label based on the role
+            if (role === 'admin') {
+                $('#usernameLabel').text('Username/Admin ID');
+            } else {
+                $('#usernameLabel').text('Username/Student ID');
+            }
+        });
+
+
 
 
         $('#loginForm').on('submit', function(event) {

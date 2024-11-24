@@ -68,7 +68,7 @@
                             <a class="dropdown-item" href="<?= base_url('admin/add-category') ?>"><i class="bx bx-plus"></i> Add Category</a>
                             <a class="dropdown-item" href="<?= base_url('admin/create-book') ?>"><i class="bx bx-plus"></i> Add Book</a>
                             <a class="dropdown-item" href="<?= base_url('admin/view-books') ?>"><i class="bx bx-book-open"></i> View Books</a>
-                            <a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>"><i class="bx bx-check"></i> View Borrowed Books</a>
+                            <a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>"><i class="bx bx-book"></i> View Pending Books</a>
                         </div>
                     </li>
                 <?php endif; ?>
@@ -81,6 +81,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="<?= session()->get('role') === 'admin' ? base_url('admin/view-profile') : base_url('student/view-profile') ?>"><i class="bx bx-user"></i> View Profile</a>
+                            <a class="dropdown-item" href="<?= base_url('admin/view-users') ?>"><i class="bx bx-group"></i> View Users</a>
                             <a class="dropdown-item" href="<?= base_url('user/logout') ?>"><i class="bx bx-log-out"></i> Logout</a>
                         </div>
                     </li>

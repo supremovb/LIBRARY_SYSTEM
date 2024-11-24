@@ -16,11 +16,20 @@
 
     <style>
         body {
+            background: url('http://localhost/library_system/assets/login_bg.png') no-repeat center center fixed;
+            /* Set background image with no repeat, centered, and fixed */
+            background-size: cover;
+            /* Ensures the image covers the whole screen */
             background-color: #f4f7fc;
+            /* Fallback color */
         }
 
         .registration-container {
             margin-top: 5%;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .form-group label {
@@ -35,11 +44,12 @@
             transition: opacity 0.5s ease-in-out;
         }
     </style>
+
 </head>
 
 <body>
     <div class="container registration-container">
-        <h2 class="text-center mb-4">Student Registration</h2>
+        <h2 class="text-center mb-4">STUDENT REGISTRATION</h2>
 
 
         <?php if (session()->getFlashdata('msg')): ?>

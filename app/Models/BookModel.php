@@ -10,12 +10,12 @@ class BookModel extends Model
     protected $primaryKey = 'book_id';       // Primary key column
 
     protected $allowedFields = [
-        'title', 
-        'description', 
-        'author', 
-        'isbn', 
-        'published_date', 
-        'status', 
+        'title',
+        'description',
+        'author',
+        'isbn',
+        'published_date',
+        'status',
         'photo',
         'category_id',
         'quantity' // Added the quantity field here
@@ -91,5 +91,26 @@ class BookModel extends Model
     public function get_books_by_status($status)
     {
         return $this->where('status', $status)->findAll();
+    }
+
+    // Get borrowed books with near due dates (e.g., within 3 days)
+    public function getNearDueBooks()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('borrowed_books'); // Assuming this is the table storing borrowed books
+        $builder->join('users', 'users.user_id = borrowed_books.user_id');
+        $builder->where('borrowed_books.due_date <=', date('Y-m-d', strtotime('+3 days')));
+        $builder->where('borrowed_books.due_date >=', date('Y-m-d'));
+        return $builder->get()->getResult();
+    }
+
+    // Get overdue books
+    public function getOverdueBooks()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('borrowed_books');
+        $builder->join('users', 'users.user_id = borrowed_books.user_id');
+        $builder->where('borrowed_books.due_date <', date('Y-m-d'));
+        return $builder->get()->getResult();
     }
 }

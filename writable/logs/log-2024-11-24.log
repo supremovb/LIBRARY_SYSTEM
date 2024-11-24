@@ -1,0 +1,27 @@
+ERROR - 2024-11-24 09:28:11 --> mysqli_sql_exception: Unknown column 'admin_id' in 'where clause' in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\library_system\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\laragon\www\library_system\app\Controllers\UserController.php(596): CodeIgniter\BaseModel->first()
+#7 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\UserController->authenticate()
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-11-24 09:28:11 --> Error: Call to a member function getFirstRow() on bool
+[Method: POST, Route: user/authenticate]
+in SYSTEMPATH\Model.php on line 330.
+ 1 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 2 APPPATH\Controllers\UserController.php(596): CodeIgniter\BaseModel->first()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->authenticate()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
