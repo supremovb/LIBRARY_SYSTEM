@@ -11,33 +11,33 @@
 
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
     <style>
-        /* Ensure descriptions break properly */
+        
         .description-cell {
             word-wrap: break-word;
             max-width: 300px;
-            /* Adjust width for better layout */
+            
             overflow-wrap: break-word;
         }
 
-        /* Add margin below the categories title */
+        
         h2 {
             margin-bottom: 30px;
         }
 
-        /* Add padding to the search bar for spacing */
+        
         .search-bar {
             margin-bottom: 20px;
         }
 
-        /* Reduce width of Actions column */
+        
         .table th:nth-child(4),
         .table td:nth-child(4) {
             width: 150px;
-            /* Adjust width to fit the buttons */
+            
             text-align: center;
         }
 
-        /* Reduce space between buttons */
+        
         .btn-group .btn {
             margin-right: 5px;
         }
@@ -72,7 +72,7 @@
                             <li><a class="dropdown-item" href="<?= base_url('admin/borrowed-books') ?>"><i class="bx bx-bookmark"></i> View Borrowed Books</a></li>
                         </ul>
                     </li>
-                    <!-- Reports Dropdown Menu -->
+                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bx bx-bar-chart-alt-2"></i> Reports
@@ -237,13 +237,13 @@
             $('#editCategoryForm').on('submit', function(e) {
                 e.preventDefault();
 
-                var formData = $(this).serialize(); // Serialize form data
+                var formData = $(this).serialize(); 
 
                 $.ajax({
                     url: $(this).attr('action'),
                     method: 'POST',
                     data: formData,
-                    dataType: 'json', // Expect JSON response
+                    dataType: 'json', 
                     success: function(response) {
                         if (response.status === 'success') {
                             Swal.fire({
@@ -253,7 +253,7 @@
                                 confirmButtonText: 'OK'
                             }).then(() => {
 
-                                location.reload(); // Reload to reflect changes
+                                location.reload(); 
                             });
                         } else {
                             Swal.fire({

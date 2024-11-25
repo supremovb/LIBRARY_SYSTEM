@@ -71,8 +71,8 @@ abstract class BaseController extends Controller
         $lastActivity = $this->session->get('last_activity') ?? $currentTime;
 
 
-        if ($this->session->get('logged_in') && ($currentTime - $lastActivity) > 1800) { // 30 minutes timeout
-            $this->session->destroy(); // Destroy session
+        if ($this->session->get('logged_in') && ($currentTime - $lastActivity) > 1800) { 
+            $this->session->destroy(); 
 
             header('Location: ' . base_url('/login?session_expired=1'));
             exit;

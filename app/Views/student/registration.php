@@ -17,11 +17,11 @@
     <style>
         body {
             background: url('http://localhost/library_system/assets/login_bg.png') no-repeat center center fixed;
-            /* Set background image with no repeat, centered, and fixed */
+            
             background-size: cover;
-            /* Ensures the image covers the whole screen */
+            
             background-color: #f4f7fc;
-            /* Fallback color */
+            
         }
 
         .registration-container {
@@ -202,7 +202,7 @@
                 $(".flash-message").fadeOut("slow", function() {
                     $(this).remove();
                 });
-            }, 3000); // 5 seconds
+            }, 3000); 
         });
     </script>
 

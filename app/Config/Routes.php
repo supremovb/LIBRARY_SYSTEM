@@ -197,4 +197,151 @@ $routes->get('admin/undefined', 'AdminController::rejectAllTransactions');
 $routes->get('student/view-history', 'TransactionController::view_history');
 
 
+// librarian
+
+$routes->get('librarian/dashboard', 'LibrarianController::dashboard');
+$routes->get('librarian/dashboard', 'LibrarianController::dashboard');
+$routes->get('librarian/add-book', 'LibrarianController::addBook');
+$routes->get('librarian/update-book/(:num)', 'LibrarianController::updateBook/$1');
+$routes->get('librarian/delete-book/(:num)', 'LibrarianController::deleteBook/$1');
+$routes->get('librarian/manage-students', 'LibrarianController::manageStudents');
+
+$routes->get('/librarian/dashboard', 'LibrarianController::dashboard');   // Admin dashboard
+$routes->get('/librarian/add-book', 'LibrarianController::addBook');      // Show form to add a book
+$routes->post('/librarian/store-book', 'LibrarianController::createBook');  // Store the new book
+$routes->get('/librarian/edit-book/(:num)', 'LibrarianController::editBook/$1');  // Edit book form
+$routes->post('/librarian/update-book', 'LibrarianController::updateBookDetails');  // Update book details
+$routes->get('/librarian/delete-book/(:num)', 'LibrarianController::deleteBook/$1');  // Delete book
+
+$routes->post('librarian/create-book', 'LibrarianController::createBook');
+$routes->get('librarian/add-book', 'LibrarianController::addBook');
+$routes->get('/librarian/create-book', 'LibrarianController::addBook');
+
+$routes->get('/librarian/dashboard', 'LibrarianController::dashboard');
+$routes->get('librarian/dashboard', 'LibrarianController::dashboard');
+$routes->get('/librarian/add-book', 'LibrarianController::addBook');
+$routes->post('/librarian/create-book', 'LibrarianController::createBook');
+$routes->get('/librarian/edit-book/(:num)', 'LibrarianController::editBook/$1');
+$routes->post('/librarian/update-book', 'LibrarianController::updateBookDetails');
+$routes->delete('/librarian/delete-book/(:num)', 'LibrarianController::deleteBook/$1');
+$routes->get('librarian/edit-book/(:num)', 'LibrarianController::editBook/$1');
+$routes->post('librarian/update-book', 'LibrarianController::updateBookDetails');
+
+$routes->post('/librarian/delete-book/(:num)', 'LibrarianController::deleteBook/$1');
+
+$routes->delete('librarian/delete-book/(:num)', 'LibrarianController::deleteBook/$1');
+
+$routes->get('librarian/view-books', 'LibrarianController::viewBooks');
+$routes->get('/librarian/view-books', 'LibrarianController::viewBooks');
+
+$routes->get('librarian/view_books', 'LibrarianController::viewBooks');
+$routes->get('/librarian/view_books', 'LibrarianController::viewBooks');
+
+$routes->get('librarian/approve_reject_transactions', 'LibrarianController::approve_reject_transactions');
+
+$routes->get('librarian/edit-book/(:num)', 'LibrarianController::editBook/$1');  // Route for editing book
+
+$routes->get('librarian/create-book', 'LibrarianController::addBook');  // This should load the Add Book form
+$routes->post('librarian/create-book', 'LibrarianController::createBook'); // This should handle form submission
+
+$routes->post('librarian/approveTransaction/(:num)', 'LibrarianController::approveTransaction/$1');
+
+$routes->get('librarian/rejectTransaction/(:num)', 'LibrarianController::rejectTransaction/$1');
+
+$routes->get('librarian/view-profile', 'LibrarianController::viewProfile');
+$routes->post('librarian/update-profile', 'LibrarianController::updateProfile');
+
+$routes->get('librarian_dashboard/add-category', 'LibrarianController::add_Category');
+
+// Route for handling the form submission (POST request)
+$routes->post('librarian/add-category', 'LibrarianController::addCategory');
+
+
+$routes->get('librarian/add-category', 'LibrarianController::add_Category');
+$routes->post('librarian/add-category', 'LibrarianController::addCategory');
+
+$routes->get('librarian_dashboard', 'LibrarianController::dashboard');
+
+
+$routes->get('librarian/categories', 'LibrarianController::categories');
+
+$routes->get('librarian/delete-category/(:num)', 'LibrarianController::deleteCategory/$1');
+
+$routes->get('librarian/edit-category/(:num)', 'LibrarianController::editCategory/$1');
+
+$routes->post('librarian/update-category', 'LibrarianController::updateCategory');
+
+
+$routes->get('librarian/view-users', 'LibrarianController::viewUsers');
+
+$routes->post('librarian/approveAllTransactions', 'LibrarianController::approveAllTransactions');
+
+$routes->post('librarian/rejectAllTransactions', 'LibrarianController::rejectAllTransactions');
+
+$routes->post('librarian/edit-role', 'LibrarianController::editRole');
+
+$routes->get('librarian/edit-role', 'LibrarianController::editRole');
+
+$routes->post('librarian/delete-user', 'LibrarianController::deleteUser');
+
+$routes->post('librarian/delete-category/(:num)', 'LibrarianController::deleteCategory/$1');
+
+$routes->get('/librarian/notifyNearDueBooks', 'LibrarianController::notifyNearDueBooks');
+$routes->get('/librarian/notifyOverdueBooks', 'LibrarianController::notifyOverdueBooks');
+
+$routes->get('librarian/borrowed-books', 'LibrarianController::borrowedBooks');
+
+
+$routes->post('librarian/send-notification-to-overdue', 'NotificationController::sendNotificationToOverdue');
+
+$routes->get('librarian/generate-book-report', 'ReportsController::generateBookReport');
+$routes->get('librarian/generate-user-report', 'ReportsController::generateUserReport');
+$routes->get('librarian/generate-transaction-report', 'ReportsController::generateTransactionReport');
+
+$routes->post('librarian/rejectAllTransactions', 'LibrarianController::rejectAllTransactions');
+
+$routes->get('librarian/rejectAllTransactions', 'LibrarianController::rejectAllTransactions');
+
+// app/Config/Routes.php
+$routes->get('librarian/undefined', 'LibrarianController::rejectAllTransactions');
+
+$routes->get('/librarian/user/logout', 'LibrarianController::logout');
+
+$routes->get('/dashboard', 'LibrarianController::dashboard');
+
+$routes->get('librarian/dashboard', 'LibrarianController::dashboard');
+
+$routes->get('librarian/logout', 'LibrarianController::logout');
+
+$routes->get('/librarian/dashboard', 'LibrarianController::dashboard');
+
+$routes->get('/librarian_dashboard', 'LibrarianController::dashboard');
+
+$routes->get('/librarian_dashboard/edit-book/(:num)', 'LibrarianController::editBook/$1');
+$routes->post('/librarian_dashboard/update-book', 'LibrarianController::updateBookDetails');
+$routes->post('librarian_dashboard/update-book', 'LibrarianController::updateBookDetails');
+$routes->get('/librarian_dashboard/edit-book/(:num)', 'LibrarianController::editBook/$1');  // Edit book form
+$routes->post('/librarian_dashboard/update-book', 'LibrarianController::updateBookDetails');  // Update book details
+$routes->get('librarian_dashboard/edit-book/(:num)', 'LibrarianController::editBook/$1');
+
+$routes->get('librarian/librarian_dashboard', 'LibrarianController::dashboard');
+
+$routes->get('librarian/librarian_dashboard/edit-book/(:num)', 'LibrarianController::editBook/$1');
+
+// Route to handle the book deletion with the book ID
+$routes->post('librarian/librarian/delete-book/(:num)', 'LibrarianController::deleteBook/$1');
+
+$routes->get('NotificationController/updateNotifications', 'NotificationController::updateNotifications');
+$routes->get('NotificationController/unreadCount', 'NotificationController::unreadCount');
+
+$routes->get('NotificationController/fetchNotifications', 'NotificationController::fetchNotifications');
+$routes->post('NotificationController/markAsRead', 'NotificationController::markAsRead');
+
+
+$routes->get('student/get_recommendations/(:num)', 'UserController::get_recommendations/$1');
+
+
+
+
+
 $routes->get('/admin/user/logout', 'AdminController::logout');

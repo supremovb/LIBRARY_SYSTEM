@@ -27,11 +27,11 @@ class AdminController extends BaseController
         $db = \Config\Database::connect();
         $builder = $db->table('transactions');
 
-        // Join tables to get necessary data
+
         $builder->select('transactions.borrow_date, transactions.due_date, transactions.return_date, users.firstname, users.lastname, books.title');
-        $builder->join('users', 'transactions.user_id = users.user_id'); // Join with users table
-        $builder->join('books', 'transactions.book_id = books.book_id'); // Join with books table
-        $builder->where('transactions.status', 'borrowed'); // Only get borrowed books
+        $builder->join('users', 'transactions.user_id = users.user_id');
+        $builder->join('books', 'transactions.book_id = books.book_id');
+        $builder->where('transactions.status', 'borrowed');
 
         $data['borrowedBooks'] = $builder->get()->getResult();
 
@@ -189,9 +189,9 @@ class AdminController extends BaseController
     public function categories()
     {
         $categoryModel = new \App\Models\CategoryModel();
-        $data['categories'] = $categoryModel->findAll(); // Fetch all categories from the database
+        $data['categories'] = $categoryModel->findAll();
 
-        return view('admin/categories', $data); // Load the categories view
+        return view('admin/categories', $data);
     }
 
 
@@ -231,7 +231,7 @@ class AdminController extends BaseController
 
         if (!session()->has('logged_in') || session()->get('role') !== 'admin') {
 
-            return view('errors/unauthorized'); // Create this view to show an unauthorized message
+            return view('errors/unauthorized');
         }
 
         $user_id = $session->get('user_id');
@@ -252,9 +252,9 @@ class AdminController extends BaseController
 
 
         if ($emailVerification && $emailVerification['is_verified'] == 1) {
-            $data['emailVerified'] = true;  // Email is verified
+            $data['emailVerified'] = true;
         } else {
-            $data['emailVerified'] = false; // Email is not verified
+            $data['emailVerified'] = false;
         }
 
 
@@ -297,17 +297,17 @@ class AdminController extends BaseController
 
 
         if (!$emailChanged) {
-            unset($data['email']); // Don't update the email if it's not changed
+            unset($data['email']);
         }
 
 
         if (isset($data['username']) && $currentUser['username'] === $data['username']) {
-            unset($data['username']); // Don't update username if it's not changed
+            unset($data['username']);
         }
 
 
         if (isset($data['student_id']) && $currentUser['student_id'] === $data['student_id']) {
-            unset($data['student_id']); // Don't update username if it's not changed
+            unset($data['student_id']);
         }
 
 
@@ -324,15 +324,15 @@ class AdminController extends BaseController
 
 
         if (!$studentIdChanged) {
-            $validationRules['student_id'] = 'permit_empty'; // Allow student_id to remain unchanged
+            $validationRules['student_id'] = 'permit_empty';
         }
 
         if (!isset($data['username']) || $currentUser['username'] === $data['username']) {
-            $validationRules['username'] = 'permit_empty'; // Allow empty value for username
+            $validationRules['username'] = 'permit_empty';
         }
 
         if (!isset($data['student_id']) || $currentUser['student_id'] === $data['student_id']) {
-            $validationRules['student_id'] = 'permit_empty'; // Allow empty value for username
+            $validationRules['student_id'] = 'permit_empty';
         }
 
         $validation->setRules($validationRules);
@@ -367,7 +367,7 @@ class AdminController extends BaseController
         if (!empty($data['new_password']) && $data['new_password'] === $data['confirm_password']) {
             $data['password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
         } else {
-            unset($data['password']); // Remove password if no change
+            unset($data['password']);
         }
 
         unset($data['new_password'], $data['confirm_password'], $data['role']);
@@ -381,8 +381,8 @@ class AdminController extends BaseController
 
         if ($emailChanged) {
 
-            $verificationToken = bin2hex(random_bytes(32)); // Generate a random token
-            $tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token valid for 1 hour
+            $verificationToken = bin2hex(random_bytes(32));
+            $tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
 
             $otpData = [
@@ -390,7 +390,7 @@ class AdminController extends BaseController
                 'email' => $data['email'],
                 'token' => $verificationToken,
                 'token_expiration' => $tokenExpiration,
-                'type' => 'email_verification' // Distinguish OTP types
+                'type' => 'email_verification'
             ];
 
             if (!$otpModel->save($otpData)) {
@@ -466,7 +466,7 @@ class AdminController extends BaseController
 
 
         $bookModel = new BookModel();
-        $data['books'] = $bookModel->findAll();  // Get all books
+        $data['books'] = $bookModel->findAll();
 
 
         return view('admin/book_list', $data);
@@ -478,7 +478,7 @@ class AdminController extends BaseController
 
         if (!session()->has('logged_in') || session()->get('role') !== 'admin') {
 
-            return view('errors/unauthorized'); // Create this view to show an unauthorized message
+            return view('errors/unauthorized');
         }
 
 
@@ -540,10 +540,10 @@ class AdminController extends BaseController
             $bookModel->skipValidation(false);
 
             if ($inserted) {
-                // Initialize the notification model after the book is inserted
+
                 $notificationModel = new \App\Models\Notification_model();
 
-                // Send notification to all students about new book arrival
+
                 $message = 'A new book "' . $bookData['title'] . '" has arrived. Check it out now!';
                 $notificationModel->sendNotificationToAllStudents($message, 'NEW_ARRIVAL');
 
@@ -571,7 +571,7 @@ class AdminController extends BaseController
         $bookModel = new \App\Models\BookModel();
         $notificationModel = new \App\Models\Notification_model();
 
-        // Get books with near due dates
+
         $nearDueBooks = $bookModel->getNearDueBooks();
 
         foreach ($nearDueBooks as $borrowedBook) {
@@ -592,7 +592,7 @@ class AdminController extends BaseController
         $bookModel = new \App\Models\BookModel();
         $notificationModel = new \App\Models\Notification_model();
 
-        // Get overdue books
+
         $overdueBooks = $bookModel->getOverdueBooks();
 
         foreach ($overdueBooks as $borrowedBook) {
@@ -615,7 +615,7 @@ class AdminController extends BaseController
     {
         $transactionModel = new \App\Models\TransactionModel();
         $bookModel = new \App\Models\BookModel();
-        $dueDate = $this->request->getPost('due_date'); // Get due date from the form
+        $dueDate = $this->request->getPost('due_date');
 
 
         if (empty($dueDate)) {
@@ -725,9 +725,9 @@ class AdminController extends BaseController
 
 
         $builder = $transactionModel->builder();
-        $builder->select('transactions.*, users.firstname, users.lastname, books.title');  // Ensure 'books.title' is selected
+        $builder->select('transactions.*, users.firstname, users.lastname, books.title');
         $builder->join('users', 'users.user_id = transactions.user_id');
-        $builder->join('books', 'books.book_id = transactions.book_id');  // Join with books table
+        $builder->join('books', 'books.book_id = transactions.book_id');
         $builder->where('transactions.status', 'pending');
         $data['pendingTransactions'] = $builder->get()->getResult();
 
@@ -755,7 +755,7 @@ class AdminController extends BaseController
         foreach ($pendingTransactions as $transaction) {
             $book = $bookModel->find($transaction['book_id']);
             if (!$book || $book['quantity'] <= 0) {
-                continue; // Skip if book is not found or out of stock
+                continue;
             }
 
 
@@ -827,7 +827,7 @@ class AdminController extends BaseController
 
 
 
-        return view('admin/book_edit', $data);  // Load the book_edit.php view
+        return view('admin/book_edit', $data);
     }
 
 
@@ -839,7 +839,7 @@ class AdminController extends BaseController
 
         $book_id = $this->request->getPost('book_id');
         $title = $this->request->getPost('title');
-        $isbn = $this->request->getPost('isbn');  // Still get the ISBN but won't validate if unchanged
+        $isbn = $this->request->getPost('isbn');
 
 
         $validationRules = [
@@ -875,8 +875,8 @@ class AdminController extends BaseController
             'author' => $this->request->getPost('author'),
             'published_date' => $this->request->getPost('published_date'),
             'status' => $this->request->getPost('status'),
-            'description' => $this->request->getPost('description'), // Optional field
-            'category_id' => $this->request->getPost('category'), // Update the category_id if provided
+            'description' => $this->request->getPost('description'),
+            'category_id' => $this->request->getPost('category'),
             'quantity' => $this->request->getPost('quantity'),
         ];
 

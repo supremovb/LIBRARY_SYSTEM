@@ -113,7 +113,7 @@
             margin-right: 10px;
         }
 
-        /* Added search input style */
+        
         #searchInput {
             margin-bottom: 20px;
             width: 100%;
@@ -123,7 +123,7 @@
             margin-top: 20px;
         }
 
-        /* Icon styles */
+        
         .search-icon {
             position: absolute;
             left: 10px;
@@ -245,7 +245,7 @@
 
 
         document.getElementById('rejectAllBtn').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault(); 
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -258,10 +258,10 @@
                 cancelButtonColor: '#6c757d',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Log the form's action for debugging
+                    
                     console.log('Form Action:', document.getElementById('rejectAllForm').action);
 
-                    // Submit the form
+                    
                     document.getElementById('rejectAllForm').submit();
                 }
             });

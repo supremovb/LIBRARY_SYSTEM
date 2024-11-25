@@ -6,31 +6,31 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table = 'users';           // Table name
-    protected $primaryKey = 'user_id';    // Primary key column
+    protected $table = 'users';           
+    protected $primaryKey = 'user_id';    
 
     protected $allowedFields = [
         'username',
         'password', 
-        'email',  // Added email field
+        'email',  
         'role', 
         'photo', 
-        'firstname',  // Added firstname
-        'lastname',   // Added lastname
-        'course',     // Added course
-        'year',       // Added year
-        'created_at'  // Created at (handled by timestamps)
-    ]; // Fields allowed for mass assignment
+        'firstname',  
+        'lastname',   
+        'course',     
+        'year',       
+        'created_at'  
+    ]; 
 
-    // Enable automatic timestamps for creation and updates
+    
     protected $useTimestamps = true;
-    protected $createdField  = 'created_at'; // Field for storing creation timestamps
-    protected $updatedField  = 'updated_at'; // Field for storing update timestamps
+    protected $createdField  = 'created_at'; 
+    protected $updatedField  = 'updated_at'; 
 
-    // Validation rules for data integrity
+    
     protected $validationRules = [
         'username'  => 'required|alpha_numeric|min_length[3]|max_length[50]|is_unique[users.username,user_id,{user_id}]',
-        'student_id'=> 'permit_empty|alpha_numeric|min_length[6]|max_length[20]|is_unique[users.student_id,user_id,{user_id}]', // Add validation for student_id
+        'student_id'=> 'permit_empty|alpha_numeric|min_length[6]|max_length[20]|is_unique[users.student_id,user_id,{user_id}]', 
         'password'  => 'required|min_length[6]',
         'role'      => 'required|in_list[admin,student,librarian]',
         'photo'     => 'permit_empty|valid_url',
@@ -38,7 +38,7 @@ class UserModel extends Model
         'lastname'  => 'required|alpha_space|min_length[2]|max_length[50]',
         'course'    => 'required|alpha_space|min_length[2]|max_length[50]',
         'year'      => 'required|alpha_numeric_space|min_length[1]|max_length[20]',
-        'email'     => 'required|valid_email|is_unique[users.email,user_id,{user_id}]' // Added validation for email
+        'email'     => 'required|valid_email|is_unique[users.email,user_id,{user_id}]' 
     ];
     
     protected $validationMessages = [
@@ -98,9 +98,9 @@ class UserModel extends Model
         ],
     ];
     
-    protected $skipValidation = false; // Always validate data before saving
+    protected $skipValidation = false; 
 
-    // Custom methods
+    
     public function findUserByUsername($username)
     {
         return $this->where('username', $username)->first();
@@ -108,36 +108,36 @@ class UserModel extends Model
 
     public function findUserByStudentId($student_id)
     {
-        return $this->where('student_id', $student_id)->first(); // New method to find user by student_id
+        return $this->where('student_id', $student_id)->first(); 
     }
 
     public function verifyPassword($inputPassword, $storedPassword)
     {
-        // Use PHP password hashing for secure comparison
+        
         return password_verify($inputPassword, $storedPassword);
     }
 
     public function createUser(array $data)
     {
-        // Check if username or email already exists
+        
         if ($this->where('username', $data['username'])->first()) {
             log_message('error', 'Username already exists: ' . $data['username']);
-            return false; // Return false if username exists
+            return false; 
         }
 
         if ($this->where('email', $data['email'])->first()) {
             log_message('error', 'Email already exists: ' . $data['email']);
-            return false; // Return false if email exists
+            return false; 
         }
 
-        // Assume the password is already hashed
-        log_message('info', 'Password hash received: ' . $data['password']); // Debugging
         
-        // Attempt to save the user data
-        $db = \Config\Database::connect(); // Get the DB connection
-        $builder = $db->table('users'); // Assume 'users' is your table name
+        log_message('info', 'Password hash received: ' . $data['password']); 
+        
+        
+        $db = \Config\Database::connect(); 
+        $builder = $db->table('users'); 
 
-        // Check if the insert operation succeeds
+        
         $inserted = $builder->insert($data);
         
         if ($inserted) {

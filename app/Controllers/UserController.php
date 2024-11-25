@@ -24,7 +24,7 @@ class UserController extends BaseController
     {
 
 
-        $this->transactionModel = new TransactionModel(); // Initialize the model
+        $this->transactionModel = new TransactionModel(); 
         $this->userModel = new UserModel();
         $this->passwordResetModel = new PasswordResetModel();
         $this->email = \Config\Services::email();
@@ -35,7 +35,7 @@ class UserController extends BaseController
         $bookId = $this->request->getPost('book_id');
         $rating = $this->request->getPost('rating');
         $reviewText = $this->request->getPost('review_text');
-        $userId = session()->get('user_id'); // Assuming user ID is stored in the session
+        $userId = session()->get('user_id'); 
 
         $bookReviewModel = new \App\Models\BookReview();
         $review = $bookReviewModel->createReview($bookId, $userId, $rating, $reviewText);
@@ -90,14 +90,14 @@ class UserController extends BaseController
 
     public function verifyEmail()
     {
-        $token = $this->request->getGet('token'); // Get token from URL
+        $token = $this->request->getGet('token'); 
         $otpModel = new \App\Models\OtpModel();
 
 
         $currentDateTime = date('Y-m-d H:i:s');
         $otpRecord = $otpModel
             ->where('token', $token)
-            ->where('token_expiration >', $currentDateTime) // Token not expired
+            ->where('token_expiration >', $currentDateTime) 
             ->first();
 
         if (!$otpRecord) {
@@ -118,7 +118,7 @@ class UserController extends BaseController
     {
         $session = session();
         log_message('debug', 'Session user_id at verifyOtp: ' . $session->get('user_id'));
-        return view('verify_otp'); // Display the OTP verification form
+        return view('verify_otp'); 
     }
 
 
@@ -127,12 +127,12 @@ class UserController extends BaseController
     {
         $session = session();
         $otpModel = new \App\Models\OtpModel();
-        $userModel = new \App\Models\UserModel();  // User model to delete the user if OTP fails
+        $userModel = new \App\Models\UserModel();  
 
 
-        $currentDateTime = date('Y-m-d H:i:s'); // Current date and time in 'Y-m-d H:i:s' format
+        $currentDateTime = date('Y-m-d H:i:s'); 
 
-        $userId = $session->get('user_id'); // Retrieve user ID from session
+        $userId = $session->get('user_id'); 
         log_message('debug', 'Session User ID: ' . $userId);
 
         if (!$userId) {
@@ -144,7 +144,7 @@ class UserController extends BaseController
 
         $otpRecord = $otpModel
             ->where('user_id', $userId)
-            ->where('otp_expiration >', $currentDateTime) // Compare the full datetime (date and time)
+            ->where('otp_expiration >', $currentDateTime) 
             ->first();
 
 
@@ -152,13 +152,13 @@ class UserController extends BaseController
             log_message('debug', 'OTP expired or invalid for user ID: ' . $userId);
 
 
-            $userModel->delete($userId); // Deletes the user
+            $userModel->delete($userId); 
 
 
             $otpModel->where('user_id', $userId)->delete();
 
             $session->setFlashdata('msg', 'OTP expired or invalid. The user has been deleted.');
-            return redirect()->to('/register');  // Redirect to registration or login page
+            return redirect()->to('/register');  
         }
 
 
@@ -205,7 +205,7 @@ class UserController extends BaseController
      */
     public function sendResetLink()
     {
-        helper(['form', 'session']);  // Ensure session helper is loaded
+        helper(['form', 'session']);  
 
         $rules = [
             'email' => 'required|valid_email'
@@ -243,7 +243,7 @@ class UserController extends BaseController
 
 
             $data = [
-                'firstname' => $user['firstname'], // Passing only the firstname
+                'firstname' => $user['firstname'], 
                 'resetLink' => $resetLink
             ];
 
@@ -289,7 +289,7 @@ class UserController extends BaseController
 
 
         if (strtotime($resetRequest['expires_at']) < time()) {
-            $this->passwordResetModel->delete($resetRequest['id']); // Remove expired token
+            $this->passwordResetModel->delete($resetRequest['id']); 
             return redirect()->to('/login')->with('error', 'The password reset link has expired. Please request a new one.');
         }
 
@@ -350,24 +350,25 @@ class UserController extends BaseController
     {
         $session = session();
 
-
         if ($session->get('logged_in')) {
-
             $currentTime = time();
             $lastActivity = $session->get('last_activity') ?? $currentTime;
 
-            if (($currentTime - $lastActivity) > 1800) { // 30 minutes timeout
-                $session->destroy(); // Destroy the session
+            
+            if (($currentTime - $lastActivity) > 1800) { 
+                $session->destroy(); 
                 $session->setFlashdata('msg', 'Your session has expired. Please log in again.');
                 return redirect()->to('/login');
             }
 
-
+            
             $session->set('last_activity', $currentTime);
 
-
+            
             if ($session->get('role') === 'admin') {
                 return redirect()->to('/admin/dashboard');
+            } elseif ($session->get('role') === 'librarian') {
+                return redirect()->to('/librarian/dashboard'); 
             } else {
                 return redirect()->to('/user/dashboard');
             }
@@ -377,14 +378,25 @@ class UserController extends BaseController
         echo view('login');
     }
 
+
     public function adminDashboard()
     {
         $session = session();
         if ($session->get('role') !== 'admin') {
             return redirect()->to('/login');
         }
-        // Load admin dashboard view
+        
         echo view('admin/dashboard');
+    }
+
+    public function librarianDashboard()
+    {
+        $session = session();
+        if ($session->get('role') !== 'librarian') {
+            return redirect()->to('/login');
+        }
+        
+        echo view('librarian/dashboard');
     }
 
 
@@ -402,7 +414,7 @@ class UserController extends BaseController
 
         $user_id = $session->get('user_id');
         $userModel = new UserModel();
-        $otpModel = new OtpModel();  // Ensure you have an OTP model for interacting with the user_otps table
+        $otpModel = new OtpModel();  
 
 
         $data['user'] = $userModel->find($user_id);
@@ -418,9 +430,9 @@ class UserController extends BaseController
 
 
         if ($emailVerification && $emailVerification['is_verified'] == 1) {
-            $data['emailVerified'] = true;  // Email is verified
+            $data['emailVerified'] = true;  
         } else {
-            $data['emailVerified'] = false; // Email is not verified
+            $data['emailVerified'] = false; 
         }
 
 
@@ -432,7 +444,7 @@ class UserController extends BaseController
     {
         $session = session();
         $userModel = new UserModel();
-        $otpModel = new OtpModel(); // Make sure you have an OTP model for interacting with the user_otps table
+        $otpModel = new OtpModel(); 
 
         if (!$session->get('logged_in') || $session->get('role') != 'student') {
             return redirect()->to('/');
@@ -461,20 +473,20 @@ class UserController extends BaseController
 
 
         if (!$emailChanged) {
-            unset($data['email']); // Don't update the email if it's not changed
+            unset($data['email']); 
         }
 
 
         if (isset($data['username']) && $currentUser['username'] === $data['username']) {
-            unset($data['username']); // Don't update username if it's not changed
+            unset($data['username']); 
         }
 
         if (!isset($data['student_id']) || $currentUser['student_id'] === $data['student_id']) {
-            $validationRules['student_id'] = 'permit_empty'; // Allow empty value for username
+            $validationRules['student_id'] = 'permit_empty'; 
         }
 
         if (isset($data['student_id']) && $currentUser['student_id'] === $data['student_id']) {
-            unset($data['student_id']); // Don't update username if it's not changed
+            unset($data['student_id']); 
         }
 
 
@@ -486,7 +498,7 @@ class UserController extends BaseController
             'lastname'  => 'required|min_length[3]|max_length[100]',
             'username'  => 'required|min_length[3]|max_length[50]',
             'student_id' => 'permit_empty|alpha_numeric|min_length[3]|max_length[20]',
-            'email'     => 'permit_empty|valid_email|max_length[100]',  // Set as permit_empty so we can skip it when not changed
+            'email'     => 'permit_empty|valid_email|max_length[100]',  
             'new_password' => 'permit_empty|min_length[6]|max_length[255]',
             'confirm_password' => 'permit_empty|matches[new_password]',
             'course' => 'required|min_length[3]|max_length[100]',
@@ -494,13 +506,13 @@ class UserController extends BaseController
         ];
 
         if (!isset($data['username']) || $currentUser['username'] === $data['username']) {
-            $validationRules['username'] = 'permit_empty'; // Allow empty value for username if unchanged
+            $validationRules['username'] = 'permit_empty'; 
         }
 
         $validation->setRules($validationRules);
 
         if (!$studentIdChanged) {
-            $validationRules['student_id'] = 'permit_empty'; // Allow student_id to remain unchanged
+            $validationRules['student_id'] = 'permit_empty'; 
         }
 
 
@@ -536,7 +548,7 @@ class UserController extends BaseController
         if (!empty($data['new_password']) && $data['new_password'] === $data['confirm_password']) {
             $data['password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
         } else {
-            unset($data['password']); // Remove password if no change
+            unset($data['password']); 
         }
 
         unset($data['new_password'], $data['confirm_password'], $data['role']);
@@ -557,8 +569,8 @@ class UserController extends BaseController
 
             if ($emailChanged) {
 
-                $verificationToken = bin2hex(random_bytes(32)); // Generate a random token
-                $tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token valid for 1 hour
+                $verificationToken = bin2hex(random_bytes(32)); 
+                $tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour')); 
 
 
                 $otpData = [
@@ -566,7 +578,7 @@ class UserController extends BaseController
                     'email' => $data['email'],
                     'token' => $verificationToken,
                     'token_expiration' => $tokenExpiration,
-                    'type' => 'email_verification' // Optionally add a type field to distinguish OTP types
+                    'type' => 'email_verification' 
                 ];
 
                 if (!$otpModel->save($otpData)) {
@@ -603,7 +615,7 @@ class UserController extends BaseController
 
         $input = trim($this->request->getVar('username'));
         $password = trim($this->request->getVar('password'));
-        $role = trim($this->request->getVar('role')); // Get the role input
+        $role = trim($this->request->getVar('role')); 
 
         if (empty($input) || empty($password) || empty($role)) {
             $session->setFlashdata('msg', 'All fields are required.');
@@ -614,13 +626,13 @@ class UserController extends BaseController
 
         if ($data) {
             if (password_verify($password, $data['password'])) {
-                // Check if the role from the form matches the role from the database
+                
                 if ($data['role'] !== $role) {
                     $session->setFlashdata('msg', 'You are not authorized as the selected role.');
                     return redirect()->to('/login');
                 }
 
-                // Set session data
+                
                 $ses_data = [
                     'user_id' => $data['user_id'],
                     'username' => $data['username'],
@@ -632,21 +644,16 @@ class UserController extends BaseController
                 ];
                 $session->set($ses_data);
 
-                // Redirect based on role
+                
                 if ($role === 'admin') {
-                    // Make sure the user is an admin
-                    if ($data['role'] !== 'admin') {
-                        $session->setFlashdata('msg', 'You are not an admin. You cannot access the admin dashboard.');
-                        return redirect()->to('/login');
-                    }
                     return redirect()->to('/admin/dashboard');
                 } elseif ($role === 'student') {
-                    // Make sure the user is a student
-                    if ($data['role'] !== 'student') {
-                        $session->setFlashdata('msg', 'You are not a student. You cannot access the student dashboard.');
-                        return redirect()->to('/login');
-                    }
                     return redirect()->to('/user/dashboard');
+                } elseif ($role === 'librarian') {
+                    return redirect()->to('/librarian/dashboard'); 
+                } else {
+                    $session->setFlashdata('msg', 'Invalid role selected.');
+                    return redirect()->to('/login');
                 }
             } else {
                 $session->setFlashdata('msg', 'Password is incorrect.');
@@ -661,7 +668,8 @@ class UserController extends BaseController
 
 
 
-    // UserController.php
+
+    
 
     public function dashboard()
     {
@@ -672,36 +680,42 @@ class UserController extends BaseController
 
         if ($session->get('role') == 'admin') {
             return redirect()->to('/admin/dashboard');
+        } elseif (!$session->get('role') == 'librarian') {
+            return redirect()->to('/login');
         } else {
             $bookModel = new BookModel();
             $categoryModel = new CategoryModel();
             $transactionModel = new TransactionModel();
 
-            // Get user ID from the session
+            
             $userId = $session->get('user_id');
 
-            // Get the user's borrowed categories from the transactions table
+            
             $borrowedCategories = $transactionModel->getUserBorrowedCategories($userId);
 
+            
             if (!empty($borrowedCategories)) {
-                // Fetch books that belong to the same categories and are highly rated (rating 3 or more)
-                $data['recommendedBooks'] = $bookModel->getBooksByCategories($borrowedCategories, $userId);
+                $data['relatedBooks'] = $bookModel->getRelatedBooksByCategories($borrowedCategories);
             } else {
-                // If no borrowing history, recommend books based on rating (3 or higher) from all categories
-                $data['recommendedBooks'] = $bookModel->getBooksByCategories([], $userId);  // Empty array for categories
+                $data['relatedBooks'] = [];  
             }
 
-            // Fetch all available books
+            
+            if (!empty($borrowedCategories)) {
+                $data['recommendedBooks'] = $bookModel->getBooksByCategories($borrowedCategories, $userId);
+            } else {
+                $data['recommendedBooks'] = $bookModel->getBooksByCategories([], $userId);  
+            }
+
+            
             $data['books'] = $bookModel->findAll();
 
-            // Fetch all categories for filter
+            
             $data['categories'] = $categoryModel->findAll();
 
             return view('student/dashboard', $data);
         }
     }
-
-
 
     public function myBorrowedBooks()
     {
@@ -748,7 +762,7 @@ class UserController extends BaseController
                 'required',
                 'valid_email',
                 'is_unique[users.email]',
-                'regex_match[/^[a-zA-Z0-9._%+-]+@sdca\.edu\.ph$/]'  // Validate email domain
+                'regex_match[/^[a-zA-Z0-9._%+-]+@sdca\.edu\.ph$/]'  
             ],
             'username' => 'required|alpha_numeric|min_length[3]|max_length[50]|is_unique[users.username]',
             'password' => 'required|min_length[6]',
@@ -764,23 +778,23 @@ class UserController extends BaseController
             $existingUser = $model->where('username', $this->request->getPost('username'))->first();
             if ($existingUser) {
                 $session->setFlashdata('msg', 'The username already exists. Please choose another one.');
-                return redirect()->to('/register')->withInput();  // Preserve the input values
+                return redirect()->to('/register')->withInput();  
             }
 
             $existingEmail = $model->where('email', $this->request->getPost('email'))->first();
             if ($existingEmail) {
                 $session->setFlashdata('msg', 'The email is already registered. Please use a different email address.');
-                return redirect()->to('/register')->withInput();  // Preserve the input values
+                return redirect()->to('/register')->withInput();  
             }
 
-            // Check if email domain is valid before proceeding
+            
             $email = $this->request->getPost('email');
             if (!preg_match('/@sdca\.edu\.ph$/', $email)) {
                 $session->setFlashdata('msg', 'Please register with an email address from the SDCA');
-                return redirect()->to('/register')->withInput();  // Preserve the input values
+                return redirect()->to('/register')->withInput();  
             }
 
-            $student_id = 'SDCA' . strtoupper(bin2hex(random_bytes(2)));  // Generates a random 4-character string like H5J7
+            $student_id = 'SDCA' . strtoupper(bin2hex(random_bytes(2)));  
 
             $data = [
                 'student_id' => $student_id,
@@ -791,18 +805,18 @@ class UserController extends BaseController
                 'course' => $this->request->getPost('course'),
                 'year' => $this->request->getPost('year'),
                 'role' => 'student',
-                'email' => $this->request->getPost('email'),  // Add email
+                'email' => $this->request->getPost('email'),  
             ];
 
             $create = $model->createUser($data);
 
             if ($create) {
-                $session->set('user_id', $model->insertID());  // Store the user ID in the session
+                $session->set('user_id', $model->insertID());  
 
                 $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
                 $otpExpiration = date('Y-m-d H:i:s', strtotime('+10 minutes'));
 
-                $token = bin2hex(random_bytes(16)); // Generate a secure random token
+                $token = bin2hex(random_bytes(16)); 
                 $tokenExpiration = date('Y-m-d H:i:s', strtotime('+10 minutes'));
 
                 $otpData = [
@@ -861,14 +875,14 @@ class UserController extends BaseController
         $history = $transactionModel->select('users.firstname, users.lastname, transactions.borrow_date')
             ->join('users', 'users.user_id = transactions.user_id')
             ->where('transactions.book_id', $book_id)
-            ->orderBy('transactions.borrow_date', 'DESC') // Sorting by borrow date in descending order
+            ->orderBy('transactions.borrow_date', 'DESC') 
             ->findAll();
 
 
         $history = array_map(function ($item) {
             return [
-                'user' => $item['firstname'] . ' ' . $item['lastname'],  // Concatenate firstname and lastname
-                'date' => $item['borrow_date']  // Keep the borrow date as is
+                'user' => $item['firstname'] . ' ' . $item['lastname'],  
+                'date' => $item['borrow_date']  
             ];
         }, $history);
 

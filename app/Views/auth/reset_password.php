@@ -101,7 +101,7 @@
             var confirmPassword = document.getElementById('pass_confirm').value;
 
             if (password !== confirmPassword) {
-                event.preventDefault(); // Prevent the form submission
+                event.preventDefault(); 
                 Swal.fire({
                     icon: 'error',
                     title: 'Passwords do not match',

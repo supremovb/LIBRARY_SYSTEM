@@ -12,13 +12,13 @@
     <style>
         .container {
             margin-top: 100px;
-            /* Increased margin-top for more space at the top */
+            
         }
 
         .form-container {
             max-width: 500px;
             margin: 0 auto;
-            /* Center the form container */
+            
             padding: 20px;
             background-color: #f8f9fa;
             border-radius: 8px;
@@ -59,7 +59,7 @@
                                 <li><a class="dropdown-item" href="<?= base_url('admin/borrowed-books') ?>"><i class="bx bx-bookmark"></i> View Borrowed Books</a></li>
                             </ul>
                         </li>
-                        <!-- Reports Dropdown Menu -->
+                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bx bx-bar-chart-alt-2"></i> Reports
@@ -122,14 +122,14 @@
         <?php if (session()->get('success')): ?>
             Swal.fire({
                 title: 'Success!',
-                text: '<?= session()->get('success'); ?>', // Dynamically use session success message
+                text: '<?= session()->get('success'); ?>', 
                 icon: 'success',
                 confirmButtonText: 'OK'
             });
         <?php elseif (session()->get('error')): ?>
             Swal.fire({
                 title: 'Error!',
-                text: '<?= session()->get('error'); ?>', // Dynamically use session error message
+                text: '<?= session()->get('error'); ?>', 
                 icon: 'error',
                 confirmButtonText: 'Try Again'
             });

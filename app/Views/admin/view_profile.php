@@ -32,15 +32,15 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
 
         .profile-photo {
             width: 200px;
-            /* Increased width */
+            
             height: 200px;
-            /* Increased height */
+            
             object-fit: cover;
             border-radius: 50%;
-            /* Keeps the photo circular */
+            
             cursor: pointer;
             border: 2px solid #ddd;
-            /* Optional: Add a border for aesthetics */
+            
         }
 
         .profile-details {
@@ -239,7 +239,7 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
                 icon: 'success',
                 title: 'Profile Updated',
                 text: 'Your profile has been successfully updated.',
-                timer: 3000, // Auto-close after 3 seconds
+                timer: 3000, 
                 timerProgressBar: true,
             });
         <?php elseif (session()->getFlashdata('error')): ?>
@@ -247,7 +247,7 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
                 icon: 'error',
                 title: 'Update Failed',
                 text: '<?= esc(session()->getFlashdata('error')) ?>',
-                timer: 3000, // Auto-close after 3 seconds
+                timer: 3000, 
                 timerProgressBar: true,
             });
         <?php endif; ?>
@@ -271,16 +271,16 @@ $photoPath = (!empty($photoFileName) && file_exists(ROOTPATH . 'uploads/user_pho
         setTimeout(() => {
             const validationAlert = document.querySelector('.validation-alert');
             if (validationAlert) {
-                validationAlert.classList.remove('show'); // Bootstrap's fade-out effect
-                setTimeout(() => validationAlert.remove(), 500); // Remove from DOM after animation
+                validationAlert.classList.remove('show'); 
+                setTimeout(() => validationAlert.remove(), 500); 
             }
 
             const generalAlert = document.querySelector('.general-alert');
             if (generalAlert) {
-                generalAlert.classList.remove('show'); // Bootstrap's fade-out effect
-                setTimeout(() => generalAlert.remove(), 500); // Remove from DOM after animation
+                generalAlert.classList.remove('show'); 
+                setTimeout(() => generalAlert.remove(), 500); 
             }
-        }, 1000); // Delay in milliseconds
+        }, 1000); 
     </script>
 </body>
 

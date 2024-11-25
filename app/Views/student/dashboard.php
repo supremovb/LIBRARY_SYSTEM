@@ -12,32 +12,32 @@
 
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
     <style>
-        /* Updated Custom Styles */
+        
         .container {
             margin-top: 50px;
         }
 
         .card {
             width: 100%;
-            /* Ensure consistent sizing */
+            
             margin: 0;
-            /* Remove margin to avoid extra spacing */
+            
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            /* Subtle shadow */
+            
             border-radius: 8px;
-            /* Rounded corners */
+            
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            /* Smooth transition for hover effect */
+            
         }
 
         .card:hover {
             transform: scale(1.05);
-            /* Slightly increase the card size */
+            
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            /* More prominent shadow */
+            
         }
 
         .card img {
@@ -50,35 +50,35 @@
         .card-deck {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            /* 4 cards per row */
+            
             gap: 1.5rem;
-            /* Space between cards */
+            
         }
 
         .card-body {
             padding: 1rem;
-            /* Adds padding inside card content */
+            
             text-align: center;
-            /* Centers text for better readability */
+            
         }
 
         .card-title {
             font-size: 1.25rem;
-            /* Slightly larger font for titles */
+            
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
 
         .card-text {
             font-size: 0.9rem;
-            /* Makes the text smaller to fit details */
+            
             color: #555;
-            /* Subtle color for better contrast */
+            
         }
 
         .modal-content {
             background-color: rgba(255, 255, 255, 0.9);
-            /* Semi-transparent */
+            
         }
 
         .modal-body img {
@@ -151,7 +151,7 @@
             color: gold;
         }
 
-        /* Additional styling to ensure the cards are responsive */
+        
         @media (max-width: 768px) {
             .card-deck {
                 grid-template-columns: repeat(2, 1fr);
@@ -164,16 +164,24 @@
             }
         }
 
-        /* Additional padding for Recommended Books */
+        
         #recommendedBooksList {
             margin-top: 20px;
-            /* Add some space between the heading and the deck */
+            
             position: relative;
             top: 20px;
-            /* Move the card deck slightly down from the heading */
+            
         }
 
-        /* Back to top button styles */
+        #relatedBooksList {
+            margin-top: 20px;
+            
+            position: relative;
+            top: 20px;
+            
+        }
+
+        
         #backToTopBtn {
             position: fixed;
             bottom: 30px;
@@ -185,7 +193,7 @@
             padding: 15px;
             font-size: 24px;
             display: none;
-            /* Hidden by default */
+            
             cursor: pointer;
             z-index: 1000;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -201,12 +209,12 @@
 
         #backToTop:hover {
             transform: scale(1.1);
-            /* Slightly enlarge on hover */
+            
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            /* Bigger shadow on hover */
+            
         }
 
-        /* Back to top button styles */
+        
         #scrollToRecommendedBtn {
             position: fixed;
             bottom: 30px;
@@ -218,7 +226,7 @@
             padding: 15px;
             font-size: 24px;
             display: none;
-            /* Hidden by default */
+            
             cursor: pointer;
             z-index: 1000;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -234,9 +242,32 @@
 
         #scrollToRecommended:hover {
             transform: scale(1.1);
-            /* Slightly enlarge on hover */
+            
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            /* Bigger shadow on hover */
+            
+        }
+
+        #feedbackButton {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #feedbackButton:hover {
+            background-color: #0056b3;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -258,7 +289,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('student/book-reviews') ?>"><i class="bx bx-book"></i> Book Reviews</a>
                 </li>
-                <!-- Navbar -->
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="bx bx-bell"></i> Notifications
@@ -266,7 +297,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right p-3" aria-labelledby="notificationDropdown" style="max-height: 400px; overflow-y: auto; width: 300px;">
                         <ul id="notificationList" class="list-group list-group-flush">
-                            <!-- Notifications will be dynamically loaded here -->
+                            
                         </ul>
                     </div>
 
@@ -340,13 +371,13 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <!-- Recommended Books -->
-        <!-- Recommended Books -->
+        
+        
         <div id="recommendedBooksList">
-            <h4><i class="bx bx-bookmark"></i> Recommended Books</h4>
+            <h4><i class="bx bx-bookmark"></i> Recommended Books Based on Rating</h4>
             <div class="card-deck">
                 <?php foreach ($recommendedBooks as $book): ?>
-                    <!-- Ensure the book has a rating of 3 or more -->
+                    
                     <?php if (isset($book->avg_rating) && $book->avg_rating >= 3): ?>
                         <div class="card">
                             <img src="<?= base_url('uploads/books/' . esc($book->photo)) ?>" class="card-img-top" alt="<?= esc($book->title) ?>">
@@ -360,6 +391,22 @@
                 <?php endforeach; ?>
             </div>
         </div>
+
+        <div id="relatedBooksList">
+            <h4><i class="bx bx-bookmark"></i> Related Books Based on Borrower History</h4>
+            <div class="card-deck">
+                <?php foreach ($relatedBooks as $book): ?>
+                    <div class="card">
+                        <img src="<?= base_url('uploads/books/' . esc($book->photo)) ?>" class="card-img-top" alt="<?= esc($book->title) ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= esc($book->title) ?></h5>
+                            <p class="card-text"><?= esc($book->author) ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
 
         <div class="modal fade" id="bookDetailsModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -384,7 +431,7 @@
             </div>
         </div>
 
-        <!-- Modal for creating a review -->
+        
         <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -407,17 +454,24 @@
             </div>
         </div>
 
-        <!-- Back to Top Button -->
+        
         <a href="#" id="backToTop" class="btn" style="display: none; position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 50px; height: 50px; background: linear-gradient(135deg, #4e73df, #1a5ab1); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); font-size: 24px; transition: all 0.3s ease-in-out; border: none;">
             <i class="bx bx-up-arrow-alt"></i>
         </a>
 
-        <!-- Scroll to Recommended Books Button -->
+        
         <button id="scrollToRecommended" class="btn" style="display: none; position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 50px; height: 50px; background: linear-gradient(135deg, #4e73df, #1a5ab1); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); font-size: 24px; transition: all 0.3s ease-in-out; border: none;">
             <i class="bx bx-down-arrow-alt"></i>
         </button>
 
-
+        
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=supremopkv@gmail.com"
+            id="feedbackButton"
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener">
+            <i class="fas fa-envelope"></i> Report Issues
+        </a>
 
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -425,13 +479,13 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <script>
-            // Show the "Scroll to Recommended Books" button when at the top of the page
+            
             window.onscroll = function() {
-                // Get the scroll position and button element
+                
                 var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
                 var scrollToRecommended = document.getElementById("scrollToRecommended");
 
-                // Show the button if scrolled to the top
+                
                 if (scrollPosition === 0) {
                     scrollToRecommended.style.display = "block";
                 } else {
@@ -439,12 +493,12 @@
                 }
             };
 
-            // Scroll to the Recommended Books section when the button is clicked
+            
             document.getElementById("scrollToRecommended").addEventListener("click", function() {
-                // Get the Recommended Books section
+                
                 var recommendedBooksSection = document.getElementById("recommendedBooksList");
 
-                // Scroll to the Recommended Books section smoothly
+                
                 recommendedBooksSection.scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -453,17 +507,17 @@
 
 
         <script>
-            // Show the back to top button when scrolling down
+            
             window.addEventListener("scroll", function() {
                 let button = document.getElementById("backToTop");
                 if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                    button.style.display = "flex"; // Show button
+                    button.style.display = "flex"; 
                 } else {
-                    button.style.display = "none"; // Hide button
+                    button.style.display = "none"; 
                 }
             });
 
-            // Smooth scroll to the top when the button is clicked
+            
             document.getElementById("backToTop").addEventListener("click", function(e) {
                 e.preventDefault();
                 window.scrollTo({
@@ -482,7 +536,7 @@
                         method: 'GET',
                         dataType: 'json',
                         success: function(response) {
-                            // Update notification list
+                            
                             const notificationList = $("#notificationList");
                             notificationList.empty();
 
@@ -495,7 +549,7 @@
                                 notificationList.append(listItem);
                             });
 
-                            // Update unread count
+                            
                             const notificationCount = $("#notificationCount");
                             if (response.unread_count > 0) {
                                 notificationCount.text(response.unread_count).show();
@@ -509,12 +563,12 @@
                     });
                 }
 
-                // Trigger notification update when dropdown is clicked
+                
                 $("#notificationDropdown").on('click', function() {
                     updateNotifications();
                 });
 
-                // Initial update on page load
+                
                 updateNotifications();
             });
 
@@ -535,36 +589,74 @@
 
         <script>
             $(document).ready(function() {
-                // Fetch unread notifications count
+                
                 function fetchNotificationCount() {
-                    $.get("<?= base_url('notification/unread-count') ?>", function(data) {
-                        $('#notificationCount').text(data.unread_count || '');
+                    $.ajax({
+                        url: '<?= base_url("NotificationController/unreadCount") ?>',
+                        method: 'GET',
+                        success: function(response) {
+                            const count = response.unread_count || 0;
+                            const notificationBadge = $('#notificationCount');
+                            if (count > 0) {
+                                notificationBadge.text(count).show();
+                            } else {
+                                notificationBadge.hide();
+                            }
+                        },
+                        error: function() {
+                            console.error("Failed to fetch notification count.");
+                        }
                     });
                 }
 
-                // Load notifications into the dropdown
+                
+                function fetchNotifications() {
+                    $.ajax({
+                        url: '<?= base_url("NotificationController/fetchNotifications") ?>',
+                        method: 'GET',
+                        success: function(notifications) {
+                            const notificationList = $('#notificationList');
+                            notificationList.empty();
+
+                            if (notifications.length > 0) {
+                                notifications.forEach(notification => {
+                                    const listItem = `
+                            <li class="list-group-item">
+                                <strong>${notification.type}</strong>: ${notification.message}
+                                <small class="text-muted d-block">${new Date(notification.created_at).toLocaleString()}</small>
+                            </li>`;
+                                    notificationList.append(listItem);
+                                });
+                            } else {
+                                notificationList.append('<li class="list-group-item text-center">No notifications found</li>');
+                            }
+                        },
+                        error: function() {
+                            console.error("Failed to fetch notifications.");
+                        }
+                    });
+                }
+
+                
                 $('#notificationDropdown').on('click', function() {
-                    const notificationList = $('#notificationList');
-                    $.get("<?= base_url('notification/fetch-notifications') ?>", function(notifications) {
-                        notificationList.empty();
-                        if (notifications.length > 0) {
-                            notifications.forEach(notification => {
-                                const listItem = `
-                        <li class="list-group-item">
-                            <strong>${notification.type}</strong>: ${notification.message}
-                            <small class="text-muted d-block">${new Date(notification.created_at).toLocaleString()}</small>
-                        </li>`;
-                                notificationList.append(listItem);
-                            });
-                        } else {
-                            notificationList.append('<li class="list-group-item text-center">No notifications found</li>');
+                    fetchNotifications();
+                    $.ajax({
+                        url: '<?= base_url("NotificationController/markAsRead") ?>',
+                        method: 'POST',
+                        success: function() {
+                            fetchNotificationCount(); 
+                        },
+                        error: function() {
+                            console.error("Failed to mark notifications as read.");
                         }
                     });
                 });
 
-                // Fetch notification count periodically
+                
                 fetchNotificationCount();
-                setInterval(fetchNotificationCount, 30000); // Update every 30 seconds
+
+                
+                setInterval(fetchNotificationCount, 30000); 
             });
         </script>
 
@@ -651,7 +743,7 @@
                             `;
                                     });
                                     recommendationsHtml += '</div>';
-                                    $('#recommendations').html(recommendationsHtml); // Update the recommendations section
+                                    $('#recommendations').html(recommendationsHtml); 
                                 } else {
                                     $('#recommendations').html('<p>No recommendations available at the moment.</p>');
                                 }
@@ -688,13 +780,13 @@
                                 book_id: bookId
                             },
                             success: function(response) {
-                                if (response.status === 'success') { // Check for 'status' instead of 'success'
+                                if (response.status === 'success') { 
                                     Swal.fire('Success', response.message, 'success').then(() => {
-                                        location.reload(); // Automatically refresh the page
+                                        location.reload(); 
                                     });
                                     $('#bookDetailsModal').modal('hide');
                                 } else {
-                                    Swal.fire('Error', response.message, 'error'); // Display the error message from response
+                                    Swal.fire('Error', response.message, 'error'); 
                                 }
                             },
                             error: function() {
@@ -709,19 +801,19 @@
                 var rating = $(this).data('rating');
                 var bookId = $(this).closest('.card').find('.book-image').data('id');
 
-                // Build the rating text with star icons
+                
                 var starIcons = '';
                 for (var i = 1; i <= rating; i++) {
-                    starIcons += '<i class="fa fa-star text-warning"></i>'; // Using Font Awesome star icons
+                    starIcons += '<i class="fa fa-star text-warning"></i>'; 
                 }
 
-                // Update the modal with the selected rating (only stars)
+                
                 $('#selectedRating').html(starIcons);
 
-                // Open modal to submit a review
+                
                 $('#reviewModal').modal('show');
 
-                // Store rating for review submission
+                
                 $('#reviewModal').data('rating', rating);
                 $('#reviewModal').data('bookId', bookId);
             });
@@ -730,10 +822,10 @@
 
 
             $(document).ready(function() {
-                // Hover effect for stars
+                
                 $(document).on('mouseover', '.stars i', function() {
                     var rating = $(this).data('rating');
-                    // Loop through siblings and only add the hover effect for stars that are less than or equal to the hovered rating
+                    
                     $(this).siblings().each(function(index) {
                         if (index < rating) {
                             $(this).addClass('hover');
@@ -741,24 +833,24 @@
                             $(this).removeClass('hover');
                         }
                     });
-                    // Also highlight the current star
+                    
                     $(this).addClass('hover');
                 });
 
-                // Reset hover effect when mouse leaves
+                
                 $(document).on('mouseout', '.stars', function() {
                     $(this).find('i').removeClass('hover');
                 });
 
-                // Handle click to rate a book
+                
                 $(document).on('click', '.stars i', function() {
                     var rating = $(this).data('rating');
                     var bookId = $(this).closest('.card').find('.book-image').data('id');
 
-                    // Open modal to submit a review
+                    
                     $('#reviewModal').modal('show');
 
-                    // Store rating for review submission
+                    
                     $('#reviewModal').data('rating', rating);
                     $('#reviewModal').data('bookId', bookId);
                 });

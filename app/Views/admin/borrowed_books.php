@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrowed Books</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- SweetAlert CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                             <a class="dropdown-item" href="<?= base_url('admin/borrowed-books') ?>"><i class="bx bx-bookmark"></i> View Borrowed Books</a>
                         </div>
                     </li>
-                    <!-- Reports Dropdown Menu -->
+                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bx bx-bar-chart-alt-2"></i> Reports
@@ -77,12 +77,12 @@
     <div class="container mt-5">
         <h2 class="text-center mb-4">Borrowed Books</h2>
         <div class="text-center mb-3">
-            <!-- Button to Send Notifications -->
+            
             <button id="sendNotificationButton" class="btn btn-danger">Send Notifications to Overdue Students</button>
         </div>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
-                <!-- Table content here -->
+                
             </table>
         </div>
         <div class="table-responsive">
@@ -131,13 +131,13 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- SweetAlert JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <script>
-        // Handle "View Details" button click
+        
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', function() {
                 const title = this.dataset.title;
@@ -171,7 +171,7 @@
                 cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Make an AJAX request to send notifications
+                    
                     fetch('<?= base_url('admin/send-notification-to-overdue') ?>', {
                             method: 'POST',
                         })
@@ -180,12 +180,12 @@
                             if (data.success) {
                                 Swal.fire('Success!', 'Notifications sent to overdue students.', 'success');
                             } else {
-                                // Handle the case when there are no overdue books
+                                
                                 Swal.fire('No Overdue Books', data.message, 'info');
                             }
                         })
                         .catch(error => {
-                            // Handle network or other errors
+                            
                             Swal.fire('Error!', 'There was an issue sending notifications.', 'error');
                         });
                 }

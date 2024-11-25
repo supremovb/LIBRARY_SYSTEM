@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Models\UserModel;  // Add UserModel
-use App\Models\BookModel;  // Add BookModel
+use App\Models\UserModel;  
+use App\Models\BookModel;  
 
 class TransactionModel extends Model
 {
-    protected $table = 'transactions';  // Table name
-    protected $primaryKey = 'transaction_id'; // Primary key column
+    protected $table = 'transactions';  
+    protected $primaryKey = 'transaction_id'; 
 
     protected $allowedFields = [
         'book_id',
@@ -17,29 +17,29 @@ class TransactionModel extends Model
         'borrow_date',
         'return_date',
         'due_date',
-        'remarks', // Including due_date in allowed fields
+        'remarks', 
         'status'
     ];
 
-    // Enable automatic timestamps for creation and updates
+    
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Validation rules for data integrity
+    
     protected $validationRules = [
         'book_id'     => 'required|is_natural_no_zero',
         'user_id'     => 'required|is_natural_no_zero',
         'borrow_date' => 'required|valid_date',
         'return_date' => 'permit_empty|valid_date',
         'due_date'    => 'permit_empty|valid_date',
-        'remarks'     => 'permit_empty|string',  // Validate remarks (optional)
+        'remarks'     => 'permit_empty|string',  
         'status'      => 'required|in_list[borrowed,returned,pending,rejected]'
     ];
 
-    // TransactionModel.php
-    // TransactionModel.php
+    
+    
 
     public function getUserBorrowedCategories($userId)
     {
@@ -67,8 +67,8 @@ class TransactionModel extends Model
                 'COALESCE(users.lastname, "") as lastname',
                 'COALESCE(books.title, "No Title") as title'
             ])
-            ->join('users', 'users.user_id = transactions.user_id', 'left')  // Make sure user_id is correct
-            ->join('books', 'books.book_id = transactions.book_id', 'left')  // Ensure book_id is correct
+            ->join('users', 'users.user_id = transactions.user_id', 'left')  
+            ->join('books', 'books.book_id = transactions.book_id', 'left')  
             ->where('transactions.status', 'pending');
 
         if ($user_id !== null) {
@@ -82,17 +82,17 @@ class TransactionModel extends Model
 
     public function showPendingTransactions($user_id = null)
     {
-        // Get the pending transactions from the model
+        
         $pendingTransactions = $this->getPendingTransactions($user_id);
 
-        // Debug: Log the query result for pending transactions
+        
         if (empty($pendingTransactions)) {
             log_message('debug', 'No pending transactions found.');
         } else {
             log_message('debug', 'Pending Transactions: ' . print_r($pendingTransactions, true));
         }
 
-        // Pass the transactions to the view
+        
         return view('admin/approve_reject_transactions', ['pendingTransactions' => $pendingTransactions]);
     }
 
@@ -102,7 +102,7 @@ class TransactionModel extends Model
             ->where('due_date <', date('Y-m-d'))
             ->findAll();
 
-        // Debug: log the results to check
+        
         log_message('error', 'Overdue books: ' . print_r($overdueBooks, true));
 
         return $overdueBooks;
@@ -110,7 +110,7 @@ class TransactionModel extends Model
 
 
 
-    // Additional method to fetch overdue transactions based on current date and due date
+    
     public function getOverdueTransactions()
     {
         return $this->where('due_date <', date('Y-m-d'))

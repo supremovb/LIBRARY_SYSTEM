@@ -128,7 +128,7 @@
 
                     $('#imagePreview').attr('src', event.target.result);
                     $('#imageFilename').text('Filename: ' + file.name);
-                    $('#imagePreviewContainer').show(); // Display the preview container
+                    $('#imagePreviewContainer').show(); 
                 };
                 reader.readAsDataURL(file);
             }
@@ -150,7 +150,7 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    $('.loading').removeClass('show'); // Hide loading spinner
+                    $('.loading').removeClass('show'); 
 
                     if (response.status === 'success') {
                         Swal.fire(
@@ -169,7 +169,7 @@
                     }
                 },
                 error: function() {
-                    $('.loading').removeClass('show'); // Hide loading spinner
+                    $('.loading').removeClass('show'); 
                     Swal.fire(
                         'Oops!',
                         'Something went wrong, please try again.',

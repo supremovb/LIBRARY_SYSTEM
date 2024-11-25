@@ -73,7 +73,7 @@
                         </div>
                     </li>
 
-                    <!-- Reports Dropdown Menu -->
+                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bx bx-bar-chart-alt-2"></i> Reports
@@ -232,7 +232,7 @@
                                     title: 'Deleted!',
                                     text: 'The user has been deleted.'
                                 }).then(() => {
-                                    location.reload(); // Reload the page to reflect the change
+                                    location.reload(); 
                                 });
                             } else {
                                 Swal.fire({

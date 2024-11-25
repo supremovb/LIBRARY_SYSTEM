@@ -84,7 +84,7 @@
                     <a href="<?= base_url('student/book-reviews') ?>" class="nav-link"><i class="bx bx-comment"></i> Book Reviews</a>
                 </li>
 
-                <!-- Navbar -->
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="bx bx-bell"></i> Notifications
@@ -92,7 +92,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right p-3" aria-labelledby="notificationDropdown" style="max-height: 400px; overflow-y: auto; width: 300px;">
                         <ul id="notificationList" class="list-group list-group-flush">
-                            <!-- Notifications will be dynamically loaded here -->
+                            
                         </ul>
                     </div>
 
@@ -120,7 +120,7 @@
     </nav>
 
     <div class="container">
-        <!-- Check if borrowed books exist -->
+        
         <?php if (empty($borrowed)): ?>
             <div class="no-books-message">
                 <p>You have no borrowed books at the moment.</p>
@@ -168,7 +168,7 @@
                     method: 'GET',
                     dataType: 'json',
                     success: function(response) {
-                        // Update notification list
+                        
                         const notificationList = $("#notificationList");
                         notificationList.empty();
 
@@ -181,7 +181,7 @@
                             notificationList.append(listItem);
                         });
 
-                        // Update unread count
+                        
                         const notificationCount = $("#notificationCount");
                         if (response.unread_count > 0) {
                             notificationCount.text(response.unread_count).show();
@@ -195,48 +195,86 @@
                 });
             }
 
-            // Trigger notification update when dropdown is clicked
+            
             $("#notificationDropdown").on('click', function() {
                 updateNotifications();
             });
 
-            // Initial update on page load
+            
             updateNotifications();
         });
     </script>
 
     <script>
         $(document).ready(function() {
-            // Fetch unread notifications count
+            
             function fetchNotificationCount() {
-                $.get("<?= base_url('notification/unread-count') ?>", function(data) {
-                    $('#notificationCount').text(data.unread_count || '');
+                $.ajax({
+                    url: '<?= base_url("NotificationController/unreadCount") ?>',
+                    method: 'GET',
+                    success: function(response) {
+                        const count = response.unread_count || 0;
+                        const notificationBadge = $('#notificationCount');
+                        if (count > 0) {
+                            notificationBadge.text(count).show();
+                        } else {
+                            notificationBadge.hide();
+                        }
+                    },
+                    error: function() {
+                        console.error("Failed to fetch notification count.");
+                    }
                 });
             }
 
-            // Load notifications into the dropdown
+            
+            function fetchNotifications() {
+                $.ajax({
+                    url: '<?= base_url("NotificationController/fetchNotifications") ?>',
+                    method: 'GET',
+                    success: function(notifications) {
+                        const notificationList = $('#notificationList');
+                        notificationList.empty();
+
+                        if (notifications.length > 0) {
+                            notifications.forEach(notification => {
+                                const listItem = `
+                            <li class="list-group-item">
+                                <strong>${notification.type}</strong>: ${notification.message}
+                                <small class="text-muted d-block">${new Date(notification.created_at).toLocaleString()}</small>
+                            </li>`;
+                                notificationList.append(listItem);
+                            });
+                        } else {
+                            notificationList.append('<li class="list-group-item text-center">No notifications found</li>');
+                        }
+                    },
+                    error: function() {
+                        console.error("Failed to fetch notifications.");
+                    }
+                });
+            }
+
+            
             $('#notificationDropdown').on('click', function() {
-                const notificationList = $('#notificationList');
-                $.get("<?= base_url('notification/fetch-notifications') ?>", function(notifications) {
-                    notificationList.empty();
-                    if (notifications.length > 0) {
-                        notifications.forEach(notification => {
-                            const listItem = `
-                        <li class="list-group-item">
-                            <strong>${notification.type}</strong>: ${notification.message}
-                            <small class="text-muted d-block">${new Date(notification.created_at).toLocaleString()}</small>
-                        </li>`;
-                            notificationList.append(listItem);
-                        });
-                    } else {
-                        notificationList.append('<li class="list-group-item text-center">No notifications found</li>');
+                fetchNotifications();
+                $.ajax({
+                    url: '<?= base_url("NotificationController/markAsRead") ?>',
+                    method: 'POST',
+                    success: function() {
+                        fetchNotificationCount(); 
+                    },
+                    error: function() {
+                        console.error("Failed to mark notifications as read.");
                     }
                 });
             });
 
-            // Fetch notification count periodically
+            
             fetchNotificationCount();
-            setInterval(fetchNotificationCount, 30000); // Update every 30 seconds
+
+            
+            setInterval(fetchNotificationCount, 30000); 
         });
     </script>
 

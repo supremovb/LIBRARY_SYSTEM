@@ -6,8 +6,8 @@ use CodeIgniter\Model;
 
 class BookModel extends Model
 {
-    protected $table = 'books';              // Table name
-    protected $primaryKey = 'book_id';       // Primary key column
+    protected $table = 'books';              
+    protected $primaryKey = 'book_id';       
 
     protected $allowedFields = [
         'title',
@@ -18,29 +18,29 @@ class BookModel extends Model
         'status',
         'photo',
         'category_id',
-        'quantity' // Added the quantity field here
-    ]; // Fields allowed for mass assignment
+        'quantity' 
+    ]; 
 
-    // Enable automatic timestamps if needed (e.g., for created_at/updated_at fields)
+    
     protected $useTimestamps = true;
-    protected $createdField  = 'created_at'; // Field to store the creation timestamp
-    protected $updatedField  = 'updated_at'; // Field to store the update timestamp
-    // protected $deletedField  = 'deleted_at'; // Soft delete field (optional)
+    protected $createdField  = 'created_at'; 
+    protected $updatedField  = 'updated_at'; 
+    
 
-    // Validation rules for data
+    
     protected $validationRules = [
         'title'          => 'required|min_length[3]|max_length[255]',
-        'description'    => 'permit_empty|max_length[2000]', // Validation for description
+        'description'    => 'permit_empty|max_length[2000]', 
         'author'         => 'required|min_length[3]|max_length[255]',
         'isbn'           => 'required|min_length[10]|max_length[13]',
         'published_date' => 'required|valid_date',
         'status'         => 'in_list[available,borrowed,pending]',
         'photo'          => 'permit_empty|mime_in[photo,image/jpg,image/jpeg,image/png]|max_size[photo,2048]',
         'category_id'    => 'required|is_not_unique[categories.category_id]',
-        'quantity'       => 'required|integer|min_length[1]' // Validation for quantity
+        'quantity'       => 'required|integer|min_length[1]' 
     ];
 
-    // Validation messages for errors
+    
     protected $validationMessages = [
         'title' => [
             'required'   => 'The book title is required.',
@@ -79,67 +79,89 @@ class BookModel extends Model
         ],
     ];
 
-    protected $skipValidation = false; // Validation will always run before saving/updating data
+    protected $skipValidation = false; 
 
-    // Custom Method: Get books by category
+    
     public function get_books_by_category($category_id)
     {
         return $this->where('category_id', $category_id)->findAll();
     }
 
-    // BookModel.php
+    
 
     public function getBooksByCategories($categories, $userId)
     {
         $builder = $this->db->table('books')
             ->select('books.*, AVG(book_review.rating) as avg_rating')
-            ->join('book_review', 'books.book_id = book_review.book_id', 'left') // Join book_reviews table
-            ->groupBy('books.book_id');  // Group by book_id to calculate average rating
+            ->join('book_review', 'books.book_id = book_review.book_id', 'left') 
+            ->groupBy('books.book_id');  
 
-        // If there are borrowed categories, filter by those
+        
         if (!empty($categories)) {
             $builder->whereIn('books.category_id', array_column($categories, 'category_id'));
         }
 
-        // Always filter for books with a rating of 3 or more
+        
         $builder->having('avg_rating >=', 3)
-            ->orderBy('avg_rating', 'DESC');  // Order by rating if available
+            ->orderBy('avg_rating', 'DESC');  
 
-        // Attempt to get the results
+        
         $query = $builder->get();
 
-        // Check if the query was successful
+        
         if ($query !== false) {
-            return $query->getResult();  // Return the result if successful
+            return $query->getResult();  
         } else {
-            // Log the error or handle failure gracefully
+            
             log_message('error', 'Query failed: ' . $this->db->getLastQuery());
-            return [];  // Return an empty array or handle the error accordingly
+            return [];  
+        }
+    }
+
+    public function getRelatedBooksByCategories($categories)
+    {
+        
+        if (empty($categories)) {
+            return [];
+        }
+
+        $builder = $this->db->table('books')
+            ->select('books.*')
+            ->whereIn('books.category_id', array_column($categories, 'category_id'))
+            ->orderBy('books.title', 'ASC'); 
+
+        
+        $query = $builder->get();
+
+        
+        if ($query !== false) {
+            return $query->getResult();  
+        } else {
+            
+            log_message('error', 'Query failed: ' . $this->db->getLastQuery());
+            return [];  
         }
     }
 
 
-
-
-
-    // Custom Method: Get books by status
+    
     public function get_books_by_status($status)
     {
         return $this->where('status', $status)->findAll();
     }
 
-    // Get borrowed books with near due dates (e.g., within 3 days)
+    
     public function getNearDueBooks()
     {
         $db = \Config\Database::connect();
-        $builder = $db->table('borrowed_books'); // Assuming this is the table storing borrowed books
+        $builder = $db->table('borrowed_books'); 
         $builder->join('users', 'users.user_id = borrowed_books.user_id');
         $builder->where('borrowed_books.due_date <=', date('Y-m-d', strtotime('+3 days')));
         $builder->where('borrowed_books.due_date >=', date('Y-m-d'));
         return $builder->get()->getResult();
     }
 
-    // Get overdue books
+    
     public function getOverdueBooks()
     {
         $db = \Config\Database::connect();

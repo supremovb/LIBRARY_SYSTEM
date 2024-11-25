@@ -33,7 +33,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 30px;
-            /* Adds space between the cards */
+            
         }
 
         .creator-card {
@@ -85,7 +85,7 @@
             color: #0056b3;
         }
 
-        /* Modal Styles */
+        
         .modal-content {
             border-radius: 10px;
         }
@@ -94,9 +94,9 @@
             width: 100%;
             height: auto;
             max-width: 300px;
-            /* Adjust for a better view inside modal */
+            
             border-radius: 50%;
-            /* Ensure circular shape in modal */
+            
             object-fit: cover;
         }
     </style>

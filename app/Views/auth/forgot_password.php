@@ -84,7 +84,7 @@
                                 text: '<?= session()->getFlashdata('success'); ?>',
                                 confirmButtonText: 'OK'
                             }).then(() => {
-                                window.location.href = "<?= base_url('/login') ?>"; // Redirect to login
+                                window.location.href = "<?= base_url('/login') ?>"; 
                             });
                         </script>
                     <?php endif; ?>
@@ -143,7 +143,7 @@
                 text: '<?= session()->getFlashdata('success'); ?>',
                 confirmButtonText: 'OK'
             }).then(() => {
-                window.location.href = "<?= base_url('/login') ?>"; // Redirect to login page after showing the alert
+                window.location.href = "<?= base_url('/login') ?>"; 
             });
         </script>
     <?php endif; ?>
@@ -164,7 +164,7 @@
         window.onload = function() {
             history.pushState(null, null, window.location.href);
             window.onpopstate = function() {
-                history.go(1); // Push forward to prevent going back
+                history.go(1); 
             };
         };
     </script>

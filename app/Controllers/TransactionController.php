@@ -20,22 +20,24 @@ class TransactionController extends BaseController
 
     public function view_history()
     {
-        // Fetch the logged-in user's ID
+        
         $userId = session()->get('user_id');
 
-        // Load the models
+        
         $transactionModel = new TransactionModel();
         $bookModel = new BookModel();
 
-        // Get all transactions for the logged-in user, including book titles
+        
         $transactions = $transactionModel->select('transactions.*, books.title')
             ->join('books', 'transactions.book_id = books.book_id', 'left')
             ->where('transactions.user_id', $userId)
+            ->orderBy('transactions.borrow_date', 'DESC') 
             ->findAll();
 
-        // Pass data to the view
+        
         return view('student/view_history', ['transactions' => $transactions]);
     }
+
 
     public function borrow()
     {
@@ -74,7 +76,7 @@ class TransactionController extends BaseController
             'book_id' => $book_id,
             'user_id' => $user_id,
             'borrow_date' => date('Y-m-d'),
-            'status' => 'pending', // Set to pending
+            'status' => 'pending', 
         ];
 
         if ($this->transactionModel->insert($data)) {
@@ -95,8 +97,8 @@ class TransactionController extends BaseController
             'book_id' => $this->request->getPost('book_id'),
             'borrow_date' => $this->request->getPost('borrow_date'),
             'return_date' => $this->request->getPost('return_date'),
-            'due_date' => $this->request->getPost('due_date'),  // Include the due_date
-            'status' => 'pending', // Example status
+            'due_date' => $this->request->getPost('due_date'),  
+            'status' => 'pending', 
         ];
 
         $transactionModel = new \App\Models\TransactionModel();

@@ -16,10 +16,10 @@ class NotificationController extends BaseController
         $this->transactionModel = new TransactionModel();
     }
 
-    // Method to send notifications to overdue students
+    
     public function sendNotificationToOverdue()
     {
-        $overdueBooks = $this->transactionModel->getOverdueBooks(); // Assuming this method fetches overdue transactions
+        $overdueBooks = $this->transactionModel->getOverdueBooks(); 
 
         if (empty($overdueBooks)) {
             return $this->response->setJSON(['success' => false, 'message' => 'No overdue books found.']);
@@ -29,7 +29,7 @@ class NotificationController extends BaseController
         $type = 'Overdue';
 
         foreach ($overdueBooks as $book) {
-            // Send notification and email
+            
             $this->notificationModel->sendNotificationToUser($book['user_id'], $message, $type);
         }
 
@@ -37,7 +37,7 @@ class NotificationController extends BaseController
     }
 
 
-    // Method to show the notifications page
+    
     public function index()
     {
         $user_id = session()->get('user_id');
@@ -46,16 +46,23 @@ class NotificationController extends BaseController
         return view('student/notifications', $data);
     }
 
-    // Method to update the status of the notifications to 'READ'
+    
     public function markAsRead()
     {
         $user_id = session()->get('user_id');
         $this->notificationModel->updateStatusToRead($user_id);
-
-        return redirect()->to('/student/notifications');
+        return $this->response->setJSON(['success' => true]);
     }
 
-    // Method to get the unread notifications count for the navbar
+    public function cleanOldNotifications()
+    {
+        $user_id = session()->get('user_id');
+        $this->notificationModel->removeOldNotifications($user_id);
+
+        return $this->response->setJSON(['message' => 'Old notifications removed successfully.']);
+    }
+
+    
     public function unreadCount()
     {
         $user_id = session()->get('user_id');
@@ -64,15 +71,16 @@ class NotificationController extends BaseController
     }
 
 
+
     public function fetchNotifications()
     {
         $user_id = session()->get('user_id');
         $notifications = $this->notificationModel->getNotifications($user_id);
-
         return $this->response->setJSON($notifications);
     }
 
-    // Method to fetch, update, and clean notifications
+
+    
     public function updateNotifications()
     {
         $user_id = session()->get('user_id');
@@ -88,13 +96,13 @@ class NotificationController extends BaseController
 
 
 
-    // Fetch and display all notifications
+    
     public function showNotifications()
     {
         $user_id = session()->get('user_id');
         $notifications = $this->notificationModel->getNotifications($user_id);
 
-        // Mark all notifications as read
+        
         foreach ($notifications as $notification) {
             $this->notificationModel->markAsRead($notification['id']);
         }

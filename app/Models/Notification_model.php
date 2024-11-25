@@ -11,7 +11,7 @@ class Notification_model extends Model
     protected $allowedFields = ['user_id', 'message', 'type', 'status', 'created_at', 'email'];
     protected $useTimestamps = false;
 
-    // Get notifications for a specific user
+    
     public function getNotifications($user_id)
     {
         return $this->where('user_id', $user_id)
@@ -44,27 +44,27 @@ class Notification_model extends Model
             ->delete();
     }
 
-    // Send notification to user and send an email
+    
     public function sendNotificationToUser($user_id, $message, $type)
     {
-        // Get user details to fetch email
+        
         $userModel = new \App\Models\UserModel();
         $user = $userModel->find($user_id);
 
-        // Prepare data for insertion
+        
         $data = [
             'user_id' => $user_id,
             'message' => $message,
             'type' => $type,
             'status' => 'UNREAD',
-            'created_at' => date('Y-m-d H:i:s'), // Manually set created_at
-            'email' => $user['email'],  // Store email in the notifications table
+            'created_at' => date('Y-m-d H:i:s'), 
+            'email' => $user['email'],  
         ];
 
-        // Insert the data into the notifications table
+        
         $this->insert($data);
 
-        // Send an email to the user
+        
         $email = \Config\Services::email();
         $email->setFrom('your_email@example.com', 'Library System');
         $email->setTo($user['email']);
@@ -83,20 +83,20 @@ class Notification_model extends Model
         if (count($students) > 0) {
             $db->transBegin();
 
-            // Prepare the data for batch insert into the notifications table
+            
             $notifications = [];
             foreach ($students as $student) {
-                // Add email to the notifications array
+                
                 $notifications[] = [
                     'user_id' => $student->user_id,
                     'message' => $message,
                     'type' => $type,
                     'status' => 'UNREAD',
                     'created_at' => date('Y-m-d H:i:s'),
-                    'email' => $student->email, // Store email
+                    'email' => $student->email, 
                 ];
 
-                // Send email to each student
+                
                 $email = \Config\Services::email();
                 $email->setFrom('your_email@example.com', 'Library System');
                 $email->setTo($student->email);
@@ -105,7 +105,7 @@ class Notification_model extends Model
                 $email->send();
             }
 
-            // Insert notifications into the notifications table
+            
             $notificationBuilder = $db->table('notifications');
             if (!$notificationBuilder->insertBatch($notifications)) {
                 $db->transRollback();
@@ -113,7 +113,7 @@ class Notification_model extends Model
                 return false;
             }
 
-            // Commit the transaction if successful
+            
             $db->transCommit();
             log_message('info', 'Successfully sent notifications to all students.');
             return true;

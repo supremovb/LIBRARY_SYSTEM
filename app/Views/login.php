@@ -20,24 +20,24 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            /* Centers content horizontally */
+
             align-items: center;
-            /* Centers content vertically */
+
         }
 
         .login-container {
             max-width: 250px;
-            /* Reduced maximum width */
+
             width: 85%;
-            /* Reduced responsive width for smaller screens */
+
             padding: 15px;
-            /* Slightly reduced padding */
+
             border-radius: 15px;
-            /* Smoother, rounded corners */
+
             background-color: rgba(255, 255, 255, 0.8);
-            /* Added light transparency */
+
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            /* Softer shadow for better depth */
+
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -47,7 +47,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             height: auto;
-            /* Ensures dynamic adjustment */
+
         }
 
 
@@ -126,7 +126,7 @@
             font-size: 1.5em;
         }
 
-        /* Add blur effect for IP address field */
+
         .blurred {
             filter: blur(5px);
         }
@@ -207,6 +207,7 @@
                         <select id="role" name="role" class="form-control">
                             <option value="student">Student</option>
                             <option value="admin">Admin</option>
+                            <option value="librarian">Librarian</option>
                         </select>
                     </div>
 
@@ -258,9 +259,9 @@
         });
 
         $('#role').on('change', function() {
-            var role = $(this).val(); // Get the selected role
+            var role = $(this).val();
 
-            // Change the label based on the role
+
             if (role === 'admin') {
                 $('#usernameLabel').text('Username/Admin ID');
             } else {

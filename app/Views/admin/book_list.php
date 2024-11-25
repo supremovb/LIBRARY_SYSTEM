@@ -108,7 +108,7 @@
             }
         }
 
-        /* Back to top button styles */
+        
         #backToTopBtn {
             position: fixed;
             bottom: 30px;
@@ -120,7 +120,7 @@
             padding: 15px;
             font-size: 24px;
             display: none;
-            /* Hidden by default */
+            
             cursor: pointer;
             z-index: 1000;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -136,9 +136,9 @@
 
         #backToTop:hover {
             transform: scale(1.1);
-            /* Slightly enlarge on hover */
+            
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            /* Bigger shadow on hover */
+            
         }
     </style>
 </head>
@@ -217,7 +217,7 @@
             <?php endforeach; ?>
         </div>
 
-        <!-- Back to Top Button -->
+        
         <a href="#" id="backToTop" class="btn" style="display: none; position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 50px; height: 50px; background: linear-gradient(135deg, #4e73df, #1a5ab1); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); font-size: 24px; transition: all 0.3s ease-in-out; border: none;">
             <i class="bx bx-up-arrow-alt"></i>
         </a>
@@ -231,17 +231,17 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-        // Show the back to top button when scrolling down
+        
         window.addEventListener("scroll", function() {
             let button = document.getElementById("backToTop");
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                button.style.display = "flex"; // Show button
+                button.style.display = "flex"; 
             } else {
-                button.style.display = "none"; // Hide button
+                button.style.display = "none"; 
             }
         });
 
-        // Smooth scroll to the top when the button is clicked
+        
         document.getElementById("backToTop").addEventListener("click", function(e) {
             e.preventDefault();
             window.scrollTo({
@@ -253,9 +253,9 @@
 
     <script>
         $('.modal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); // Button that triggered the modal
-            var modal = $(this); // Current modal
-            var bookId = modal.attr('id').replace('bookModal', ''); // Extract book ID
+            var button = $(event.relatedTarget); 
+            var modal = $(this); 
+            var bookId = modal.attr('id').replace('bookModal', ''); 
 
 
             var historyList = modal.find(`#borrowerHistory${bookId}`);

@@ -18,12 +18,12 @@
                     <a class="dropdown-item" href="<?= base_url('admin/create-book') ?>"><i class="bx bx-book-add"></i> Add Book</a>
                     <a class="dropdown-item" href="<?= base_url('admin/view-books') ?>"><i class="bx bx-book-open"></i> View Books</a>
                     <a class="dropdown-item" href="<?= base_url('admin/approve_reject_transactions') ?>"><i class="bx bx-book"></i> View Pending Books</a>
-                    <!-- New Button -->
+                    
                     <a class="dropdown-item" href="<?= base_url('admin/borrowed-books') ?>"><i class="bx bx-bookmark"></i> View Borrowed Books</a>
                 </div>
             </li>
 
-            <!-- Reports Dropdown Menu -->
+            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bx bx-bar-chart-alt-2"></i> Reports
@@ -45,7 +45,7 @@
             <li class="nav-item">
                 <a href="<?= base_url('student/my-borrowed-books') ?>" class="nav-link"><i class="bx bx-bookmark"></i> My Borrowed Books</a>
             </li>
-            <!-- New Book Reviews Link for Students -->
+            
             <li class="nav-item">
                 <a href="<?= base_url('student/book-reviews') ?>" class="nav-link"><i class="bx bx-comment"></i> Book Reviews</a>
             </li>
@@ -66,7 +66,7 @@
                         <a class="dropdown-item" href="<?= base_url('admin/view-users') ?>"><i class="bx bx-group"></i> View Users</a>
                     <?php endif; ?>
 
-                    
+
 
                     <a class="dropdown-item" href="<?= base_url('user/logout') ?>"><i class="bx bx-log-out"></i> Logout</a>
                 </div>

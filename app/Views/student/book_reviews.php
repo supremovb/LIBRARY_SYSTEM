@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Reviews</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- SweetAlert2 CSS -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.7/dist/sweetalert2.min.css">
-    <!-- Boxicons CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Navigation Bar -->
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
             <i class="bx bx-book-reader"></i> Library System
@@ -30,7 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('student/book-reviews') ?>"><i class="bx bx-book"></i> Book Reviews</a>
                 </li>
-                <!-- Notifications Dropdown -->
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="bx bx-bell"></i> Notifications
@@ -38,11 +38,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right p-3" aria-labelledby="notificationDropdown" style="max-height: 400px; overflow-y: auto; width: 300px;">
                         <ul id="notificationList" class="list-group list-group-flush">
-                            <!-- Notifications will be dynamically loaded here -->
+                            
                         </ul>
                     </div>
                 </li>
-                <!-- User Profile Dropdown -->
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?= session()->get('firstname') ?> <span class="caret"></span>
@@ -67,9 +67,9 @@
                     <p class="mb-1"><?= esc($review['review']); ?></p>
                     <small>Reviewed by: <?= esc($review['firstname']) . ' ' . esc($review['lastname']); ?> on <?= esc($review['created_at']); ?></small>
 
-                    <!-- Check if the logged-in user is the one who wrote this review -->
+                    
                     <?php if (session()->get('user_id') == $review['user_id']): ?>
-                        <!-- Edit Button to Trigger Modal -->
+                        
                         <button class="btn btn-warning btn-sm ml-2" data-toggle="modal" data-target="#editReviewModal"
                             data-review-id="<?= $review['review_id']; ?>"
                             data-rating="<?= $review['rating']; ?>"
@@ -86,7 +86,7 @@
         </div>
     </div>
 
-    <!-- Modal for Editing Review -->
+    
     <div class="modal fade" id="editReviewModal" tabindex="-1" role="dialog" aria-labelledby="editReviewModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -114,11 +114,11 @@
         </div>
     </div>
 
-    <!-- SweetAlert2 JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.7/dist/sweetalert2.all.min.js"></script>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap JS -->
+    
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -129,7 +129,7 @@
                     method: 'GET',
                     dataType: 'json',
                     success: function(response) {
-                        // Update notification list
+                        
                         const notificationList = $("#notificationList");
                         notificationList.empty();
 
@@ -142,7 +142,7 @@
                             notificationList.append(listItem);
                         });
 
-                        // Update unread count
+                        
                         const notificationCount = $("#notificationCount");
                         if (response.unread_count > 0) {
                             notificationCount.text(response.unread_count).show();
@@ -156,70 +156,108 @@
                 });
             }
 
-            // Trigger notification update when dropdown is clicked
+            
             $("#notificationDropdown").on('click', function() {
                 updateNotifications();
             });
 
-            // Initial update on page load
+            
             updateNotifications();
         });
     </script>
 
     <script>
         $(document).ready(function() {
-            // Fetch unread notifications count
+            
             function fetchNotificationCount() {
-                $.get("<?= base_url('notification/unread-count') ?>", function(data) {
-                    $('#notificationCount').text(data.unread_count || '');
+                $.ajax({
+                    url: '<?= base_url("NotificationController/unreadCount") ?>',
+                    method: 'GET',
+                    success: function(response) {
+                        const count = response.unread_count || 0;
+                        const notificationBadge = $('#notificationCount');
+                        if (count > 0) {
+                            notificationBadge.text(count).show();
+                        } else {
+                            notificationBadge.hide();
+                        }
+                    },
+                    error: function() {
+                        console.error("Failed to fetch notification count.");
+                    }
                 });
             }
 
-            // Load notifications into the dropdown
+            
+            function fetchNotifications() {
+                $.ajax({
+                    url: '<?= base_url("NotificationController/fetchNotifications") ?>',
+                    method: 'GET',
+                    success: function(notifications) {
+                        const notificationList = $('#notificationList');
+                        notificationList.empty();
+
+                        if (notifications.length > 0) {
+                            notifications.forEach(notification => {
+                                const listItem = `
+                            <li class="list-group-item">
+                                <strong>${notification.type}</strong>: ${notification.message}
+                                <small class="text-muted d-block">${new Date(notification.created_at).toLocaleString()}</small>
+                            </li>`;
+                                notificationList.append(listItem);
+                            });
+                        } else {
+                            notificationList.append('<li class="list-group-item text-center">No notifications found</li>');
+                        }
+                    },
+                    error: function() {
+                        console.error("Failed to fetch notifications.");
+                    }
+                });
+            }
+
+            
             $('#notificationDropdown').on('click', function() {
-                const notificationList = $('#notificationList');
-                $.get("<?= base_url('notification/fetch-notifications') ?>", function(notifications) {
-                    notificationList.empty();
-                    if (notifications.length > 0) {
-                        notifications.forEach(notification => {
-                            const listItem = `
-                        <li class="list-group-item">
-                            <strong>${notification.type}</strong>: ${notification.message}
-                            <small class="text-muted d-block">${new Date(notification.created_at).toLocaleString()}</small>
-                        </li>`;
-                            notificationList.append(listItem);
-                        });
-                    } else {
-                        notificationList.append('<li class="list-group-item text-center">No notifications found</li>');
+                fetchNotifications();
+                $.ajax({
+                    url: '<?= base_url("NotificationController/markAsRead") ?>',
+                    method: 'POST',
+                    success: function() {
+                        fetchNotificationCount(); 
+                    },
+                    error: function() {
+                        console.error("Failed to mark notifications as read.");
                     }
                 });
             });
 
-            // Fetch notification count periodically
+            
             fetchNotificationCount();
-            setInterval(fetchNotificationCount, 30000); // Update every 30 seconds
+
+            
+            setInterval(fetchNotificationCount, 30000); 
         });
     </script>
 
     <script>
-        // Trigger Modal with Data from Edit Button
+        
         $('#editReviewModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); // Button that triggered the modal
+            var button = $(event.relatedTarget); 
             var reviewId = button.data('review-id');
             var rating = button.data('rating');
             var reviewText = button.data('review-text');
 
-            // Populate the modal fields with review data
+            
             var modal = $(this);
             modal.find('#reviewId').val(reviewId);
             modal.find('#rating').val(rating);
-            modal.find('#review').val(reviewText); // Corrected to match the field ID
+            modal.find('#review').val(reviewText); 
         });
 
         $(document).ready(function() {
-            // Handle form submission for editing the review
+            
             $('#editReviewForm').submit(function(e) {
-                e.preventDefault(); // Prevent the default form submission
+                e.preventDefault(); 
 
                 $.ajax({
                     url: $(this).attr('action'),
@@ -228,18 +266,18 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.status === 'success') {
-                            // Show success SweetAlert message
+                            
                             Swal.fire({
                                 title: 'Success!',
                                 text: response.message,
                                 icon: 'success',
                                 confirmButtonText: 'OK'
                             }).then(() => {
-                                // Reload the page to reflect the changes
+                                
                                 location.reload();
                             });
                         } else {
-                            // Show error SweetAlert message
+                            
                             Swal.fire({
                                 title: 'Error!',
                                 text: response.message,
@@ -249,7 +287,7 @@
                         }
                     },
                     error: function() {
-                        // Show generic error SweetAlert message in case of failure
+                        
                         Swal.fire({
                             title: 'Oops!',
                             text: 'Something went wrong. Please try again later.',
@@ -262,7 +300,7 @@
         });
 
 
-        // Function to handle deleting a review
+        
         function deleteReview(reviewId) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -283,7 +321,7 @@
                                     'Your review has been deleted.',
                                     'success'
                                 );
-                                location.reload(); // Reload page to update the reviews list
+                                location.reload(); 
                             } else {
                                 Swal.fire(
                                     'Error!',

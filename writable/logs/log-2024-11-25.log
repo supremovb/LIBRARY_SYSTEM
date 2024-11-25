@@ -1,0 +1,273 @@
+ERROR - 2024-11-25 05:27:44 --> Overdue books: Array
+(
+)
+
+ERROR - 2024-11-25 05:27:48 --> Overdue books: Array
+(
+)
+
+CRITICAL - 2024-11-25 05:38:02 --> ErrorException: Cannot redeclare App\Controllers\UserController::adminDashboard()
+[Method: GET, Route: login]
+in APPPATH\Controllers\UserController.php on line 390.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-11-25 06:02:16 --> ErrorException: Cannot redeclare App\Controllers\UserController::adminDashboard()
+[Method: GET, Route: login]
+in APPPATH\Controllers\UserController.php on line 390.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-11-25 06:18:57 --> BadMethodCallException: Call to undefined method App\Models\TransactionModel::countBorrowedBooks
+[Method: GET, Route: user/dashboard]
+in SYSTEMPATH\Model.php on line 932.
+ 1 APPPATH\Controllers\UserController.php(692): CodeIgniter\Model->__call('countBorrowedBooks', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 06:23:12 --> ParseError: syntax error, unexpected token "{", expecting "("
+[Method: GET, Route: login]
+in APPPATH\Controllers\UserController.php on line 683.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\library_system\\app\\Controllers\\UserController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\UserController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\UserController')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\UserController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-25 06:55:18 --> Overdue books: Array
+(
+)
+
+ERROR - 2024-11-25 07:49:12 --> mysqli_sql_exception: Duplicate entry '3434344334344' for key 'books.isbn' in C:\laragon\www\library_system\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\library_system\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `bo...', 0)
+#1 C:\laragon\www\library_system\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `bo...')
+#2 C:\laragon\www\library_system\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `bo...')
+#3 C:\laragon\www\library_system\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `bo...', Array, false)
+#4 C:\laragon\www\library_system\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\library_system\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\library_system\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\library_system\app\Controllers\LibrarianController.php(539): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\library_system\system\CodeIgniter.php(933): App\Controllers\LibrarianController->createBook()
+#9 C:\laragon\www\library_system\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibrarianController))
+#10 C:\laragon\www\library_system\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\library_system\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\library_system\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\library_system\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+ERROR - 2024-11-25 07:49:12 --> Failed to insert book into the database. Errors: {"CodeIgniter\\Database\\MySQLi\\Connection":"Duplicate entry '3434344334344' for key 'books.isbn'"}
+CRITICAL - 2024-11-25 07:55:58 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "librarian_dashboard/book_form.php"
+[Method: GET, Route: librarian/create-book]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('librarian_dashboard/book_form.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('librarian_dashboard/book_form', [], true)
+ 3 APPPATH\Controllers\LibrarianController.php(489): view('librarian_dashboard/book_form', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\LibrarianController->addBook()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibrarianController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-25 10:00:31 --> Overdue books: Array
+(
+    [0] => Array
+        (
+            [transaction_id] => 131
+            [book_id] => 15
+            [user_id] => 76
+            [borrow_date] => 2024-11-25
+            [return_date] => 
+            [due_date] => 2024-11-24
+            [remarks] => 
+            [status] => borrowed
+            [created_at] => 2024-11-25 10:00:14
+            [updated_at] => 2024-11-25 10:00:26
+            [deleted_at] => 
+        )
+
+)
+
+ERROR - 2024-11-25 10:16:21 --> Overdue books: Array
+(
+)
+
+ERROR - 2024-11-25 10:17:50 --> Overdue books: Array
+(
+    [0] => Array
+        (
+            [transaction_id] => 132
+            [book_id] => 17
+            [user_id] => 76
+            [borrow_date] => 2024-11-25
+            [return_date] => 
+            [due_date] => 2024-11-24
+            [remarks] => 
+            [status] => borrowed
+            [created_at] => 2024-11-25 10:16:59
+            [updated_at] => 2024-11-25 10:17:43
+            [deleted_at] => 
+        )
+
+)
+
+ERROR - 2024-11-25 10:18:47 --> Overdue books: Array
+(
+    [0] => Array
+        (
+            [transaction_id] => 132
+            [book_id] => 17
+            [user_id] => 76
+            [borrow_date] => 2024-11-25
+            [return_date] => 
+            [due_date] => 2024-11-24
+            [remarks] => 
+            [status] => borrowed
+            [created_at] => 2024-11-25 10:16:59
+            [updated_at] => 2024-11-25 10:17:43
+            [deleted_at] => 
+        )
+
+)
+
+CRITICAL - 2024-11-25 13:06:58 --> ParseError: syntax error, unexpected token "public", expecting end of file
+[Method: GET, Route: NotificationController/unreadCount]
+in APPPATH\Controllers\NotificationController.php on line 80.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\library_system\\app\\Controllers\\NotificationController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\NotificationController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\NotificationController')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\NotificationController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 13:06:58 --> ParseError: syntax error, unexpected token "public", expecting end of file
+[Method: GET, Route: NotificationController/updateNotifications]
+in APPPATH\Controllers\NotificationController.php on line 80.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\library_system\\app\\Controllers\\NotificationController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\NotificationController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\NotificationController')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\NotificationController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 13:24:52 --> Error: Attempt to modify property "get" on null
+[Method: GET, Route: dashboard]
+in APPPATH\Config\Routes.php on line 340.
+ 1 SYSTEMPATH\Router\RouteCollection.php(340): require()
+ 2 SYSTEMPATH\CodeIgniter.php(823): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 13:36:23 --> Error: Cannot use object of type stdClass as array
+[Method: GET, Route: dashboard]
+in APPPATH\Controllers\UserController.php on line 702.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 13:36:40 --> Error: Cannot use object of type stdClass as array
+[Method: GET, Route: dashboard]
+in APPPATH\Controllers\UserController.php on line 702.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 13:37:20 --> Error: Cannot use object of type stdClass as array
+[Method: GET, Route: dashboard]
+in APPPATH\Controllers\UserController.php on line 702.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 13:38:47 --> ErrorException: Undefined variable $relatedBooks
+[Method: GET, Route: dashboard]
+in APPPATH\Views\student\dashboard.php on line 390.
+ 1 APPPATH\Views\student\dashboard.php(390): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $relatedBooks', 'C:\\laragon\\www\\library_system\\app\\Views\\student\\dashboard.php', 390)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\student\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('student/dashboard', [], true)
+ 5 APPPATH\Controllers\UserController.php(710): view('student/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 13:40:01 --> ErrorException: Undefined variable $relatedBooks
+[Method: GET, Route: dashboard]
+in APPPATH\Views\student\dashboard.php on line 390.
+ 1 APPPATH\Views\student\dashboard.php(390): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $relatedBooks', 'C:\\laragon\\www\\library_system\\app\\Views\\student\\dashboard.php', 390)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\library_system\\app\\Views\\student\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('student/dashboard', [], true)
+ 5 APPPATH\Controllers\UserController.php(710): view('student/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 13:43:51 --> BadMethodCallException: Call to undefined method App\Models\BookModel::getRelatedBooksByBorrowedHistory
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Model.php on line 932.
+ 1 APPPATH\Controllers\UserController.php(700): CodeIgniter\Model->__call('getRelatedBooksByBorrowedHistory', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 13:47:18 --> BadMethodCallException: Call to undefined method App\Models\BookModel::getRelatedBooksByCategories
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Model.php on line 932.
+ 1 APPPATH\Controllers\UserController.php(698): CodeIgniter\Model->__call('getRelatedBooksByCategories', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-25 14:00:42 --> ErrorException: unlink(C:\laragon\www\library_system\writable\debugbar/debugbar_1732543209.846433.json): No such file or directory
+[Method: GET, Route: /]
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 82.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(C:\\laragon\\www\\library_system\\writable\\debugbar/debugbar_1732543209.846433.json): No such file or directory', 'C:\\laragon\\www\\library_system\\system\\Debug\\Toolbar\\Collectors\\History.php', 82)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(82): unlink('C:\\laragon\\www\\library_system\\writable\\debugbar/debugbar_1732543209.846433.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(520): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1732543241.825005', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(155): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-11-25 14:16:12 --> Overdue books: Array
+(
+)
+
+ERROR - 2024-11-25 14:18:50 --> Overdue books: Array
+(
+)
+
+CRITICAL - 2024-11-25 14:24:44 --> BadMethodCallException: Call to undefined method App\Models\BookModel::getRelatedBooksByCategories
+[Method: GET, Route: user/dashboard]
+in SYSTEMPATH\Model.php on line 932.
+ 1 APPPATH\Controllers\UserController.php(698): CodeIgniter\Model->__call('getRelatedBooksByCategories', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->dashboard()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

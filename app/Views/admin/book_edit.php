@@ -20,7 +20,7 @@
             display: block;
         }
 
-        /* Adjust input fields */
+        
         .form-control {
             max-width: 100%;
         }
@@ -29,12 +29,12 @@
             max-width: 800px;
         }
 
-        /* Ensure image is not too large */
+        
         .img-thumbnail {
             max-width: 150px;
         }
 
-        /* Adjust text area */
+        
         textarea.form-control {
             resize: vertical;
         }
@@ -128,7 +128,7 @@
     <script>
         $('#editBookForm').submit(function(e) {
             e.preventDefault();
-            $('.loading').addClass('show'); // Show the loading spinner
+            $('.loading').addClass('show'); 
 
             const formData = new FormData(this);
 
@@ -139,7 +139,7 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    $('.loading').removeClass('show'); // Hide the loading spinner
+                    $('.loading').removeClass('show'); 
 
                     if (response.status === 'success') {
                         Swal.fire(
@@ -147,7 +147,7 @@
                             response.message,
                             'success'
                         ).then(() => {
-                            window.location.href = '<?= site_url("admin/dashboard") ?>'; // Redirect to the dashboard
+                            window.location.href = '<?= site_url("admin/dashboard") ?>'; 
                         });
                     } else if (response.status === 'error') {
                         Swal.fire(
@@ -158,7 +158,7 @@
                     }
                 },
                 error: function() {
-                    $('.loading').removeClass('show'); // Hide the loading spinner
+                    $('.loading').removeClass('show'); 
                     Swal.fire(
                         'Oops!',
                         'Something went wrong. Please try again later.',
